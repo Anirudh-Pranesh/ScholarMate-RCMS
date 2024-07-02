@@ -1,3 +1,20 @@
+'''
+login_page.py
+
+Simple GUI setup consisiting of an image, 2 entry fields, and 3 labels.
+Python extracts data inputted in entry field and communicates this data with MySQL with the help of login() functions.
+Depending on what is returned by MySQL, python verifies and checks if the login can be authorised.
+SQL injections can't take place.
+
+Once logged in, the details are stored in a binary file. Python will check the authorisation of the client and send them to the required window.
+The program for that window reads the binary file, and displays required information based one that.
+Once the whole program is closed, the main login page pops up again, and the binary file is overwritten with data of person who has logged in next and the process repeats.
+
+REQUIRED INSTALLS : 
+
+pip install pillow (for inserting image)
+pip install sv_ttk (for the theme)
+'''
 # IMPORT STATEMENTS
 import mysql.connector
 import tkinter
@@ -5,6 +22,8 @@ from tkinter import ttk
 import sv_ttk
 from PIL import ImageTk, Image
 from tkinter import messagebox
+import pickle
+from subprocess import call
 
 #MySQL connection
 db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
@@ -13,13 +32,25 @@ cur=db.cursor()
 #User defined functions
 def login():
     try:
+        file=open('client_details.dat', 'wb')
         username=username_entry.get()
         password=password_entry.get()
         s="SELECT * FROM credentials WHERE username='%s' AND passkey='%s'" % (username, password)
         cur.execute(s)
         res=cur.fetchall()
         if res!=[]:
-            messagebox.showinfo(title='Login success', message='You successfully logged in')
+            pickle.dump(res,file)
+            file.close()
+            db.close()
+            if res[0][4]=='S':
+                window.destroy()
+                call(['python', 'student_page_placeholder.py']) # INSERT DAVE'S GUI HERE
+            elif res[0][4]=='A':
+                window.destroy()
+                call(['python', 'admin_page_placeholder.py']) # INSERT DAVE'S GUI HERE
+            elif res[0][4]=='T':
+                window.destroy()
+                call(['python', 'teacher_page_placeholder.py']) # INSERT DAVE'S GUI HERE      
         elif username=='' or password=='':
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
