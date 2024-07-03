@@ -1,0 +1,4 @@
+REQUIRED INSTALLS : 
+
+pip install pillow (for inserting image)
+pip install sv_ttk (for the theme)

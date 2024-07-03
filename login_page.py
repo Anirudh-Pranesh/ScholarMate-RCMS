@@ -9,11 +9,6 @@ SQL injections can't take place.
 Once logged in, the details are stored in a binary file, named client_details. Python will check the authorisation of the client and send them to the required window.
 The program for that window reads the binary file, and displays required information based one that.
 Once the whole program is closed, the main login page pops up again, and the binary file is overwritten with data of person who has logged in next and the process repeats.
-
-REQUIRED INSTALLS : 
-
-pip install pillow (for inserting image)
-pip install sv_ttk (for the theme)
 '''
 # IMPORT STATEMENTS
 import mysql.connector
