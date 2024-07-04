@@ -42,7 +42,7 @@ def login():
                 call(['python', 'student_page_placeholder.py']) # INSERT DAVE'S GUI HERE
             elif res[0][4]=='A':
                 window.destroy()
-                call(['python', 'admin_page_placeholder.py']) # INSERT DAVE'S GUI HERE
+                call(['python', 'Admin_Page.py']) # INSERT DAVE'S GUI HERE
             elif res[0][4]=='T':
                 window.destroy()
                 call(['python', 'teacher_page_placeholder.py']) # INSERT DAVE'S GUI HERE      

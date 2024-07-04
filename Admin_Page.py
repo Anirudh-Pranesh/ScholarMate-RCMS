@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sv_ttk
+from subprocess import call
 
 class AdminPage(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Admin Page")
+        self.title("Welcome Admin")
         self.geometry("800x600")
 
         # Initialize Sun Valley theme with the "dark" theme
@@ -84,7 +85,7 @@ class AdminPage(tk.Tk):
         messagebox.showinfo("Generate Report Card", "Generate report card function")
 
     def edit_school_directory(self):
-        messagebox.showinfo("Edit School Directory", "Edit school directory function")
+        call(['python', 'edit_school_directory.py'])
 
 if __name__ == "__main__":
     app = AdminPage()
