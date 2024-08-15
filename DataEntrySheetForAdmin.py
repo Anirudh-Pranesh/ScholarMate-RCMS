@@ -3,7 +3,7 @@ from tkinter import ttk
 import sv_ttk
 import mysql.connector
 def tablecreation():
-    vighneshdb=mysql.connector.connect(host='localhost',user='root',password='whiskeytangofoxtrot',database='RCMS')
+    vighneshdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
     cursor1=vighneshdb.cursor()
     sqlstatement='create table'+examname+'(student_id text,name text,class text,'+sub1 +'text,'+sub2 +'text,'+sub3+'text,'+sub4 +'text,'+sub5+'text )'
     cursor1.execute(sqlstatement)
