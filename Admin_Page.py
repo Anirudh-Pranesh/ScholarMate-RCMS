@@ -73,10 +73,11 @@ class AdminPage(tk.Tk):
         widget.configure(style="TButton")
 
     def logout(self):
-        messagebox.showinfo("Logout", "Logged out successfully")
+        self.destroy()
+        call(['python', 'DataEntrySheetForAdmin.py'])
 
     def create_data(self):
-        messagebox.showinfo("Create Data", "Create new data function")
+        call(['python', 'login_page.py'])
 
     def view_edit_data(self):
         messagebox.showinfo("View/Edit Data", "View/Edit data function")

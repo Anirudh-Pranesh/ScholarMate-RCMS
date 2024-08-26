@@ -56,9 +56,9 @@ def login():
 #Window Setup
 window=tkinter.Tk()
 window.title('ScholarMate - Login')
-window.geometry('650x650')
+window.geometry('1000x650')
 frame=ttk.Frame()
-window.attributes('-fullscreen',True)
+#window.attributes('-fullscreen',True) -> Activate for full screen
 
 #Widget setup
 img = ImageTk.PhotoImage(Image.open("logo.png"))

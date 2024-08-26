@@ -10,8 +10,8 @@ def tablecreation():
         vighneshdb = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='whiskeytangofoxtrot',
-            database='RCMS'
+            password='Admin@1122',
+            database='scholarmate_db'
         )
         cursor1 = vighneshdb.cursor()
         
