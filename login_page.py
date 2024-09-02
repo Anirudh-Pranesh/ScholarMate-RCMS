@@ -20,12 +20,15 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 import pickle
 from subprocess import call
+import webbrowser
 
 #MySQL connection
 db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
 cur=db.cursor()
 
 #User defined functions
+def callback(url):
+   webbrowser.open_new_tab(url)
 def login():
     try:
         file=open('client_details.dat', 'wb')
@@ -51,7 +54,7 @@ def login():
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
             messagebox.showerror(title='Invalid credentials', message='Please enter correct username/password')
-    except error as e:
+    except Error as e:
         messagebox.showerror(title='RUNTIME ERROR', message=f'Unexpected error : {e}')
 
 #Window Setup
@@ -70,6 +73,10 @@ username_entry = ttk.Entry(frame)
 password_label = ttk.Label(frame, text='Password : ', font=('Arial', 20))
 password_entry = ttk.Entry(frame, show='*')
 login_button = ttk.Button(frame, text='Login', command=login)
+helptext=ttk.Label(window, text='Having issues ? ', font=("Arial", 15))
+link = tkinter.Label(window, text="Click here", fg="blue", cursor="hand2", font=("Arial", 15))
+link.bind("<Button-1>", lambda e:
+callback("https://github.com/Anirudh-Pranesh/ScholarMate-RCMS/issues"))
 
 panel.grid(row=0, column=0, columnspan=10)
 login_label.grid(row=1, column=4, columnspan=2, pady=10, sticky='news')
@@ -78,7 +85,10 @@ username_entry.grid(row=2, column=5, pady=20)
 password_label.grid(row=3, column=4)
 password_entry.grid(row=3, column=5)
 login_button.grid(row=4, column=4, columnspan=2, ipady=4, ipadx=8, pady=30)
+helptext.place(relx=1.0, rely=1.0, anchor="se", x=-130, y=-10)
+link.place(relx=1.0, rely=1.0, anchor="se", x=-30, y=-7)
 frame.pack()
+
 
 sv_ttk.set_theme("dark")
 frame.mainloop()
