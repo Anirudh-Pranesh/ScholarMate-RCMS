@@ -12,6 +12,7 @@ Once the whole program is closed, the main login page pops up again, and the bin
 '''
 # IMPORT STATEMENTS
 import mysql.connector
+from mysql.connector import Error
 import tkinter
 from tkinter import ttk
 import sv_ttk
@@ -50,8 +51,8 @@ def login():
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
             messagebox.showerror(title='Invalid credentials', message='Please enter correct username/password')
-    except:
-        messagebox.showerror(title='RUNTIME ERROR', message='Unexpected error')
+    except error as e:
+        messagebox.showerror(title='RUNTIME ERROR', message=f'Unexpected error : {e}')
 
 #Window Setup
 window=tkinter.Tk()

@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox;
 import sv_ttk
 import mysql.connector
 from mysql.connector import Error
@@ -24,46 +24,68 @@ def tablecreation():
         sub5 = subject5_entry.get()
         
         # Create SQL statement with proper spacing and quotes
-        sqlstatement = (
-            f"CREATE TABLE IF NOT EXISTS {examname} ("
-            "student_id TEXT, "
-            "name TEXT, "
-            "class TEXT, "
-            f"{sub1} TEXT, "
-            f"{sub2} TEXT, "
-            f"{sub3} TEXT, "
-            f"{sub4} TEXT, "
-            f"{sub5} TEXT)"
+        str = (
+        f"CREATE TABLE IF NOT EXISTS {examname} ("
+        "student_id INT, "
+        "student_name VARCHAR(30) NOT NULL, "
+        "class VARCHAR(3) NOT NULL, "
+        f"{sub1} DECIMAL(4,1), "
+        f"{sub2} DECIMAL(4,1), "
+        f"{sub3} DECIMAL(4,1), "
+        f"{sub4} DECIMAL(4,1), "
+        f"{sub5} DECIMAL(4,1), "
+        f"CHECK({sub1} <= 100.0 AND {sub1} >= 0), "
+        f"CHECK({sub2} <= 100.0 AND {sub2} >= 0), "
+        f"CHECK({sub3} <= 100.0 AND {sub3} >= 0), "
+        f"CHECK({sub4} <= 100.0 AND {sub4} >= 0), "
+        f"CHECK({sub5} <= 100.0 AND {sub5} >= 0), "
+        "FOREIGN KEY(student_id) REFERENCES student_details(student_id)"
+        ");"
         )
-        cursor1.execute(sqlstatement)
+
+        cursor1.execute(str)
         vighneshdb.commit()
-        
+
+        available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
+        selected_classes=[]
+        for i in available_classes:
+            if available_classes[i] == 1:
+                selected_classes.append(i)
+        for i in selected_classes:
+            str=(
+            f"INSERT INTO {examname}(student_id, student_name, class) "
+            "SELECT student_id, student_name, class "
+            "FROM student_details "
+            f"WHERE class LIKE '{i}%';"
+            )
+            cursor1.execute(str)
+        vighneshdb.commit()
         # Close the connection
         vighneshdb.close()
-        print(f"Table '{examname}' created successfully.")
+        messagebox.showinfo("Info", f"Table '{examname}' created successfully.")
     except Error as e:
-        print(f"Error: {e}")
+        messagebox.showerror("ERROR", f"Error: {e}")
 
 # Initialize the Tkinter window
 root = tk.Tk()
-root.geometry('600x400')
+root.geometry('800x500')
 root.title('Data Entry Sheet For Admin')
 
 # Create and place widgets
 title_label = ttk.Label(root, text='Data Entry Sheet for Admin', font=('Arial', 28, 'bold'))
 exam_label = ttk.Label(root, text='1. Enter exam name here:', font=('calibre', 14, 'bold'))
 exam_entry = ttk.Entry(root)
-subject1_label = ttk.Label(root, text='2a. Enter subject 1 here:', font=('calibre', 14, 'bold'))
+subject1_label = ttk.Label(root, text='a. Enter subject 1 here:', font=('calibre', 14, 'bold'))
 subject1_entry = ttk.Entry(root)
-subject2_label = ttk.Label(root, text='2b. Enter subject 2 here:', font=('calibre', 14, 'bold'))
+subject2_label = ttk.Label(root, text='b. Enter subject 2 here:', font=('calibre', 14, 'bold'))
 subject2_entry = ttk.Entry(root)
-subject3_label = ttk.Label(root, text='2c. Enter subject 3 here:', font=('calibre', 14, 'bold'))
+subject3_label = ttk.Label(root, text='c. Enter subject 3 here:', font=('calibre', 14, 'bold'))
 subject3_entry = ttk.Entry(root)
-subject4_label = ttk.Label(root, text='2d. Enter subject 4 here:', font=('calibre', 14, 'bold'))
+subject4_label = ttk.Label(root, text='d. Enter subject 4 here:', font=('calibre', 14, 'bold'))
 subject4_entry = ttk.Entry(root)
-subject5_label = ttk.Label(root, text='2e. Enter subject 5 here:', font=('calibre', 14, 'bold'))
+subject5_label = ttk.Label(root, text='e. Enter subject 5 here:', font=('calibre', 14, 'bold'))
 subject5_entry = ttk.Entry(root)
-class_label = ttk.Label(root, text='3. Click on the classes for which the exam was held for:', font=('calibre', 14, 'bold'))
+class_label = ttk.Label(root, text='2. Click on the classes for which the exam was held for:', font=('calibre', 14, 'bold'))
 
 # Checkbox variables
 class9var = tk.IntVar()
@@ -78,7 +100,7 @@ class11 = ttk.Checkbutton(root, text='Class 11', onvalue=1, offvalue=0, variable
 class12 = ttk.Checkbutton(root, text='Class 12', onvalue=1, offvalue=0, variable=class12var)
 
 # Button to create table
-button1 = ttk.Button(root, text='Click here to create a table', command=tablecreation)
+button1 = ttk.Button(root, text='Create data entry sheet', command=tablecreation)
 
 # Empty Labels for spacing
 emptylabel1 = ttk.Label(root, text='')

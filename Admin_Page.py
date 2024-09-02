@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import sv_ttk
 from subprocess import call
+import pickle
+from PIL import ImageTk
+from PIL import Image
 
 class AdminPage(tk.Tk):
     def __init__(self):
@@ -12,6 +15,12 @@ class AdminPage(tk.Tk):
 
         # Initialize Sun Valley theme with the "dark" theme
         sv_ttk.set_theme("dark")
+
+        #Access User details
+        file=open('client_details.dat','rb')
+        details=pickle.load(file)
+        file.close()
+        details=list(details[0])
 
         # Main content frame
         self.main_frame = ttk.Frame(self, padding=(10, 10, 10, 10))
@@ -24,10 +33,17 @@ class AdminPage(tk.Tk):
         self.sidebar_color = tk.Frame(self.sidebar, bg="#3B82F6", width=200, height=600)
         self.sidebar_color.pack(fill=tk.Y, side=tk.LEFT, expand=True)
 
-        self.user_details = ttk.Label(self.sidebar_color, text="User details", font=('Helvetica', 14, 'bold'), background="#3B82F6", foreground="white")
+        self.user_details = ttk.Label(self.sidebar_color, text="Welcome\n"+details[2], font=('Helvetica', 14, 'bold'), background="#3B82F6", foreground="white")
         self.user_details.pack(pady=20, padx=10)
 
-        self.logout_button = ttk.Button(self.sidebar_color, text="Click here to log out", command=self.logout, style='Sidebar.TButton')
+
+        image = Image.open("usericon.png")
+        image = image.resize((150, 90), Image.Resampling.LANCZOS) ## The (250, 250) is (height, width)
+        self.new_img = ImageTk.PhotoImage(image)
+        self.button= tk.Button(self.sidebar_color, image=self.new_img,command=self.changepassword,borderwidth=0)
+        self.button.pack()
+
+        self.logout_button = ttk.Button(self.sidebar_color, text="Log out", command=self.logout, style='Sidebar.TButton')
         self.logout_button.pack(side=tk.BOTTOM, pady=20, padx=10)
 
         # Main content
@@ -41,7 +57,7 @@ class AdminPage(tk.Tk):
         self.buttons_frame.pack(pady=20)
 
         # Buttons with hover effect
-        self.create_data_button = ttk.Button(self.buttons_frame, text="Create New Data", command=self.create_data, style='TButton')
+        self.create_data_button = ttk.Button(self.buttons_frame, text="Create data entry sheet", command=self.create_data, style='TButton')
         self.create_data_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
         self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
         self.create_data_button.bind("<Leave>", lambda event: self.on_leave(event, self.create_data_button))
@@ -61,11 +77,6 @@ class AdminPage(tk.Tk):
         self.edit_school_directory_button.bind("<Enter>", lambda event: self.on_enter(event, self.edit_school_directory_button, "#2563EB"))
         self.edit_school_directory_button.bind("<Leave>", lambda event: self.on_leave(event, self.edit_school_directory_button))
 
-        self.quit_button = ttk.Button(self.buttons_frame, text="Quit", command=self.quit, style='TButton')
-        self.quit_button.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
-        self.quit_button.bind("<Enter>", lambda event: self.on_enter(event, self.quit_button, "#2563EB"))
-        self.quit_button.bind("<Leave>", lambda event: self.on_leave(event, self.quit_button))
-
     def on_enter(self, event, widget, color):
         widget.configure(style="Hover.TButton")
 
@@ -74,10 +85,10 @@ class AdminPage(tk.Tk):
 
     def logout(self):
         self.destroy()
-        call(['python', 'DataEntrySheetForAdmin.py'])
+        call(['python', 'login_page.py'])
 
     def create_data(self):
-        call(['python', 'login_page.py'])
+        call(['python', 'DataEntrySheetForAdmin.py'])
 
     def view_edit_data(self):
         messagebox.showinfo("View/Edit Data", "View/Edit data function")
@@ -87,6 +98,9 @@ class AdminPage(tk.Tk):
 
     def edit_school_directory(self):
         call(['python', 'edit_school_directory.py'])
+
+    def changepassword(self):
+        call(['python', 'changepassword.py'])
 
 if __name__ == "__main__":
     app = AdminPage()
