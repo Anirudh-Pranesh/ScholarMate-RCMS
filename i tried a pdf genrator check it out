@@ -1,0 +1,122 @@
+import tkinter as tk
+from tkinter import ttk, messagebox, simpledialog
+from subprocess import call
+from fpdf import FPDF
+import smtplib
+
+class TeacherPage(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Teacher Dashboard")
+        self.geometry("800x600")
+
+        # Main content frame
+        self.main_frame = ttk.Frame(self, padding=(10, 10, 10, 10))
+        self.main_frame.pack(fill="both", expand=True)
+
+        # Title label
+        self.title_label = ttk.Label(self.main_frame, text="Teacher Dashboard", font=('Helvetica', 24, 'bold'))
+        self.title_label.pack(pady=20)
+
+        # Buttons frame
+        self.buttons_frame = ttk.Frame(self.main_frame)
+        self.buttons_frame.pack(pady=20)
+
+        # Add Marks Button
+        self.add_marks_button = ttk.Button(self.buttons_frame, text="Add Marks", command=self.add_marks, style='TButton')
+        self.add_marks_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
+
+        # Statistics Button
+        self.stats_button = ttk.Button(self.buttons_frame, text="View Statistics", command=self.view_statistics, style='TButton')
+        self.stats_button.grid(row=0, column=1, padx=20, pady=10, sticky="ew")
+
+        # Send Mail Button
+        self.send_mail_button = ttk.Button(self.buttons_frame, text="Send Mail", command=self.send_mail, style='TButton')
+        self.send_mail_button.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
+
+        # Generate Report Card Button
+        self.generate_report_button = ttk.Button(self.buttons_frame, text="Generate Report Card", command=self.generate_report_card, style='TButton')
+        self.generate_report_button.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
+
+    def add_marks(self):
+        # Prompt for student name and marks
+        student_name = simpledialog.askstring("Input", "Enter student's name:")
+        if student_name:
+            math_marks = simpledialog.askinteger("Input", f"Enter {student_name}'s Math marks:")
+            science_marks = simpledialog.askinteger("Input", f"Enter {student_name}'s Science marks:")
+            english_marks = simpledialog.askinteger("Input", f"Enter {student_name}'s English marks:")
+            
+            if math_marks and science_marks and english_marks:
+                messagebox.showinfo("Success", f"Marks for {student_name} added successfully.")
+            else:
+                messagebox.showerror("Error", "Please enter valid marks.")
+
+    def view_statistics(self):
+        # Placeholder for statistics view
+        messagebox.showinfo("Statistics", "Statistics feature is not yet implemented.")
+
+    def send_mail(self):
+        # Prompt for student email and message
+        receiver_email = simpledialog.askstring("Input", "Enter the student's email:")
+        email_message = simpledialog.askstring("Input", "Enter the message for the student:")
+
+        if not receiver_email or not email_message:
+            messagebox.showerror("Error", "Please provide both email and message.")
+            return
+
+        try:
+            sender_email = "your_email@gmail.com"
+            password = "your_password"
+
+            message = f"Subject: Report Card\n\n{email_message}"
+
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+                server.login(sender_email, password)
+                server.sendmail(sender_email, receiver_email, message)
+
+            messagebox.showinfo("Send Mail", "Email sent successfully.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error sending email: {e}")
+
+    def generate_report_card(self):
+        # Prompt for student information
+        student_name = simpledialog.askstring("Input", "Enter student's name:")
+        if not student_name:
+            messagebox.showerror("Error", "Student name is required.")
+            return
+        
+        class_name = simpledialog.askstring("Input", "Enter the class:")
+        math_marks = simpledialog.askinteger("Input", f"Enter {student_name}'s Math marks:")
+        science_marks = simpledialog.askinteger("Input", f"Enter {student_name}'s Science marks:")
+        english_marks = simpledialog.askinteger("Input", f"Enter {student_name}'s English marks:")
+
+        if not (math_marks and science_marks and english_marks):
+            messagebox.showerror("Error", "All marks must be entered.")
+            return
+
+        # Generate PDF report card
+        try:
+            pdf = FPDF()
+            pdf.add_page()
+
+            # Add template text and data
+            pdf.set_font("Arial", size=12)
+            pdf.cell(200, 10, txt="Report Card", ln=True, align='C')
+            pdf.ln(10)
+            pdf.cell(200, 10, txt=f"Student Name: {student_name}", ln=True, align='L')
+            pdf.cell(200, 10, txt=f"Class: {class_name}", ln=True, align='L')
+            pdf.cell(200, 10, txt=f"Math: {math_marks}", ln=True, align='L')
+            pdf.cell(200, 10, txt=f"Science: {science_marks}", ln=True, align='L')
+            pdf.cell(200, 10, txt=f"English: {english_marks}", ln=True, align='L')
+
+            # Save the PDF
+            pdf_filename = f"{student_name}_report_card.pdf"
+            pdf.output(pdf_filename)
+            messagebox.showinfo("PDF Generated", f"Report card generated successfully as '{pdf_filename}'")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error generating report card: {e}")
+
+if __name__ == "__main__":
+    app = TeacherPage()
+    app.mainloop()
