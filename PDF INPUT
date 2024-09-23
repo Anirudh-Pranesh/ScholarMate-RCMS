@@ -1,0 +1,90 @@
+from fpdf import FPDF
+
+class PDF(FPDF):
+    def header(self):
+        # School Name
+        self.set_font("Arial", "B", 14)
+        self.cell(0, 10, "Bharat School", 0, 1, "C")
+        self.ln(10)
+
+    def chapter_title(self, title):
+        self.set_font("Arial", "B", 12)
+        self.cell(0, 10, title, 0, 1, "L")
+        self.ln(5)
+
+    def chapter_body(self, body):
+        self.set_font("Arial", "", 12)
+        self.multi_cell(0, 10, body)
+        self.ln()
+
+def generate_report_card(student_name, teacher_name, parent_contact, teacher_contact,
+                         class_name, exam_name, scores, top_score, average_score):
+    pdf = PDF()
+    pdf.add_page()
+
+    # First Page Content
+    pdf.chapter_title(f"Report for {exam_name}")
+    pdf.set_font("Arial", "", 12)
+    pdf.cell(0, 10, f"Student Name: {student_name}", 0, 1)
+    pdf.cell(0, 10, f"Teacher Name: {teacher_name}", 0, 1)
+    pdf.cell(0, 10, f"Parent Contact: {parent_contact}", 0, 1)
+    pdf.cell(0, 10, f"Teacher Contact: {teacher_contact}", 0, 1)
+    pdf.cell(0, 10, f"Class: {class_name}", 0, 1)
+    pdf.cell(0, 10, "", 0, 1)  # Blank line
+    pdf.cell(0, 10, f"Exam Name: {exam_name}", 0, 1)
+    pdf.ln(10)
+
+    # Second Page: Marksheet
+    pdf.add_page()
+    pdf.chapter_title("Marksheet")
+
+    # Table Header
+    pdf.set_font("Arial", "B", 12)
+    pdf.cell(60, 10, "Subject", 1)
+    pdf.cell(40, 10, "Student Score", 1)
+    pdf.cell(40, 10, "Top Score", 1)
+    pdf.cell(40, 10, "Average Score", 1)
+    pdf.ln()
+
+    # Table Rows
+    pdf.set_font("Arial", "", 12)
+    subjects = ["Math", "Science", "English", "History", "Geography"]
+    total_score = 0
+
+    for i, subject in enumerate(subjects):
+        student_score = scores[i]
+        total_score += student_score
+        pdf.cell(60, 10, subject, 1)
+        pdf.cell(40, 10, str(student_score), 1)
+        pdf.cell(40, 10, str(top_score), 1)
+        pdf.cell(40, 10, str(average_score), 1)
+        pdf.ln()
+
+    # Total and Average
+    average_student_score = total_score / len(subjects)
+    pdf.cell(60, 10, "Total Score", 1)
+    pdf.cell(40, 10, str(total_score), 1, 0)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
+    pdf.ln()
+    pdf.cell(60, 10, "Average Score", 1)
+    pdf.cell(40, 10, str(average_student_score), 1, 0)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
+
+    # Save PDF
+    pdf.output("report_card.pdf")
+    print("Report card generated successfully as 'report_card.pdf'.")
+
+# Example usage
+generate_report_card(
+    student_name="John Doe",
+    teacher_name="Mrs. Smith",
+    parent_contact="123-456-7890",
+    teacher_contact="098-765-4321",
+    class_name="10th Grade",
+    exam_name="Midterm Exam",
+    scores=[85, 90, 78, 88, 92],  # Scores for five subjects
+    top_score=95,
+    average_score=85
+)
