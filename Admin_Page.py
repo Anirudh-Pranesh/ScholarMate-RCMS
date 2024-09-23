@@ -57,7 +57,7 @@ class AdminPage(tk.Tk):
         self.buttons_frame.pack(pady=20)
 
         # Buttons with hover effect
-        self.create_data_button = ttk.Button(self.buttons_frame, text="Create data entry sheet", command=self.create_data, style='TButton')
+        self.create_data_button = ttk.Button(self.buttons_frame, text="Create entry sheet for new exam", command=self.create_data, style='TButton')
         self.create_data_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
         self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
         self.create_data_button.bind("<Leave>", lambda event: self.on_leave(event, self.create_data_button))

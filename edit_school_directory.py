@@ -9,7 +9,7 @@ import mysql.connector
 from tkinter import messagebox
 # endregion
 
-# Window and fram setup
+# Window and frame setup
 window=tkinter.Tk()
 window.title('Edit School Directory')
 window.geometry('1000x900')
@@ -77,6 +77,8 @@ def execute_selection_delete_teacher(): #deletes teacher by sending a query
         refresh_teacher_list()
         return_main_menu()
         messagebox.showinfo(title='Teacher succssfully removed', message=values[1]+', (teacher_id = '+str(values[0])+') has been removed')
+    else:
+        messagebox.showwarning(title='WARNING', message='Select a teacher')
 
 def execute_selection_delete_student(): # deletes student by sending a query
     db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
@@ -86,6 +88,8 @@ def execute_selection_delete_student(): # deletes student by sending a query
         item_data = student_trv.item(selected_item)  
         values = item_data['values']
         id=values[0]
+        print(item_data)
+        print(values)
         query=f"DELETE FROM student_details WHERE student_id={id};"
         cur.execute(query)
         db.commit()
@@ -93,6 +97,8 @@ def execute_selection_delete_student(): # deletes student by sending a query
         refresh_student_list()
         return_main_menu()
         messagebox.showinfo(title='Student succssfully removed', message=values[1]+', (student_id = '+str(values[0])+') has been removed')
+    else:
+        messagebox.showwarning(title='WARNING', message='Select a student')
 
 def execute_add_teacher(): #adds teacher by sending a query
     db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
