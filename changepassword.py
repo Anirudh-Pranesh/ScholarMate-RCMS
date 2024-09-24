@@ -34,7 +34,7 @@ def save():
             file=open('client_details.dat','wb')
             pickle.dump(details, file)
             file.close()
-            messagebox.showinfo('Password and username changed', 'Sucessfully chnages username and password')
+            messagebox.showinfo('Password and username changed', 'Sucessfully changed username and password')
         else:
             messagebox.showwarning('Incorrect password', 'Password entered is incorrect')
     except Error as e:
