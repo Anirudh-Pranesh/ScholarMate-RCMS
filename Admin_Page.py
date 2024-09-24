@@ -11,7 +11,7 @@ class AdminPage(tk.Tk):
         super().__init__()
 
         self.title("Welcome Admin")
-        self.geometry("800x600")
+        self.geometry("850x600")
 
         # Initialize Sun Valley theme with the "dark" theme
         sv_ttk.set_theme("dark")

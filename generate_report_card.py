@@ -24,11 +24,12 @@ import sv_ttk
 from tkinter import messagebox
 import mysql.connector
 from tkinter import messagebox
+import pdfgenerator as pdfg
 
 #window and frame set up
 window=tkinter.Tk()
 window.title('Generate report card')
-window.geometry('800x700')
+window.geometry('1000x10000')
 common_options_frame=ttk.Frame(window) # main frame to ask for which exam we are generating report for
 multiple_student_frame=ttk.Frame(window) # frame if we are generating for multiple students. it asks for the classes we are geenrating for. so in the database we query for the list of students who belong to the selected class from the table for the exam containing students and their marks, and then generate their report cards using their marks
 single_student_frame=ttk.Frame(window) # frame if we are generating only for a single student. we get the id of the student based on what the student in the treeview the user has selected. using that we query for their marks from the exam table we select and then generate the report card
@@ -56,84 +57,79 @@ def update_window():
 
 def generate_multiple_rc_func():
     # in here, we can get the classes selected by using class9var, class10var, class11var, class12var
-    if (class9var.get() == 1 or class10var.get() == 1 or class11var.get() == 1 or class12var.get() == 1) and selected_exam != None : 
-        db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
-        cur=db.cursor()
-        permitted_classes_get=f"SELECT DISTINCT LEFT(class, LENGTH(class) - 1) FROM {selected_exam};"
-        cur.execute(permitted_classes_get)
-        res=cur.fetchall()
-        get_subj_names=f"DESC {selected_exam};"
-        cur.execute(get_subj_names)
-        subj_names_sql=cur.fetchall()
-        db.close()
-        count=0
-        subj_names_useable=[]
-        for i in subj_names_sql:
-            if count<=2:
-                count+=1
-            else:
-                subj_names_useable.append(i[0])
-        subj_names_useable=tuple(subj_names_useable)
-        sub1name,sub2name,sub3name,sub4name, sub5name = subj_names_useable # pdf function param
-        
-        permitted_classes=[i[0] for i in res]
-        available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
-        selected_classes=[]
-        error_list=[]
-        for i in available_classes:
-            if available_classes[i] == 1 and i in permitted_classes:
-                selected_classes.append(i)
-            elif available_classes[i] == 1 and i not in permitted_classes:
-                error_list.append(i)
-        if error_list != [] and selected_classes != []:
-            messagebox.showinfo(title='Info', message='This examination was not conducted for classes '+str(error_list)+'. Report card now being generated for '+str(selected_classes))
-        elif error_list!=[] and selected_classes == []:
-            messagebox.showwarning(title='Select appropriate class', message='This examination was not conducted for classes '+str(error_list))
-
-        for i in selected_classes:
+    try:
+        if (class9var.get() == 1 or class10var.get() == 1 or class11var.get() == 1 or class12var.get() == 1) and selected_exam != None : 
             db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
             cur=db.cursor()
-            sqlstatement=f"SELECT * FROM {selected_exam} WHERE class LIKE '{i}%';"
-            cur.execute(sqlstatement)
+            permitted_classes_get=f"SELECT DISTINCT LEFT(class, LENGTH(class) - 1) FROM {selected_exam};"
+            cur.execute(permitted_classes_get)
             res=cur.fetchall()
+            get_subj_names=f"DESC {selected_exam};"
+            cur.execute(get_subj_names)
+            subj_names_sql=cur.fetchall()
             db.close()
-            top_score=[]
-            avg_score=[]
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
-            cur=db.cursor()
-            for k in subj_names_useable:
-                statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
-                statement_avg=f"SELECT AVG({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
-                cur.execute(statement_top)
-                top_score.append(cur.fetchall()[0][0])
-                cur.execute(statement_avg)
-                avg_score.append(cur.fetchall()[0][0])
-            db.close()
-            top_score=tuple(top_score)
-            avg_score=tuple(avg_score)
-            topsub1,topsub2,topsub3,topsub4,topsub5=top_score #pdf function params
-            avgsub1,avgsub2,avgsub3,avgsub4,avgsub5=avg_score #pdf function params
-            for j in res:
-                std_id=j[0] #pdf function params
-                std_name=j[1] #pdf function params
-                std_class=j[2] #pdf function params
-                sub1=j[3] #pdf function params
-                sub2=j[4] #pdf function params
-                sub3=j[5] #pdf function params
-                sub4=j[6] #pdf function params
-                sub5=j[7] #pdf function params
+            count=0
+            subj_names_useable=[]
+            for i in subj_names_sql:
+                if count<=2:
+                    count+=1
+                else:
+                    subj_names_useable.append(i[0])
+            subj_names_useable=tuple(subj_names_useable)
+            sub1name,sub2name,sub3name,sub4name, sub5name = subj_names_useable # pdf function param
+            
+            permitted_classes=[i[0] for i in res]
+            available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
+            selected_classes=[]
+            error_list=[]
+            for i in available_classes:
+                if available_classes[i] == 1 and i in permitted_classes:
+                    selected_classes.append(i)
+                elif available_classes[i] == 1 and i not in permitted_classes:
+                    error_list.append(i)
+            if error_list != [] and selected_classes != []:
+                messagebox.showinfo(title='Info', message='This examination was not conducted for classes '+str(error_list)+'. Report card now being generated for '+str(selected_classes))
+            elif error_list!=[] and selected_classes == []:
+                messagebox.showwarning(title='Select appropriate class', message='This examination was not conducted for classes '+str(error_list))
+        else:
+            messagebox.showwarning(title='WARNING', message='A class must be selected/confirm your exam selection')
+        if selected_classes !=[]:
+            for i in selected_classes:
                 db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
                 cur=db.cursor()
-                get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
-                cur.execute(get_names_contacts)
-                contact_name_details=cur.fetchall()
+                sqlstatement=f"SELECT * FROM {selected_exam} WHERE class LIKE '{i}%';"
+                cur.execute(sqlstatement)
+                res=cur.fetchall()
                 db.close()
-                contact_name_details=contact_name_details[0]
-                teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
-            
-                # add all params to pdf genrator function, add a message saying pdf genrated, and saved in so and so file path
-    else:
-        messagebox.showwarning(title='WARNING', message='A class must be selected/confirm your exam selection')
+                top_score=[]
+                avg_score=[]
+                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+                cur=db.cursor()
+                for k in subj_names_useable:
+                    statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
+                    statement_avg=f"SELECT AVG({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
+                    cur.execute(statement_top)
+                    top_score.append(cur.fetchall()[0][0])
+                    cur.execute(statement_avg)
+                    avg_score.append(cur.fetchall()[0][0])
+                db.close()
+                for j in res:
+                    std_id=j[0] #pdf function params
+                    std_name=j[1] #pdf function params
+                    std_class=j[2] #pdf function params
+                    score_list=[j[3], j[4], j[5], j[6], j[7]]
+                    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+                    cur=db.cursor()
+                    get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
+                    cur.execute(get_names_contacts)
+                    contact_name_details=cur.fetchall()
+                    db.close()
+                    contact_name_details=contact_name_details[0]
+                    teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
+                    pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
+            messagebox.showinfo(title='Info', message='PDFs for report cards generated')
+    except:
+        messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please try again')
 
 def select_exam_func():
     global selected_exam 
@@ -144,62 +140,56 @@ def select_exam_func():
     messagebox.showinfo(title='Examination selected', message='Report card will now be generated for '+selected_exam)
 
 def generate_single_rc_func():
-    selected_student=students_trv.selection()[0]
-    if selected_student and selected_exam != None:
-        values = selected_student
-        db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
-        cur=db.cursor()
+    try:
+        selected_student=students_trv.selection()[0]
+        if selected_student and selected_exam != None:
+            values = selected_student
+            print(values)
+            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            cur=db.cursor()
 
-        sqlstatement=f"SELECT * FROM {selected_exam} WHERE student_id={values[0]};"
-        cur.execute(sqlstatement)
-        res=cur.fetchall()
+            sqlstatement=f"SELECT * FROM {selected_exam} WHERE student_id={values};"
+            cur.execute(sqlstatement)
+            res=cur.fetchall()
 
-        get_subj_names=f"DESC {selected_exam};"
-        cur.execute(get_subj_names)
-        subj_names_sql=cur.fetchall()
+            get_subj_names=f"DESC {selected_exam};"
+            cur.execute(get_subj_names)
+            subj_names_sql=cur.fetchall()
 
-        get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {res[0][0]};"
-        cur.execute(get_names_contacts)
-        contact_name_details=cur.fetchall()
-        contact_name_details=contact_name_details[0]
-        db.close()
-        subj_names_useable=[]
-        count=0
-        for i in subj_names_sql:
-            if count<=2:
-                count+=1
-            else:
-                subj_names_useable.append(i[0])
-        subj_names_useable=tuple(subj_names_useable)
-        sub1name,sub2name,sub3name,sub4name, sub5name = subj_names_useable #pdf function params
-        teacher_name, teacher_contact, parent_contact = contact_name_details #pdf function params
-        std_id=res[0][0] #pdf function params
-        std_name=res[0][1] #pdf function params
-        std_class=res[0][2] #pdf function params
-        sub1=res[0][3] #pdf function params
-        sub2=res[0][4] #pdf function params
-        sub3=res[0][5] #pdf function params
-        sub4=res[0][6] #pdf function params
-        sub5=res[0][7] #pdf function params
-        top_score=[]
-        avg_score=[]
-        db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
-        cur=db.cursor()
-        for i in subj_names_useable:
-            statement=f"SELECT MAX({i}), AVG({i}) FROM {selected_exam} WHERE class LIKE CONCAT(LEFT('{std_class}', LENGTH('{std_class}')-1), '%');"
-            cur.execute(statement)
-            dat=cur.fetchall()
-            top_score.append(dat[0][0])
-            avg_score.append(dat[0][1])
-        db.close()
-        top_score=tuple(top_score)
-        avg_score=tuple(avg_score)
-        topsub1,topsub2,topsub3,topsub4,topsub5=top_score #pdf function params
-        avgsub1,avgsub2,avgsub3,avgsub4,avgsub5=avg_score #pdf function params
-
-        # add all params to pdf generator function, add a message saying pdf genrated, and saved in so and so file path
-    else:
-        messagebox.showwarning(title='WARNING', message='Please select a student/confirm you exam selection')
+            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {res[0][0]};"
+            cur.execute(get_names_contacts)
+            contact_name_details=cur.fetchall()
+            contact_name_details=contact_name_details[0]
+            db.close()
+            subj_names_useable=[]
+            count=0
+            for i in subj_names_sql:
+                if count<=2:
+                    count+=1
+                else:
+                    subj_names_useable.append(i[0])
+            teacher_name, teacher_contact, parent_contact = contact_name_details #pdf function params
+            std_id=res[0][0] #pdf function params
+            std_name=res[0][1] #pdf function params
+            std_class=res[0][2] #pdf function params
+            score_list=[res[0][3], res[0][4], res[0][5], res[0][6], res[0][7]] # pdf function param
+            top_score=[]
+            avg_score=[]
+            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            cur=db.cursor()
+            for i in subj_names_useable:
+                statement=f"SELECT MAX({i}), ROUND(AVG({i}), 1) FROM {selected_exam} WHERE class LIKE CONCAT(LEFT('{std_class}', LENGTH('{std_class}')-1), '%');"
+                cur.execute(statement)
+                dat=cur.fetchall()
+                top_score.append(dat[0][0])
+                avg_score.append(dat[0][1])
+            db.close()
+            pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
+            messagebox.showinfo(title='Info', message='PDF for report card generated')
+        else:
+            messagebox.showwarning(title='WARNING', message='Please select a student/confirm you exam selection')
+    except:
+        messagebox.showerror(title='ERROR', message='Unexpected error, please check whether this student has written this exam')
 
 
 selected_option=tkinter.StringVar()
