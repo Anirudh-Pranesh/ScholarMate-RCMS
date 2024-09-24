@@ -1,3 +1,4 @@
+import os
 from fpdf import FPDF
 import matplotlib.pyplot as plt
 
@@ -59,6 +60,11 @@ def create_bar_graph(subjects, student_scores, top_scores, average_scores):
 
 def generate_report_card(student_name, teacher_name, parent_contact, teacher_contact,
                          class_name, exam_name, scores, top_scores, average_scores):
+    # Create the 'Grades' directory if it doesn't exist
+    directory = "Grades"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
     pdf = PDF()
     pdf.add_page()
 
@@ -124,9 +130,11 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     pdf.chapter_title("Performance Comparison")
     pdf.image("bar_graph.png", x=10, y=50, w=180)  # Embed the saved bar graph image
 
-    # Save PDF
-    pdf.output("report_card_with_grades_and_graph.pdf")
-    print("Report card generated successfully with bar graph as 'report_card_with_grades_and_graph.pdf'.")
+    # Save the PDF in the 'Grades' directory with the student's name in the filename
+    file_name = f"{student_name.replace(' ', '_')}_report_card.pdf"
+    pdf_path = os.path.join(directory, file_name)
+    pdf.output(pdf_path)
+    print(f"Report card generated successfully as '{pdf_path}'.")
 
 # Example usage
 subjects = ["Math", "Science", "English", "History", "Geography"]
