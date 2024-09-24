@@ -75,9 +75,6 @@ def generate_multiple_rc_func():
                     count+=1
                 else:
                     subj_names_useable.append(i[0])
-            subj_names_useable=tuple(subj_names_useable)
-            sub1name,sub2name,sub3name,sub4name, sub5name = subj_names_useable # pdf function param
-            
             permitted_classes=[i[0] for i in res]
             available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
             selected_classes=[]
@@ -127,7 +124,7 @@ def generate_multiple_rc_func():
                     contact_name_details=contact_name_details[0]
                     teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
                     pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
-            messagebox.showinfo(title='Info', message='PDFs for report cards generated')
+            messagebox.showinfo(title='Info', message='PDFs for report cards generated. Please check in downloads folder')
     except:
         messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please try again')
 
@@ -137,7 +134,7 @@ def select_exam_func():
         selected_exam = exams_trv.selection()[0] # selected exam is declard none first, now we are obtaining the selection made by user and we are updated the selected_exam variable
     except:
         messagebox.showerror(title='ERROR', message='Examination not selected')
-    messagebox.showinfo(title='Examination selected', message='Report card will now be generated for '+selected_exam)
+    messagebox.showinfo(title='Examination selected', message=selected_exam+' has been selected')
 
 def generate_single_rc_func():
     try:
@@ -185,7 +182,7 @@ def generate_single_rc_func():
                 avg_score.append(dat[0][1])
             db.close()
             pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
-            messagebox.showinfo(title='Info', message='PDF for report card generated')
+            messagebox.showinfo(title='Info', message='PDF for report card generated. Please check in downloads folder')
         else:
             messagebox.showwarning(title='WARNING', message='Please select a student/confirm you exam selection')
     except:
@@ -217,7 +214,7 @@ exams_trv.heading('Examinations', text='Examinations')
 for row in res:
     exams_trv.insert("", 'end', iid=row[0], text=row[0], values=list(row))
 
-select_exam_button=ttk.Button(common_options_frame, text='Confirm Selection ? ', command=select_exam_func)
+select_exam_button=ttk.Button(common_options_frame, text='Confirm examination ? ', command=select_exam_func)
 option_label=ttk.Label(common_options_frame, text='Generate for : ', font=('Arial', '15'), justify="left", anchor="w")
 multiple_student_radiobutton=ttk.Radiobutton(common_options_frame, text='Multiple students', value='multiple', variable=selected_option, command=update_window)
 single_student_radiobutton=ttk.Radiobutton(common_options_frame, text='Single student', value='single', variable=selected_option, command=update_window)
