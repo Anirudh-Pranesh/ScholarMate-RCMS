@@ -17,6 +17,19 @@ class PDF(FPDF):
         self.multi_cell(0, 10, body)
         self.ln()
 
+def get_grade(score):
+    """Returns the grade based on the score."""
+    if score >= 90:
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    else:
+        return 'F'
+
 def generate_report_card(student_name, teacher_name, parent_contact, teacher_contact,
                          class_name, exam_name, scores, top_score, average_score):
     pdf = PDF()
@@ -40,10 +53,11 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
 
     # Table Header
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(60, 10, "Subject", 1)
-    pdf.cell(40, 10, "Student Score", 1)
-    pdf.cell(40, 10, "Top Score", 1)
-    pdf.cell(40, 10, "Average Score", 1)
+    pdf.cell(50, 10, "Subject", 1)
+    pdf.cell(30, 10, "Student Score", 1)
+    pdf.cell(30, 10, "Top Score", 1)
+    pdf.cell(30, 10, "Avg Score", 1)
+    pdf.cell(30, 10, "Grade", 1)
     pdf.ln()
 
     # Table Rows
@@ -54,27 +68,33 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     for i, subject in enumerate(subjects):
         student_score = scores[i]
         total_score += student_score
-        pdf.cell(60, 10, subject, 1)
-        pdf.cell(40, 10, str(student_score), 1)
-        pdf.cell(40, 10, str(top_score), 1)
-        pdf.cell(40, 10, str(average_score), 1)
+        grade = get_grade(student_score)
+
+        pdf.cell(50, 10, subject, 1)
+        pdf.cell(30, 10, str(student_score), 1)
+        pdf.cell(30, 10, str(top_score), 1)
+        pdf.cell(30, 10, str(average_score), 1)
+        pdf.cell(30, 10, grade, 1)
         pdf.ln()
 
     # Total and Average
     average_student_score = total_score / len(subjects)
-    pdf.cell(60, 10, "Total Score", 1)
-    pdf.cell(40, 10, str(total_score), 1, 0)
-    pdf.cell(40, 10, "", 1)
-    pdf.cell(40, 10, "", 1)
+    pdf.cell(50, 10, "Total Score", 1)
+    pdf.cell(30, 10, str(total_score), 1, 0)
+    pdf.cell(30, 10, "", 1)
+    pdf.cell(30, 10, "", 1)
+    pdf.cell(30, 10, "", 1)
     pdf.ln()
-    pdf.cell(60, 10, "Average Score", 1)
-    pdf.cell(40, 10, str(average_student_score), 1, 0)
-    pdf.cell(40, 10, "", 1)
-    pdf.cell(40, 10, "", 1)
+
+    pdf.cell(50, 10, "Average Score", 1)
+    pdf.cell(30, 10, str(average_student_score), 1, 0)
+    pdf.cell(30, 10, "", 1)
+    pdf.cell(30, 10, "", 1)
+    pdf.cell(30, 10, "", 1)
 
     # Save PDF
-    pdf.output("report_card.pdf")
-    print("Report card generated successfully as 'report_card.pdf'.")
+    pdf.output("report_card_with_grades.pdf")
+    print("Report card generated successfully as 'report_card_with_grades.pdf'.")
 
 # Example usage
 generate_report_card(
