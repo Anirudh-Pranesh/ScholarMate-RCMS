@@ -94,7 +94,7 @@ class AdminPage(tk.Tk):
         messagebox.showinfo("View/Edit Data", "View/Edit data function")
 
     def generate_report_card(self):
-        messagebox.showinfo("Generate Report Card", "Generate report card function")
+        call(['python', 'generate_report_card.py'])
 
     def edit_school_directory(self):
         call(['python', 'edit_school_directory.py'])
