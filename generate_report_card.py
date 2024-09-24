@@ -53,7 +53,6 @@ def update_window():
     else:
         show_common_opt()
 
-#NEED TO PROGRAM THESE FUNCTIONS 
 
 def generate_multiple_rc_func():
     # in here, we can get the classes selected by using class9var, class10var, class11var, class12var
@@ -86,8 +85,10 @@ def generate_multiple_rc_func():
                 selected_classes.append(i)
             elif available_classes[i] == 1 and i not in permitted_classes:
                 error_list.append(i)
-        if error_list != []:
-            messagebox.showwarning(title='WARNING', message='This examination was NOT conducted for classes '+str(error_list))
+        if error_list != [] and selected_classes != []:
+            messagebox.showinfo(title='Info', message='This examination was not conducted for classes '+str(error_list)+'. Report card now being generated for '+str(selected_classes))
+        elif error_list!=[] and selected_classes == []:
+            messagebox.showwarning(title='Select appropriate class', message='This examination was not conducted for classes '+str(error_list))
 
         for i in selected_classes:
             db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
@@ -130,7 +131,7 @@ def generate_multiple_rc_func():
                 contact_name_details=contact_name_details[0]
                 teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
             
-                # add all params to pdf genrator function
+                # add all params to pdf genrator function, add a message saying pdf genrated, and saved in so and so file path
     else:
         messagebox.showwarning(title='WARNING', message='A class must be selected/confirm your exam selection')
 
@@ -196,7 +197,7 @@ def generate_single_rc_func():
         topsub1,topsub2,topsub3,topsub4,topsub5=top_score #pdf function params
         avgsub1,avgsub2,avgsub3,avgsub4,avgsub5=avg_score #pdf function params
 
-        # add all params to pdf egenrator function
+        # add all params to pdf generator function, add a message saying pdf genrated, and saved in so and so file path
     else:
         messagebox.showwarning(title='WARNING', message='Please select a student/confirm you exam selection')
 
