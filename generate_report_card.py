@@ -104,7 +104,7 @@ def generate_multiple_rc_func():
                 cur=db.cursor()
                 for k in subj_names_useable:
                     statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
-                    statement_avg=f"SELECT AVG({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
+                    statement_avg=f"SELECT ROUND(AVG({k}), 1)) FROM {selected_exam} WHERE class LIKE '{i}%'"
                     cur.execute(statement_top)
                     top_score.append(cur.fetchall()[0][0])
                     cur.execute(statement_avg)
@@ -141,7 +141,6 @@ def generate_single_rc_func():
         selected_student=students_trv.selection()[0]
         if selected_student and selected_exam != None:
             values = selected_student
-            print(values)
             db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
             cur=db.cursor()
 

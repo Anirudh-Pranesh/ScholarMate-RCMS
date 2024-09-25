@@ -52,12 +52,17 @@ def create_bar_graph(subjects, student_scores, top_scores, average_scores):
     plt.bar(r2, top_scores, color='red', width=bar_width, label='Top Score')
     plt.bar(r3, average_scores, color='green', width=bar_width, label='Avg Score')
 
+    for i in range(len(subjects)):
+        plt.text(r1[i], float(student_scores[i]) + 0.5, str(student_scores[i]), ha='center')
+        plt.text(r2[i], float(top_scores[i]) + 0.5, str(top_scores[i]), ha='center')
+        plt.text(r3[i], float(average_scores[i]) + 0.5, str(average_scores[i]), ha='center')
+
     plt.xlabel('Subjects')
     plt.ylabel('Scores')
     plt.title('Student vs Top vs Avg Scores')
     plt.xticks([r + bar_width for r in range(len(subjects))], subjects)
-
-    plt.legend()
+    
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
 
     # Save the graph as an image
@@ -128,7 +133,7 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     # Embed Bar Graph
     create_bar_graph(subjects, scores, top_scores, average_scores)
     pdf.add_page()
-    pdf.chapter_title("Performance Comparison")
+    pdf.chapter_title("Performance Analysis")
     pdf.image("bar_graph.png", x=10, y=50, w=180)  # Embed the saved bar graph image
 
     # Save PDF
