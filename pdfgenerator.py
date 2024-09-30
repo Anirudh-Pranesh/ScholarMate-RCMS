@@ -93,10 +93,10 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     # Table Header
     pdf.set_font("Arial", "B", 12)
     pdf.cell(50, 10, "Subject", 1)
-    pdf.cell(30, 10, "Student Score", 1)
-    pdf.cell(30, 10, "Top Score", 1)
-    pdf.cell(30, 10, "Avg Score", 1)
-    pdf.cell(30, 10, "Grade", 1)
+    pdf.cell(40, 10, "Student Score", 1)
+    pdf.cell(40, 10, "Top Score", 1)
+    pdf.cell(40, 10, "Class Avg Score", 1)
+    pdf.cell(40, 10, "Grade", 1)
     pdf.ln()
 
     # Table Rows
@@ -109,26 +109,26 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
         grade = get_grade(student_score)
 
         pdf.cell(50, 10, subject, 1)
-        pdf.cell(30, 10, str(student_score), 1)
-        pdf.cell(30, 10, str(top_scores[i]), 1)
-        pdf.cell(30, 10, str(average_scores[i]), 1)
-        pdf.cell(30, 10, grade, 1)
+        pdf.cell(40, 10, str(student_score), 1)
+        pdf.cell(40, 10, str(top_scores[i]), 1)
+        pdf.cell(40, 10, str(average_scores[i]), 1)
+        pdf.cell(40, 10, grade, 1)
         pdf.ln()
 
     # Total and Average
     average_student_score = total_score / len(subjects)
     pdf.cell(50, 10, "Total Score", 1)
-    pdf.cell(30, 10, str(total_score), 1, 0)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
+    pdf.cell(40, 10, str(total_score), 1, 0)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
     pdf.ln()
 
-    pdf.cell(50, 10, "Average Score", 1)
-    pdf.cell(30, 10, str(average_student_score), 1, 0)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
+    pdf.cell(50, 10, "Your total Average Score", 1)
+    pdf.cell(40, 10, str(average_student_score), 1, 0)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
 
     # Embed Bar Graph
     create_bar_graph(subjects, scores, top_scores, average_scores)

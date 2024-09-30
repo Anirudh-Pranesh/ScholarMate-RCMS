@@ -256,7 +256,7 @@ cur.execute(show_students)
 res=cur.fetchall()
 db.close()
 l1=[i[0] for i in cur.description]#column headers
-students_trv=ttk.Treeview(single_student_frame, selectmode='browse', columns=l1, height=10, show='headings')
+students_trv=ttk.Treeview(single_student_frame, selectmode='browse', columns=l1, height=5, show='headings')
 for i in l1:    
     students_trv.column(i, anchor='c', width=200)
     students_trv.heading(i, text=i)
