@@ -24,23 +24,30 @@ class PDF(FPDF):
         self.multi_cell(0, 10, body)
         self.ln()
 
+    def watermark(self, image_path):
+        """Add a watermark to the PDF."""
+        self.image(image_path, x=10, y=10, w=190, h=190)  # Adjust size and position as needed
+        self.set_alpha(0.1)  # Set transparency (0 to 1)
+        self.image(image_path, x=10, y=10, w=190, h=190)  # Draw the watermark
+        self.set_alpha(1)  # Reset transparency to normal
+
 def get_grade(score):
     """Returns the grade based on the score."""
-    if 91<=score<=100:
+    if 91 <= score <= 100:
         return 'A1'
-    elif 81<=score<= 90:
+    elif 81 <= score <= 90:
         return 'A2'
-    elif 71<=score<=80:
+    elif 71 <= score <= 80:
         return 'B1'
-    elif 61<=score<=70:
+    elif 61 <= score <= 70:
         return 'B2'
-    elif 51<=score<=60:
+    elif 51 <= score <= 60:
         return 'C1'
-    elif 41<=score<=50:
+    elif 41 <= score <= 50:
         return 'C2'
-    elif 33<=score<=40:
+    elif 33 <= score <= 40:
         return 'D'
-    elif score<=32:
+    elif score <= 32:
         return 'F'
 
 def create_bar_graph(subjects, student_scores, top_scores, average_scores):
@@ -78,6 +85,9 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
                          class_name, exam_name, scores, top_scores, average_scores, student_id, subjects):
     pdf = PDF()
     pdf.add_page()
+
+    # Add Watermark
+    pdf.watermark("logo.png")  # Use your logo image path here
 
     # First Page Content
     pdf.chapter_title(f"Report for {exam_name}")
