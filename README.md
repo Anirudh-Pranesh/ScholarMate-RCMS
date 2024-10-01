@@ -1,6 +1,26 @@
 # ScholarMate-RCMS
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
 ScholarMate is an RCMS, being made for CS class 12 project by Anirudh, Dave & Vignesh
-The file attatched below describes the general structure of our program. It is a python executable file integrated with SQL
+The file attatched below describes the design of the software, describing all the features and functionalities included in the software.
+
 https://drive.google.com/file/d/1XUFr5fEAIPeqqcX7lUnfNcna0rNyRoBH/view?usp=sharing
 
-Sun-Valley-ttk-theme-main.zip is a folder for the theme of the GUI. Please install it using pip before running the software.
+The file attatched bellow describes the MySQL database structure
+
+https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing
+
+The software will be distributed as a .exe file among clients
+
+The software is open source and here is the list of all the required imports and downloads for the source code : 
+
+REQUIRED INSTALLS : 
+
+pip install pillow (for inserting image)
+pip install sv_ttk (for the theme)
+pip install fpdf (pdf generation)
+pip install mysql.connector
+pip install matplotlib (Graph generation)
