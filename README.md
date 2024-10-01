@@ -19,8 +19,8 @@ The software is open source and here is the list of all the required imports and
 
 REQUIRED INSTALLS : 
 
-pip install pillow (for inserting image)
-pip install sv_ttk (for the theme)
-pip install fpdf (pdf generation)
-pip install mysql.connector
+pip install pillow (for inserting image)\n
+pip install sv_ttk (for the theme)\n
+pip install fpdf (pdf generation)\n
+pip install mysql.connector\n
 pip install matplotlib (Graph generation)
