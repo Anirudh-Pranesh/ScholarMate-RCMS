@@ -133,7 +133,7 @@ def generate_multiple_rc_func():
             generating_text_multiple.grid_forget()
             messagebox.showinfo(title='Info', message='PDFs for report cards generated. Please check in downloads folder')
     except:
-        messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please try again')
+        messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please check whether the pdf already exists')
 
 def select_exam_func():
     global selected_exam 
@@ -242,7 +242,7 @@ class10 = ttk.Checkbutton(multiple_student_frame, text='Class 10', onvalue=1, of
 class11 = ttk.Checkbutton(multiple_student_frame, text='Class 11', onvalue=1, offvalue=0, variable=class11var)
 class12 = ttk.Checkbutton(multiple_student_frame, text='Class 12', onvalue=1, offvalue=0, variable=class12var)
 generate_multiple_rc=ttk.Button(multiple_student_frame, text='Generate', command=start_generating_multiple)
-generating_text_multiple=ttk.Label(multiple_student_frame, text='Generating...', font=('Arial', '15'), justify="left", anchor="w")
+generating_text_multiple=ttk.Label(multiple_student_frame, text='Generating, please wait ....', font=('Arial', '15'), justify="left", anchor="w")
 
 #grid
 grade_selection_label.grid(row=0, column=0,sticky = 'W')

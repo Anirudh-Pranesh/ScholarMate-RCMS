@@ -114,9 +114,17 @@ def execute_add_teacher(): #adds teacher by sending a query
             cur.execute(query)
             db.commit()
             db.close()
+            newdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            newcur=newdb.cursor()
+            usnamepwd=f"SELECT username, passkey FROM credentials where teacher_id = (SELECT teacher_id FROM teacher_details where teacher_name='{name}' AND teacher_contact='{contact}' AND assigned_class='{asgnclass}');'"
+            newcur.execute(usnamepwd)
+            res=newcur.fetchall()
+            newdb.close()
+            username=res[0][0]
+            pwd=res[0][1]
             refresh_teacher_list()
             return_main_menu()
-            messagebox.showinfo(title='Teacher successfully added', message=name + ' is now a teacher')
+            messagebox.showinfo(title="Teacher successfully added", message=name + ' is now a teacher'+f"Username = '{username}', Password = '{pwd}'")
         except:
             messagebox.showerror(title='UNEXPECTED ERROR', message='Unexpected error encountered. Please check details inputted')
 
@@ -135,9 +143,17 @@ def execute_add_student(): # adds studsnt by sending a query
             cur.execute(query)
             db.commit()
             db.close()
+            newdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            newcur=newdb.cursor()
+            usnamepwd=f"SELECT username, passkey FROM credentials where student_id = (SELECT student_id FROM student_details where student_name='{name}' AND parent_contact='{contact}' AND class='{asgnclass}');'"
+            newcur.execute(usnamepwd)
+            res=newcur.fetchall()
+            newdb.close()
+            username=res[0][0]
+            pwd=res[0][1]
             refresh_student_list()
             return_main_menu()
-            messagebox.showinfo(title='Student successfully added', message=name + ' is now a student')
+            messagebox.showinfo(title='Student successfully added', message=name + ' is now a student'+f"Username = '{username}', Password = '{pwd}'")
         except:
             messagebox.showerror(title='UNEXPECTED ERROR', message='Unexpected error encountered. Please check details inputted')
 

@@ -1,17 +1,22 @@
 import os
 from fpdf import FPDF
 import matplotlib.pyplot as plt
+from tkinter import messagebox
 
 class PDF(FPDF):
     def header(self):
         # School Name
-        self.set_font("Arial", "B", 14)
+        self.set_text_color(39, 75, 176)
+        self.set_font("Arial", "B", 14,)
         self.cell(0, 10, "Bharat School", 0, 1, "C")
+        self.set_text_color(0, 0, 0)
         self.ln(10)
 
     def chapter_title(self, title):
+        self.set_text_color(0, 128, 255)
         self.set_font("Arial", "B", 12)
         self.cell(0, 10, title, 0, 1, "L")
+        self.set_text_color(0, 0, 0)
         self.ln(5)
 
     def chapter_body(self, body):
