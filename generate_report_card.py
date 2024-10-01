@@ -24,6 +24,8 @@ import sv_ttk
 from tkinter import messagebox
 import mysql.connector
 from tkinter import messagebox
+import time
+import threading
 import pdfgenerator as pdfg
 
 #window and frame set up
@@ -54,6 +56,10 @@ def update_window():
     else:
         show_common_opt()
 
+def start_generating_multiple():
+    generating_text_multiple.grid(row=2, column=0, sticky='W', pady=10)
+    time.sleep(0.5)
+    threading.Thread(target=generate_multiple_rc_func).start()
 
 def generate_multiple_rc_func():
     # in here, we can get the classes selected by using class9var, class10var, class11var, class12var
@@ -104,7 +110,7 @@ def generate_multiple_rc_func():
                 cur=db.cursor()
                 for k in subj_names_useable:
                     statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
-                    statement_avg=f"SELECT ROUND(AVG({k}), 1)) FROM {selected_exam} WHERE class LIKE '{i}%'"
+                    statement_avg=f"SELECT ROUND(AVG({k}), 1) FROM {selected_exam} WHERE class LIKE '{i}%'"
                     cur.execute(statement_top)
                     top_score.append(cur.fetchall()[0][0])
                     cur.execute(statement_avg)
@@ -124,6 +130,7 @@ def generate_multiple_rc_func():
                     contact_name_details=contact_name_details[0]
                     teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
                     pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
+            generating_text_multiple.grid_forget()
             messagebox.showinfo(title='Info', message='PDFs for report cards generated. Please check in downloads folder')
     except:
         messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please try again')
@@ -234,7 +241,8 @@ class9 = ttk.Checkbutton(multiple_student_frame, text='Class 9', onvalue=1, offv
 class10 = ttk.Checkbutton(multiple_student_frame, text='Class 10', onvalue=1, offvalue=0, variable=class10var)
 class11 = ttk.Checkbutton(multiple_student_frame, text='Class 11', onvalue=1, offvalue=0, variable=class11var)
 class12 = ttk.Checkbutton(multiple_student_frame, text='Class 12', onvalue=1, offvalue=0, variable=class12var)
-generate_multiple_rc=ttk.Button(multiple_student_frame, text='Generate', command=generate_multiple_rc_func)
+generate_multiple_rc=ttk.Button(multiple_student_frame, text='Generate', command=start_generating_multiple)
+generating_text_multiple=ttk.Label(multiple_student_frame, text='Generating...', font=('Arial', '15'), justify="left", anchor="w")
 
 #grid
 grade_selection_label.grid(row=0, column=0,sticky = 'W')
@@ -243,6 +251,8 @@ class10.grid(row=0, column=2,sticky = 'W')
 class11.grid(row=0, column=3,sticky = 'W')
 class12.grid(row=0, column=4,sticky = 'W')
 generate_multiple_rc.grid(row=1, column=0,sticky = 'W', pady=10)
+generating_text_multiple.grid(row=2, column=0, sticky='W', pady=10)
+generating_text_multiple.grid_forget()
 
 
 #SINGLE STUDENT FRAME, and widget set-up
