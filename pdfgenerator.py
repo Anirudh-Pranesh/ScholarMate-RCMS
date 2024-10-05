@@ -1,17 +1,22 @@
 import os
 from fpdf import FPDF
 import matplotlib.pyplot as plt
+from tkinter import messagebox
 
 class PDF(FPDF):
     def header(self):
         # School Name
-        self.set_font("Arial", "B", 14)
+        self.set_text_color(39, 75, 176)
+        self.set_font("Arial", "B", 14,)
         self.cell(0, 10, "Bharat School", 0, 1, "C")
+        self.set_text_color(0, 0, 0)
         self.ln(10)
 
     def chapter_title(self, title):
+        self.set_text_color(0, 128, 255)
         self.set_font("Arial", "B", 12)
         self.cell(0, 10, title, 0, 1, "L")
+        self.set_text_color(0, 0, 0)
         self.ln(5)
 
     def chapter_body(self, body):
@@ -21,21 +26,21 @@ class PDF(FPDF):
 
 def get_grade(score):
     """Returns the grade based on the score."""
-    if 91<=score<=100:
+    if 91 <= score <= 100:
         return 'A1'
-    elif 81<=score<= 90:
+    elif 81 <= score <= 90:
         return 'A2'
-    elif 71<=score<=80:
+    elif 71 <= score <= 80:
         return 'B1'
-    elif 61<=score<=70:
+    elif 61 <= score <= 70:
         return 'B2'
-    elif 51<=score<=60:
+    elif 51 <= score <= 60:
         return 'C1'
-    elif 41<=score<=50:
+    elif 41 <= score <= 50:
         return 'C2'
-    elif 33<=score<=40:
+    elif 33 <= score <= 40:
         return 'D'
-    elif score<=32:
+    elif score <= 32:
         return 'F'
 
 def create_bar_graph(subjects, student_scores, top_scores, average_scores):
@@ -52,12 +57,17 @@ def create_bar_graph(subjects, student_scores, top_scores, average_scores):
     plt.bar(r2, top_scores, color='red', width=bar_width, label='Top Score')
     plt.bar(r3, average_scores, color='green', width=bar_width, label='Avg Score')
 
+    for i in range(len(subjects)):
+        plt.text(r1[i], float(student_scores[i]) + 0.5, str(student_scores[i]), ha='center')
+        plt.text(r2[i], float(top_scores[i]) + 0.5, str(top_scores[i]), ha='center')
+        plt.text(r3[i], float(average_scores[i]) + 0.5, str(average_scores[i]), ha='center')
+
     plt.xlabel('Subjects')
     plt.ylabel('Scores')
     plt.title('Student vs Top vs Avg Scores')
     plt.xticks([r + bar_width for r in range(len(subjects))], subjects)
-
-    plt.legend()
+    
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
 
     # Save the graph as an image
@@ -88,10 +98,10 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     # Table Header
     pdf.set_font("Arial", "B", 12)
     pdf.cell(50, 10, "Subject", 1)
-    pdf.cell(30, 10, "Student Score", 1)
-    pdf.cell(30, 10, "Top Score", 1)
-    pdf.cell(30, 10, "Avg Score", 1)
-    pdf.cell(30, 10, "Grade", 1)
+    pdf.cell(40, 10, "Student Score", 1)
+    pdf.cell(40, 10, "Top Score", 1)
+    pdf.cell(40, 10, "Class Avg Score", 1)
+    pdf.cell(40, 10, "Grade", 1)
     pdf.ln()
 
     # Table Rows
@@ -104,31 +114,31 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
         grade = get_grade(student_score)
 
         pdf.cell(50, 10, subject, 1)
-        pdf.cell(30, 10, str(student_score), 1)
-        pdf.cell(30, 10, str(top_scores[i]), 1)
-        pdf.cell(30, 10, str(average_scores[i]), 1)
-        pdf.cell(30, 10, grade, 1)
+        pdf.cell(40, 10, str(student_score), 1)
+        pdf.cell(40, 10, str(top_scores[i]), 1)
+        pdf.cell(40, 10, str(average_scores[i]), 1)
+        pdf.cell(40, 10, grade, 1)
         pdf.ln()
 
     # Total and Average
     average_student_score = total_score / len(subjects)
     pdf.cell(50, 10, "Total Score", 1)
-    pdf.cell(30, 10, str(total_score), 1, 0)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
+    pdf.cell(40, 10, str(total_score), 1, 0)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
     pdf.ln()
 
-    pdf.cell(50, 10, "Average Score", 1)
-    pdf.cell(30, 10, str(average_student_score), 1, 0)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
-    pdf.cell(30, 10, "", 1)
+    pdf.cell(50, 10, "Your total Average Score", 1)
+    pdf.cell(40, 10, str(average_student_score), 1, 0)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
+    pdf.cell(40, 10, "", 1)
 
     # Embed Bar Graph
     create_bar_graph(subjects, scores, top_scores, average_scores)
     pdf.add_page()
-    pdf.chapter_title("Performance Comparison")
+    pdf.chapter_title("Performance Analysis")
     pdf.image("bar_graph.png", x=10, y=50, w=180)  # Embed the saved bar graph image
 
     # Save PDF

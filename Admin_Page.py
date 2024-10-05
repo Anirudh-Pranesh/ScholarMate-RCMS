@@ -62,20 +62,27 @@ class AdminPage(tk.Tk):
         self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
         self.create_data_button.bind("<Leave>", lambda event: self.on_leave(event, self.create_data_button))
 
-        self.view_edit_button = ttk.Button(self.buttons_frame, text="View/Edit Data", command=self.view_edit_data, style='TButton')
-        self.view_edit_button.grid(row=0, column=1, padx=20, pady=10, sticky="ew")
-        self.view_edit_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_edit_button, "#2563EB"))
-        self.view_edit_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_edit_button))
+        self.edit_school_directory_button = ttk.Button(self.buttons_frame, text="Edit School Directory", command=self.edit_school_directory, style='TButton')
+        self.edit_school_directory_button.grid(row=0, column=1, padx=20, pady=10, sticky="ew")
+        self.edit_school_directory_button.bind("<Enter>", lambda event: self.on_enter(event, self.edit_school_directory_button, "#2563EB"))
+        self.edit_school_directory_button.bind("<Leave>", lambda event: self.on_leave(event, self.edit_school_directory_button))
 
         self.generate_report_button = ttk.Button(self.buttons_frame, text="Generate Report Card", command=self.generate_report_card, style='TButton')
         self.generate_report_button.grid(row=0, column=2, padx=20, pady=10, sticky="ew")
         self.generate_report_button.bind("<Enter>", lambda event: self.on_enter(event, self.generate_report_button, "#2563EB"))
         self.generate_report_button.bind("<Leave>", lambda event: self.on_leave(event, self.generate_report_button))
 
-        self.edit_school_directory_button = ttk.Button(self.buttons_frame, text="Edit School Directory", command=self.edit_school_directory, style='TButton')
-        self.edit_school_directory_button.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
-        self.edit_school_directory_button.bind("<Enter>", lambda event: self.on_enter(event, self.edit_school_directory_button, "#2563EB"))
-        self.edit_school_directory_button.bind("<Leave>", lambda event: self.on_leave(event, self.edit_school_directory_button))
+        self.view_edit_button = ttk.Button(self.buttons_frame, text="View student Marks", command=self.view_marks, style='TButton')
+        self.view_edit_button.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
+        self.view_edit_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_edit_button, "#2563EB"))
+        self.view_edit_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_edit_button))
+
+        self.view_edit_button = ttk.Button(self.buttons_frame, text="Edit student Marks", command=self.edit_marks, style='TButton')
+        self.view_edit_button.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
+        self.view_edit_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_edit_button, "#2563EB"))
+        self.view_edit_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_edit_button))
+
+        
 
     def on_enter(self, event, widget, color):
         widget.configure(style="Hover.TButton")
@@ -90,8 +97,11 @@ class AdminPage(tk.Tk):
     def create_data(self):
         call(['python', 'DataEntrySheetForAdmin.py'])
 
-    def view_edit_data(self):
-        messagebox.showinfo("View/Edit Data", "View/Edit data function")
+    def view_marks(self):
+        messagebox.showinfo("View/Edit Data", "View/Edit data function") # link python files here
+    
+    def edit_marks(self):
+        messagebox.showinfo("View/Edit Data", "View/Edit data function") # link python files here
 
     def generate_report_card(self):
         call(['python', 'generate_report_card.py'])

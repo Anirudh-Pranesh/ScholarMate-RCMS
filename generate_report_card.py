@@ -24,6 +24,8 @@ import sv_ttk
 from tkinter import messagebox
 import mysql.connector
 from tkinter import messagebox
+import time
+import threading
 import pdfgenerator as pdfg
 
 #window and frame set up
@@ -54,6 +56,10 @@ def update_window():
     else:
         show_common_opt()
 
+def start_generating_multiple():
+    generating_text_multiple.grid(row=2, column=0, sticky='W', pady=10)
+    time.sleep(0.5)
+    threading.Thread(target=generate_multiple_rc_func).start()
 
 def generate_multiple_rc_func():
     # in here, we can get the classes selected by using class9var, class10var, class11var, class12var
@@ -75,9 +81,6 @@ def generate_multiple_rc_func():
                     count+=1
                 else:
                     subj_names_useable.append(i[0])
-            subj_names_useable=tuple(subj_names_useable)
-            sub1name,sub2name,sub3name,sub4name, sub5name = subj_names_useable # pdf function param
-            
             permitted_classes=[i[0] for i in res]
             available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
             selected_classes=[]
@@ -107,7 +110,7 @@ def generate_multiple_rc_func():
                 cur=db.cursor()
                 for k in subj_names_useable:
                     statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
-                    statement_avg=f"SELECT AVG({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
+                    statement_avg=f"SELECT ROUND(AVG({k}), 1) FROM {selected_exam} WHERE class LIKE '{i}%'"
                     cur.execute(statement_top)
                     top_score.append(cur.fetchall()[0][0])
                     cur.execute(statement_avg)
@@ -127,9 +130,10 @@ def generate_multiple_rc_func():
                     contact_name_details=contact_name_details[0]
                     teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
                     pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
-            messagebox.showinfo(title='Info', message='PDFs for report cards generated')
+            generating_text_multiple.grid_forget()
+            messagebox.showinfo(title='Info', message='PDFs for report cards generated. Please check in downloads folder')
     except:
-        messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please try again')
+        messagebox.showerror(title='ERROR', message='Unexpected error encountered. Please check whether the pdf already exists')
 
 def select_exam_func():
     global selected_exam 
@@ -137,14 +141,13 @@ def select_exam_func():
         selected_exam = exams_trv.selection()[0] # selected exam is declard none first, now we are obtaining the selection made by user and we are updated the selected_exam variable
     except:
         messagebox.showerror(title='ERROR', message='Examination not selected')
-    messagebox.showinfo(title='Examination selected', message='Report card will now be generated for '+selected_exam)
+    messagebox.showinfo(title='Examination selected', message=selected_exam+' has been selected')
 
 def generate_single_rc_func():
     try:
         selected_student=students_trv.selection()[0]
         if selected_student and selected_exam != None:
             values = selected_student
-            print(values)
             db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
             cur=db.cursor()
 
@@ -185,7 +188,7 @@ def generate_single_rc_func():
                 avg_score.append(dat[0][1])
             db.close()
             pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
-            messagebox.showinfo(title='Info', message='PDF for report card generated')
+            messagebox.showinfo(title='Info', message='PDF for report card generated. Please check in downloads folder')
         else:
             messagebox.showwarning(title='WARNING', message='Please select a student/confirm you exam selection')
     except:
@@ -217,7 +220,7 @@ exams_trv.heading('Examinations', text='Examinations')
 for row in res:
     exams_trv.insert("", 'end', iid=row[0], text=row[0], values=list(row))
 
-select_exam_button=ttk.Button(common_options_frame, text='Confirm Selection ? ', command=select_exam_func)
+select_exam_button=ttk.Button(common_options_frame, text='Confirm examination ? ', command=select_exam_func)
 option_label=ttk.Label(common_options_frame, text='Generate for : ', font=('Arial', '15'), justify="left", anchor="w")
 multiple_student_radiobutton=ttk.Radiobutton(common_options_frame, text='Multiple students', value='multiple', variable=selected_option, command=update_window)
 single_student_radiobutton=ttk.Radiobutton(common_options_frame, text='Single student', value='single', variable=selected_option, command=update_window)
@@ -238,7 +241,8 @@ class9 = ttk.Checkbutton(multiple_student_frame, text='Class 9', onvalue=1, offv
 class10 = ttk.Checkbutton(multiple_student_frame, text='Class 10', onvalue=1, offvalue=0, variable=class10var)
 class11 = ttk.Checkbutton(multiple_student_frame, text='Class 11', onvalue=1, offvalue=0, variable=class11var)
 class12 = ttk.Checkbutton(multiple_student_frame, text='Class 12', onvalue=1, offvalue=0, variable=class12var)
-generate_multiple_rc=ttk.Button(multiple_student_frame, text='Generate', command=generate_multiple_rc_func)
+generate_multiple_rc=ttk.Button(multiple_student_frame, text='Generate', command=start_generating_multiple)
+generating_text_multiple=ttk.Label(multiple_student_frame, text='Generating, please wait ....', font=('Arial', '15'), justify="left", anchor="w")
 
 #grid
 grade_selection_label.grid(row=0, column=0,sticky = 'W')
@@ -247,6 +251,8 @@ class10.grid(row=0, column=2,sticky = 'W')
 class11.grid(row=0, column=3,sticky = 'W')
 class12.grid(row=0, column=4,sticky = 'W')
 generate_multiple_rc.grid(row=1, column=0,sticky = 'W', pady=10)
+generating_text_multiple.grid(row=2, column=0, sticky='W', pady=10)
+generating_text_multiple.grid_forget()
 
 
 #SINGLE STUDENT FRAME, and widget set-up
@@ -260,7 +266,7 @@ cur.execute(show_students)
 res=cur.fetchall()
 db.close()
 l1=[i[0] for i in cur.description]#column headers
-students_trv=ttk.Treeview(single_student_frame, selectmode='browse', columns=l1, height=10, show='headings')
+students_trv=ttk.Treeview(single_student_frame, selectmode='browse', columns=l1, height=5, show='headings')
 for i in l1:    
     students_trv.column(i, anchor='c', width=200)
     students_trv.heading(i, text=i)
