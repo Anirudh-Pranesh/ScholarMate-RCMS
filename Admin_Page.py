@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 from tkinter import ttk, messagebox
 import sv_ttk
 from subprocess import call
@@ -11,16 +12,15 @@ class AdminPage(tk.Tk):
         super().__init__()
 
         self.title("Welcome Admin")
-        self.geometry("850x600")
+        self.geometry("850x700")
 
         # Initialize Sun Valley theme with the "dark" theme
         sv_ttk.set_theme("dark")
 
-        #Access User details
-        file=open('client_details.dat','rb')
-        details=pickle.load(file)
-        file.close()
-        details=list(details[0])
+        # Access User details
+        with open('client_details.dat', 'rb') as file:
+            details = pickle.load(file)
+        details = list(details[0])
 
         # Main content frame
         self.main_frame = ttk.Frame(self, padding=(10, 10, 10, 10))
@@ -33,14 +33,13 @@ class AdminPage(tk.Tk):
         self.sidebar_color = tk.Frame(self.sidebar, bg="#3B82F6", width=200, height=600)
         self.sidebar_color.pack(fill=tk.Y, side=tk.LEFT, expand=True)
 
-        self.user_details = ttk.Label(self.sidebar_color, text="Welcome\n"+details[2], font=('Helvetica', 14, 'bold'), background="#3B82F6", foreground="white")
+        self.user_details = ttk.Label(self.sidebar_color, text="Welcome\n" + details[2], font=('Helvetica', 14, 'bold'), background="#3B82F6", foreground="white")
         self.user_details.pack(pady=20, padx=10)
 
-
         image = Image.open("usericon.png")
-        image = image.resize((150, 90), Image.Resampling.LANCZOS) ## The (250, 250) is (height, width)
+        image = image.resize((150, 90), Image.Resampling.LANCZOS)
         self.new_img = ImageTk.PhotoImage(image)
-        self.button= tk.Button(self.sidebar_color, image=self.new_img,command=self.changepassword,borderwidth=0)
+        self.button = tk.Button(self.sidebar_color, image=self.new_img, command=self.changepassword, borderwidth=0)
         self.button.pack()
 
         self.logout_button = ttk.Button(self.sidebar_color, text="Log out", command=self.logout, style='Sidebar.TButton')
@@ -50,13 +49,23 @@ class AdminPage(tk.Tk):
         self.content_frame = ttk.Frame(self.main_frame, style='TFrame')
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
+        # Load the watermark image
+        self.watermark_image = Image.open("logo.png")
+        self.watermark_image = self.watermark_image.resize((730, 530), Image.Resampling.LANCZOS)
+        self.watermark_photo = ImageTk.PhotoImage(self.watermark_image)
+
+        # Create a label for the watermark image
+        self.watermark_label = tk.Label(self.content_frame, image=self.watermark_photo)
+        self.watermark_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        # Title label
         self.title_label = ttk.Label(self.content_frame, text="Admin Page", font=('Helvetica', 24, 'bold'))
         self.title_label.pack(pady=20)
 
+        # Buttons frame
         self.buttons_frame = ttk.Frame(self.content_frame, style='TFrame')
         self.buttons_frame.pack(pady=20)
 
-        # Buttons with hover effect
         self.create_data_button = ttk.Button(self.buttons_frame, text="Create entry sheet for new exam", command=self.create_data, style='TButton')
         self.create_data_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
         self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
@@ -72,17 +81,15 @@ class AdminPage(tk.Tk):
         self.generate_report_button.bind("<Enter>", lambda event: self.on_enter(event, self.generate_report_button, "#2563EB"))
         self.generate_report_button.bind("<Leave>", lambda event: self.on_leave(event, self.generate_report_button))
 
-        self.view_edit_button = ttk.Button(self.buttons_frame, text="View student Marks", command=self.view_marks, style='TButton')
-        self.view_edit_button.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
-        self.view_edit_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_edit_button, "#2563EB"))
-        self.view_edit_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_edit_button))
+        self.view_marks_button = ttk.Button(self.buttons_frame, text="View student Marks", command=self.view_marks, style='TButton')
+        self.view_marks_button.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
+        self.view_marks_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_marks_button, "#2563EB"))
+        self.view_marks_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_marks_button))
 
-        self.view_edit_button = ttk.Button(self.buttons_frame, text="Edit student Marks", command=self.edit_marks, style='TButton')
-        self.view_edit_button.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
-        self.view_edit_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_edit_button, "#2563EB"))
-        self.view_edit_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_edit_button))
-
-        
+        self.edit_marks_button = ttk.Button(self.buttons_frame, text="Edit student Marks", command=self.edit_marks, style='TButton')
+        self.edit_marks_button.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
+        self.edit_marks_button.bind("<Enter>", lambda event: self.on_enter(event, self.edit_marks_button, "#2563EB"))
+        self.edit_marks_button.bind("<Leave>", lambda event: self.on_leave(event, self.edit_marks_button))
 
     def on_enter(self, event, widget, color):
         widget.configure(style="Hover.TButton")
@@ -92,25 +99,25 @@ class AdminPage(tk.Tk):
 
     def logout(self):
         self.destroy()
-        call(['python', 'login_page.py'])
+        call([sys.executable, 'login_page.py'])
 
     def create_data(self):
-        call(['python', 'DataEntrySheetForAdmin.py'])
+        call([sys.executable, 'DataEntrySheetForAdmin.py'])
 
     def view_marks(self):
-        messagebox.showinfo("View/Edit Data", "View/Edit data function") # link python files here
-    
+        messagebox.showinfo("View/Edit Data", "View/Edit data function")  # link python files here
+
     def edit_marks(self):
-        messagebox.showinfo("View/Edit Data", "View/Edit data function") # link python files here
+        messagebox.showinfo("View/Edit Data", "View/Edit data function")  # link python files here
 
     def generate_report_card(self):
-        call(['python', 'generate_report_card.py'])
+        call([sys.executable, 'generate_report_card.py'])
 
     def edit_school_directory(self):
-        call(['python', 'edit_school_directory.py'])
+        call([sys.executable, 'edit_school_directory.py'])
 
     def changepassword(self):
-        call(['python', 'changepassword.py'])
+        call([sys.executable, 'changepassword.py'])
 
 if __name__ == "__main__":
     app = AdminPage()
