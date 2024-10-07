@@ -72,7 +72,7 @@ root.geometry('800x650')
 root.title('Data Entry Sheet For Admin')
 
 # Create and place widgets
-title_label = ttk.Label(root, text='Data Entry Sheet for Admin', font=('Arial', 48, 'bold'))
+title_label = ttk.Label(root, text='Data Entry Sheet for Admin', font=('Arial', 30, 'bold'))
 exam_label = ttk.Label(root, text='1. Enter exam name here:', font=('calibre', 18, 'bold'))
 exam_entry = ttk.Entry(root)
 subject1_label = ttk.Label(root, text='a. Enter subject 1 here:', font=('calibre', 18, 'bold'))
