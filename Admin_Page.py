@@ -49,14 +49,7 @@ class AdminPage(tk.Tk):
         self.content_frame = ttk.Frame(self.main_frame, style='TFrame')
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        # Load the watermark image
-        self.watermark_image = Image.open("logo.png")
-        self.watermark_image = self.watermark_image.resize((730, 530), Image.Resampling.LANCZOS)
-        self.watermark_photo = ImageTk.PhotoImage(self.watermark_image)
 
-        # Create a label for the watermark image
-        self.watermark_label = tk.Label(self.content_frame, image=self.watermark_photo)
-        self.watermark_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # Title label
         self.title_label = ttk.Label(self.content_frame, text="Admin Page", font=('Helvetica', 24, 'bold'))
