@@ -12,7 +12,7 @@
 item_data = student_trv.item(selected_item)       #student_trv is the treeview object that we want to get the selected data from 
 values = item_data['values']                      # this will store exactly how MySQL stored it, in order. so for example if student_trv contained data from student_details, then values[0] will be student_id because the first column in student_details is student_id
 '''
-#!!!!!!!!!!!!!!!PLEASE REFERNCE https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing FOR TABLE NAMES, COLUMNS NAMES, ETC. exam-sheet-1 is just a sample table the admin will create for the exam showing how the data will be in it once such an exam table is created, 
+#!!!!!!!!!!!!!!!PLEASE REFERENCE https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing FOR TABLE NAMES, COLUMNS NAMES, ETC. exam-sheet-1 is just a sample table the admin will create for the exam showing how the data will be in it once such an exam table is created, 
 #so that teachers can enter the student marks in that table. we have not programmed the part where teachers can enter the student marks yet, but we are obtaining the table name as i said above. the table for an exam can be 
 #created by an admin.
 
@@ -213,8 +213,8 @@ main_label=ttk.Label(common_options_frame, text='Generate student report card', 
 select_exam=ttk.Label(common_options_frame, text='Select the examination you want to generate report card for : ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
+#db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 show_exams="SHOW TABLES;"
 cur.execute(show_exams)
@@ -266,8 +266,8 @@ generating_text_multiple.grid_forget()
 student_label=ttk.Label(single_student_frame, text='Selected student to generate report card for :  ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
+#db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 show_students="SELECT * FROM student_details ORDER BY student_name"
 cur.execute(show_students)
