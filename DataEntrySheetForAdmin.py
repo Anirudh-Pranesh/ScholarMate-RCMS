@@ -85,8 +85,7 @@ subject4_label = ttk.Label(root, text='d. Enter subject 4 here:', font=('calibre
 subject4_entry = ttk.Entry(root)
 subject5_label = ttk.Label(root, text='e. Enter subject 5 here:', font=('calibre', 18, 'bold'))
 subject5_entry = ttk.Entry(root)
-class_label=ttk.Label(root,text='''                                                   2.Click on the classes for
-                                                   which the exam was held: ''',font=('calibre',18,'bold'))
+class_label=ttk.Label(root,text='''           2.Click on the classes for which the exam was held: ''',font=('calibre',18,'bold'))
 
 # Checkbox variables
 class9var = tk.IntVar()
