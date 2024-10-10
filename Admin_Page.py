@@ -134,10 +134,10 @@ class AdminPage(tk.Tk):
         call(['python', 'DataEntrySheetForAdmin.py'])
 
     def view_marks(self):
-        messagebox.showinfo("View/Edit Data", "View/Edit data function")  # link python files here
+        call(['python', 'view_student_marks.py'])  # link python files here
 
     def edit_marks(self):
-        messagebox.showinfo("View/Edit Data", "View/Edit data function")  # link python files here
+        call(['python', 'edit_student_marks.py'])  # link python files here
 
     def generate_report_card(self):
         call(['python', 'generate_report_card.py'])

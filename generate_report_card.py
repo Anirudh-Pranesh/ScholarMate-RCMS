@@ -65,7 +65,8 @@ def generate_multiple_rc_func():
     # in here, we can get the classes selected by using class9var, class10var, class11var, class12var
     try:
         if (class9var.get() == 1 or class10var.get() == 1 or class11var.get() == 1 or class12var.get() == 1) and selected_exam != None : 
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
             cur=db.cursor()
             permitted_classes_get=f"SELECT DISTINCT LEFT(class, LENGTH(class) - 1) FROM {selected_exam};"
             cur.execute(permitted_classes_get)
@@ -98,7 +99,8 @@ def generate_multiple_rc_func():
             messagebox.showwarning(title='WARNING', message='A class must be selected/confirm your exam selection')
         if selected_classes !=[]:
             for i in selected_classes:
-                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+                #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
                 cur=db.cursor()
                 sqlstatement=f"SELECT * FROM {selected_exam} WHERE class LIKE '{i}%';"
                 cur.execute(sqlstatement)
@@ -106,7 +108,8 @@ def generate_multiple_rc_func():
                 db.close()
                 top_score=[]
                 avg_score=[]
-                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+                #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
                 cur=db.cursor()
                 for k in subj_names_useable:
                     statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
@@ -121,7 +124,8 @@ def generate_multiple_rc_func():
                     std_name=j[1] #pdf function params
                     std_class=j[2] #pdf function params
                     score_list=[j[3], j[4], j[5], j[6], j[7]]
-                    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+                    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+                    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
                     cur=db.cursor()
                     get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
                     cur.execute(get_names_contacts)
@@ -148,7 +152,8 @@ def generate_single_rc_func():
         selected_student=students_trv.selection()[0]
         if selected_student and selected_exam != None:
             values = selected_student
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
             cur=db.cursor()
 
             sqlstatement=f"SELECT * FROM {selected_exam} WHERE student_id={values};"
@@ -178,7 +183,8 @@ def generate_single_rc_func():
             score_list=[res[0][3], res[0][4], res[0][5], res[0][6], res[0][7]] # pdf function param
             top_score=[]
             avg_score=[]
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
             cur=db.cursor()
             for i in subj_names_useable:
                 statement=f"SELECT MAX({i}), ROUND(AVG({i}), 1) FROM {selected_exam} WHERE class LIKE CONCAT(LEFT('{std_class}', LENGTH('{std_class}')-1), '%');"
@@ -207,7 +213,8 @@ main_label=ttk.Label(common_options_frame, text='Generate student report card', 
 select_exam=ttk.Label(common_options_frame, text='Select the examination you want to generate report card for : ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 show_exams="SHOW TABLES;"
 cur.execute(show_exams)
@@ -259,7 +266,8 @@ generating_text_multiple.grid_forget()
 student_label=ttk.Label(single_student_frame, text='Selected student to generate report card for :  ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 show_students="SELECT * FROM student_details ORDER BY student_name"
 cur.execute(show_students)
