@@ -13,6 +13,23 @@
             "name": "localhost",
             "database": "scholarmate_db",
             "username": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Enabled",
+                "ssl": {
+                    "ca": "C:\\Users\\aniru\\Downloads\\ca.pem"
+                }
+            },
+            "previewLimit": 50,
+            "server": "mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com",
+            "port": 13426,
+            "driver": "MySQL",
+            "name": "onlinehost",
+            "database": "scholarmate_db",
+            "username": "avnadmin",
+            "password": "AVNS_1UgkIMxSzsCWt0D-3cB"
         }
     ]
 }
