@@ -5,19 +5,17 @@ import mysql.connector
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-
 # DATABASE CONNECTION
 db = mysql.connector.connect(
-    host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', 
-    port=13426, 
-    user='avnadmin', 
-    password='AVNS_1UgkIMxSzsCWt0D-3cB', 
+    host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',
+    port=13426,
+    user='avnadmin',
+    password='AVNS_1UgkIMxSzsCWt0D-3cB',
     database='scholarmate_db'
 )  # Aiven connection
 
 # Global variable to keep track of the graph window
 graph_window = None
-
 
 def get_tables():
     # Fetch list of tables in the database
@@ -28,7 +26,6 @@ def get_tables():
     cursor.close()
     return res
 
-
 def fetch_table_data(table_name):
     # Fetch all data from the selected table, sorted by class and name
     cursor = db.cursor()
@@ -38,7 +35,6 @@ def fetch_table_data(table_name):
     column_names = [i[0] for i in cursor.description]  # Get column names
     cursor.close()
     return column_names, data
-
 
 def display_table_data(column_names, data):
     # Clear existing Treeview content
@@ -58,19 +54,15 @@ def display_table_data(column_names, data):
     for row in data:
         tree.insert("", "end", values=row)
 
-
 def calculate_class_average(table_name):
     # Calculate class averages for each subject
     cursor = db.cursor()
-    query = f"""
-    SELECT AVG(Math), AVG(PE), AVG(SocialScience), AVG(English), AVG(Physics)
-    FROM {table_name}
-    """
+    # Generate a dynamic query to calculate averages based on the number of subjects
+    query = f"SELECT AVG(Score1), AVG(Score2), AVG(Score3), AVG(Score4), AVG(Score5) FROM {table_name}"  # Adjust the number of scores as needed
     cursor.execute(query)
     class_averages = cursor.fetchone()
     cursor.close()
     return class_averages
-
 
 def show_student_and_class_avg(selected_student):
     """Display a bar chart comparing the selected student's marks to the class average."""
@@ -81,10 +73,12 @@ def show_student_and_class_avg(selected_student):
         graph_window.focus()  # Bring it to the front
         return  # Exit to prevent opening a new one
 
+    # Convert marks to float, handling None as 0 for plotting purposes
     student_marks = [float(mark) if mark is not None else 0 for mark in selected_student[3:]]  # Convert marks to float
     class_averages = calculate_class_average(selected_table)
-    class_averages = [float(avg) for avg in class_averages]  # Ensure class averages are float
-    subjects = ["Math", "PE", "SocialScience", "English", "Physics"]
+
+    # Replace None values in class averages with 0 for proper plotting
+    class_averages = [float(avg) if avg is not None else 0 for avg in class_averages]  # Ensure class averages are float
 
     # Create a new window for the plot
     graph_window = tk.Toplevel(window)
@@ -93,7 +87,7 @@ def show_student_and_class_avg(selected_student):
     # Plot the graph
     fig, ax = plt.subplots(figsize=(8, 6))
     bar_width = 0.35
-    index = range(len(subjects))
+    index = range(len(student_marks))
 
     # Bar chart
     ax.bar(index, student_marks, bar_width, label=selected_student[1])  # Fixed label formatting
@@ -104,7 +98,7 @@ def show_student_and_class_avg(selected_student):
     ax.set_ylabel("Marks")
     ax.set_title("Student Marks vs Class Average")
     ax.set_xticks([i + bar_width / 2 for i in index])
-    ax.set_xticklabels(subjects)
+    ax.set_xticklabels([f'Score {i+1}' for i in index])  # Use uniform labels for subjects
     ax.set_ylim(0, 100)  # Set Y-axis limit to 100
     ax.legend()
 
@@ -112,7 +106,6 @@ def show_student_and_class_avg(selected_student):
     canvas = FigureCanvasTkAgg(fig, master=graph_window)
     canvas.draw()
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
-
 
 def on_table_select(event):
     global selected_table
@@ -123,20 +116,17 @@ def on_table_select(event):
     # Always clear previous selection
     tree.selection_remove(tree.selection())
 
-
 def on_student_select(event):
     selected_item = tree.focus()
     if selected_item:  # Ensure an item is selected
         selected_student = tree.item(selected_item)["values"]
         show_student_and_class_avg(selected_student)
 
-
 def on_closing():
     # Close any open Matplotlib figures
     plt.close('all')
     db.close()  # Close database connection
     window.destroy()  # Destroy the Tkinter window
-
 
 # Create window
 window = tk.Tk()
