@@ -174,7 +174,7 @@ def refresh_teacher_list(): # bug : after adding a teacher, the table showed in 
     db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
     #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur = db.cursor()
-    remove_t_q = "SELECT * FROM teacher_details"
+    remove_t_q = "SELECT * FROM teacher_details ORDER BY teacher_name"
     cur.execute(remove_t_q)
     res = cur.fetchall()
     cur.close()
@@ -192,7 +192,7 @@ def refresh_student_list(): # same bug here, except for student delete frame
     db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
     #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur = db.cursor()
-    remove_s_q = "SELECT * FROM student_details"
+    remove_s_q = "SELECT * FROM student_details ORDER BY student_name"
     cur.execute(remove_s_q)
     res = cur.fetchall()
     cur.close()
