@@ -40,7 +40,7 @@ def fetch_subject_names(table_name):
             subj_names_useable.append(item[0])
     
     cursor.close()
-    return subj_names_useable
+    return tuple(subj_names_useable)
 
 def fetch_table_data(table_name):
     # Fetch all data from the selected table, sorted by class and name
@@ -70,11 +70,12 @@ def display_table_data(column_names, data):
     for row in data:
         tree.insert("", "end", values=row)
 
-def calculate_class_average(table_name):
+def calculate_class_average(table_name, subject_names):
+    sub1,sub2,sub3,sub4,sub5=subject_names
     # Calculate class averages for each subject
     cursor = db.cursor()
     # Generate a dynamic query to calculate averages based on the number of subjects
-    query = f"SELECT AVG(Score1), AVG(Score2), AVG(Score3), AVG(Score4), AVG(Score5) FROM {table_name}"  # Adjust the number of scores as needed
+    query = f"SELECT AVG({sub1}), AVG({sub2}), AVG({sub3}), AVG({sub4}), AVG({sub5}) FROM {table_name}"  # Adjust the number of scores as needed
     cursor.execute(query)
     class_averages = cursor.fetchone()
     cursor.close()
@@ -88,16 +89,16 @@ def show_student_and_class_avg(selected_student):
     if graph_window is not None and graph_window.winfo_exists():
         graph_window.focus()  # Bring it to the front
         return  # Exit to prevent opening a new one
+    
+    # Get subject names dynamically
+    subject_names = fetch_subject_names(selected_table)
 
     # Convert marks to float, handling None as 0 for plotting purposes
     student_marks = [float(mark) if mark is not None else 0 for mark in selected_student[3:]]  # Convert marks to float
-    class_averages = calculate_class_average(selected_table)
+    class_averages = calculate_class_average(selected_table, subject_names)
 
     # Replace None values in class averages with 0 for proper plotting
     class_averages = [float(avg) if avg is not None else 0 for avg in class_averages]  # Ensure class averages are float
-
-    # Get subject names dynamically
-    subject_names = fetch_subject_names(selected_table)
 
     # Create a new window for the plot
     graph_window = tk.Toplevel(window)
