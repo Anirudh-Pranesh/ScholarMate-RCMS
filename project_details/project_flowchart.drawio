@@ -1,0 +1,481 @@
+<mxfile host="app.diagrams.net" modified="2024-07-01T11:10:51.778Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="d8KGYYKAj1atpEmGVEqu" version="24.6.4" type="google">
+  <diagram id="prtHgNgQTEPvFCAcTncT" name="Page-1">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dNxyNK7c78bLwvsdeMH5-11" value="RCMS - Report Card Management System" style="swimlane;html=1;startSize=20;horizontal=1;containerType=tree;glass=0;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="-610" y="200" width="3925" height="2170" as="geometry" />
+        </mxCell>
+        <UserObject label="Main screen -&lt;div&gt;&lt;ul&gt;&lt;li&gt;Login option&lt;/li&gt;&lt;li&gt;Create account option&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" name="Tessa Miller" position="CFO" location="Office 1" email="me@example.com" placeholders="1" link="https://www.draw.io" id="dNxyNK7c78bLwvsdeMH5-12">
+          <mxCell style="label;image=https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-3-128.png;whiteSpace=wrap;html=1;rounded=0;glass=0;treeMoving=1;treeFolding=1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+            <mxGeometry x="1765" y="280" width="200" height="90" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="dNxyNK7c78bLwvsdeMH5-14" target="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Admin page" name="Edward Morrison" position="Brand Manager" location="Office 2" email="me@example.com" placeholders="1" link="https://www.draw.io" id="dNxyNK7c78bLwvsdeMH5-14">
+          <mxCell style="label;image=https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-10-3-128.png;whiteSpace=wrap;html=1;rounded=0;glass=0;treeFolding=1;treeMoving=1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+            <mxGeometry x="1555" y="876" width="180" height="79" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="dNxyNK7c78bLwvsdeMH5-16" target="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Teacher page" name="Evan Valet" position="HR Director" location="Office 4" email="me@example.com" placeholders="1" link="https://www.draw.io" id="dNxyNK7c78bLwvsdeMH5-16">
+          <mxCell style="label;image=https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-9-2-128.png;whiteSpace=wrap;html=1;rounded=0;glass=0;treeFolding=1;treeMoving=1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+            <mxGeometry x="1775" y="875" width="180" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="dNxyNK7c78bLwvsdeMH5-12" target="LK-3olkhjE-_BAWvpnTp-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2135" y="325" />
+              <mxPoint x="2135" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="LK-3olkhjE-_BAWvpnTp-28" target="dNxyNK7c78bLwvsdeMH5-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-28" value="Open .exe file" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="1805" y="130" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-36" value="On click - Login" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="2171" y="420" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-51" value="" style="group" vertex="1" connectable="0" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="1515" y="795" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dNxyNK7c78bLwvsdeMH5-13" value="" style="endArrow=blockThin;endFill=1;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-51" source="dNxyNK7c78bLwvsdeMH5-12" target="dNxyNK7c78bLwvsdeMH5-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-38" value="If authorisation : admin" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-51">
+          <mxGeometry y="20" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-52" value="" style="group" vertex="1" connectable="0" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="1725" y="815" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dNxyNK7c78bLwvsdeMH5-15" value="" style="endArrow=blockThin;endFill=1;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-52" source="dNxyNK7c78bLwvsdeMH5-12" target="dNxyNK7c78bLwvsdeMH5-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-39" value="If authorisation : teacher" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-52">
+          <mxGeometry width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-53" value="" style="group" vertex="1" connectable="0" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="1945" y="795" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-40" value="If authorisation : student" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-53">
+          <mxGeometry y="20" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-79" value="Contents" style="swimlane;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="675" y="996" width="780" height="1104" as="geometry">
+            <mxRectangle x="1210" y="540" width="90" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-80" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=none;endArrow=blockThin;rounded=0;curved=0;endFill=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-82" target="LK-3olkhjE-_BAWvpnTp-83">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-81" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=none;endArrow=blockThin;rounded=0;curved=0;endFill=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-82" target="LK-3olkhjE-_BAWvpnTp-84">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6CY06TaJOLT5Ic3iqMJ1-6" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-82" target="6CY06TaJOLT5Ic3iqMJ1-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Admin page" treeRoot="1" id="LK-3olkhjE-_BAWvpnTp-82">
+          <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+            <mxGeometry x="325" y="170" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-100" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-83" target="LK-3olkhjE-_BAWvpnTp-99">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-83" value="Create data entry sheet button" style="whiteSpace=wrap;html=1;align=center;verticalAlign=middle;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="195" y="300" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-141" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-84" target="LK-3olkhjE-_BAWvpnTp-117">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-84" value="(DEFAULT) View/edit existing data" style="whiteSpace=wrap;html=1;align=center;verticalAlign=middle;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="335" y="300" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-88" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Contains a vertical bar on the left, with a small user icon on the top left corner and a logout option on the bottom left corner.&amp;nbsp;&lt;/font&gt;&lt;/b&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Contains a horizontal tab to the right of the vertical tab containining 4 buttons&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Upon clicking the buttons the view withing the admin page changes to required content. Default display content is page to view/edit existing data. (see checkpoint-1 solutions 2nd last point)&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="30" y="30" width="730" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-1" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-91" target="LK-3olkhjE-_BAWvpnTp-125">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="645" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-91" value="Generate report-card" style="whiteSpace=wrap;html=1;align=center;verticalAlign=middle;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="475" y="300" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-93" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-82" target="LK-3olkhjE-_BAWvpnTp-82">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-96" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=none;endArrow=blockThin;rounded=0;curved=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-82" target="LK-3olkhjE-_BAWvpnTp-91">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="635" y="230" as="sourcePoint" />
+            <mxPoint x="495" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-99" value="On click" style="swimlane;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="50" y="400" width="200" height="150" as="geometry">
+            <mxRectangle x="105" y="400" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-102" value="&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;Creates a new table for teachers to enter student data&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Queries admin for table name(examination name), Column names&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-99">
+          <mxGeometry y="20" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-103" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-99" target="LK-3olkhjE-_BAWvpnTp-107">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135" y="620" as="sourcePoint" />
+            <mxPoint x="150" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-104" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-103">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-105" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-103">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="5" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-106" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-103">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="85" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-107" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="120" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-117" value="On click" style="swimlane;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="267.5" y="400" width="235" height="390" as="geometry">
+            <mxRectangle x="105" y="400" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-118" value="&lt;ul&gt;&lt;li&gt;Displays grade-12 data on default on table&lt;/li&gt;&lt;li&gt;Above table, there are many fields to fetch particular data. Such as - class, exam name, etc. (exact description of what will be prograammed after getting a general understand of how the SQL databse should be structured and linked)&lt;/li&gt;&lt;li&gt;Below these fields, and above the table, there are readily available statistics which can be clicked on to open a pop-up on the screen to display graphs, and data analysis&amp;nbsp;&lt;br&gt;(software need not implement user to query specific data and show statistics on that due to further complexity. may be implemented later on if time permits)&lt;/li&gt;&lt;li&gt;All data extracted from SQL database&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fontStyle=1" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-117">
+          <mxGeometry x="-10" y="20" width="240" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-125" value="On click" style="swimlane;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="540" y="400" width="210" height="240" as="geometry">
+            <mxRectangle x="105" y="400" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-126" value="&lt;ul&gt;&lt;li&gt;&lt;b&gt;Asks the admin for details via fields - generate report card for a grade/particular class/student, and which exam.&amp;nbsp;&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;If the whole year&#39;s report/ report for multiple exams is being generated, then PDF will contain all the results of all the exams in a table seperately&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Python fetches data from SQL and inserts in PDF format&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-125">
+          <mxGeometry x="-20" y="20" width="220" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-119" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-123" target="LK-3olkhjE-_BAWvpnTp-117">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395" y="1010" as="sourcePoint" />
+            <mxPoint x="440" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-120" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-119">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-121" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-119">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-122" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-119">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="78" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-123" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="355" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-142" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-146" target="LK-3olkhjE-_BAWvpnTp-125">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="940" as="sourcePoint" />
+            <mxPoint x="650" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-143" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-142">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-144" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-142">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-145" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-142">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="78" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LK-3olkhjE-_BAWvpnTp-146" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="615" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-36" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="LK-3olkhjE-_BAWvpnTp-79" source="LK-3olkhjE-_BAWvpnTp-82" target="ifSm3c1guZ6E2kyASek3-39">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="199.5" as="sourcePoint" />
+            <mxPoint x="660" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-37" value="Idea that could be implemented" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-39" value="&lt;b&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;A button to promote students, store previous data in database as archive&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="660" y="150" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6CY06TaJOLT5Ic3iqMJ1-5" value="&lt;b&gt;Button to edit faculty and student list (Pop-up, option to add and remove is provided there)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LK-3olkhjE-_BAWvpnTp-79">
+          <mxGeometry x="60" y="170" width="165" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-19" value="" style="endArrow=blockThin;endFill=1;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;curved=0;jumpStyle=none;flowAnimation=1;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="dNxyNK7c78bLwvsdeMH5-12" target="aZOwVDqmpjV2yp-XFxYM-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="2825" y="1140" as="sourcePoint" />
+            <mxPoint x="3060" y="1540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dNxyNK7c78bLwvsdeMH5-17" value="" style="endArrow=blockThin;endFill=1;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;curved=0;jumpStyle=none;flowAnimation=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" target="ifSm3c1guZ6E2kyASek3-222">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1995" y="795" />
+            </Array>
+            <mxPoint x="1865" y="760" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-18" value="&lt;b&gt;Check authorisation&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="1790" y="517.5" width="150" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-21" value="" style="group" connectable="0" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="2265" y="360" width="570" height="150" as="geometry" />
+        </mxCell>
+        <UserObject label="Login page -&lt;div&gt;&lt;ul&gt;&lt;li&gt;Username entry box&lt;/li&gt;&lt;li&gt;Password entry box&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" name="Tessa Miller" position="CFO" location="Office 1" email="me@example.com" placeholders="1" link="https://www.draw.io" id="LK-3olkhjE-_BAWvpnTp-13">
+          <mxCell style="label;image=https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-3-128.png;whiteSpace=wrap;html=1;rounded=0;glass=0;treeMoving=1;treeFolding=1;" vertex="1" parent="aZOwVDqmpjV2yp-XFxYM-21">
+            <mxGeometry y="60" width="253.33333333333334" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-8" value="If credentials incorrect" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="aZOwVDqmpjV2yp-XFxYM-21">
+          <mxGeometry x="348.3333333333335" y="50" width="105.55555555555556" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-20" value="" style="group" connectable="0" vertex="1" parent="aZOwVDqmpjV2yp-XFxYM-21">
+          <mxGeometry x="120" width="450" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-11" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="aZOwVDqmpjV2yp-XFxYM-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <mxPoint x="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-9" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="aZOwVDqmpjV2yp-XFxYM-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="333.8888888888887" y="99.5" as="sourcePoint" />
+            <mxPoint x="450" y="99.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="386.6666666666665" y="99.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="aZOwVDqmpjV2yp-XFxYM-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="100" as="sourcePoint" />
+            <mxPoint x="450" y="30" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-12" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.475;entryY=0.015;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="aZOwVDqmpjV2yp-XFxYM-20" target="LK-3olkhjE-_BAWvpnTp-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <mxPoint y="50" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="aZOwVDqmpjV2yp-XFxYM-21" source="LK-3olkhjE-_BAWvpnTp-13" target="aZOwVDqmpjV2yp-XFxYM-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="aZOwVDqmpjV2yp-XFxYM-24" target="aZOwVDqmpjV2yp-XFxYM-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-24" value="If credentials corrects" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="2325" y="535" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="aZOwVDqmpjV2yp-XFxYM-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="LK-3olkhjE-_BAWvpnTp-13" target="aZOwVDqmpjV2yp-XFxYM-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-1" value="Contents" style="swimlane;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="1480" y="996" width="770" height="1104" as="geometry">
+            <mxRectangle x="1210" y="540" width="90" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-3" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=none;endArrow=blockThin;rounded=0;curved=0;endFill=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-4" target="ifSm3c1guZ6E2kyASek3-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Teacher page" treeRoot="1" id="ifSm3c1guZ6E2kyASek3-4">
+          <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+            <mxGeometry x="325" y="220" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-7" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-8" target="ifSm3c1guZ6E2kyASek3-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-8" value="(DEFAULT) View/edit existing data" style="whiteSpace=wrap;html=1;align=center;verticalAlign=middle;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="167.5" y="350" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-9" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Contains a vertical bar on the left, with a small user icon on the top left corner and a logout option on the bottom left corner.&amp;nbsp;&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;On clicking the small user icon, we are presented with the option to change your password&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Contains a horizontal tab to the right of the vertical tab containining 2 buttons&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Upon clicking the buttons the view withing the admin page changes to required content. Default display content is page to view/edit existing data. (see checkpoint-1 solutions 2nd last point)&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="30" y="30" width="730" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-10" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;flowAnimation=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-11" target="ifSm3c1guZ6E2kyASek3-23">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-11" value="Generate report-card" style="whiteSpace=wrap;html=1;align=center;verticalAlign=middle;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="475" y="350" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-12" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-4" target="ifSm3c1guZ6E2kyASek3-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-13" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=none;endArrow=blockThin;rounded=0;curved=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-4" target="ifSm3c1guZ6E2kyASek3-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="635" y="280" as="sourcePoint" />
+            <mxPoint x="495" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-21" value="On click" style="swimlane;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="99" y="455" width="235" height="390" as="geometry">
+            <mxRectangle x="105" y="400" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-22" value="&lt;ul&gt;&lt;li&gt;Displays grade-12 data on default on table&lt;/li&gt;&lt;li&gt;Above table, there are many fields to fetch particular data. Such as - class, exam name, etc. (exact description of what will be prograammed after getting a general understand of how the SQL databse should be structured and linked)&lt;/li&gt;&lt;li&gt;Below these fields, and above the table, there are readily available statistics which can be clicked on to open a pop-up on the screen to display graphs, and data analysis&amp;nbsp;&lt;br&gt;(software need not implement user to query specific data and show statistics on that due to further complexity. may be implemented later on if time permits)&lt;/li&gt;&lt;li&gt;All data extracted from SQL database&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-21">
+          <mxGeometry x="-10" y="20" width="240" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-23" value="On click" style="swimlane;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="420" y="455" width="210" height="230" as="geometry">
+            <mxRectangle x="105" y="400" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-24" value="&lt;ul&gt;&lt;li&gt;&lt;b&gt;Asks the teacher for details via fields - generate report card for a grade/particular class/student, and which exam.&amp;nbsp;&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;If the whole year&#39;s report/ report for multiple exams is being generated, then PDF will contain all the results of all the exams in a table seperately&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Python fetches data from SQL and inserts in PDF format&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-23">
+          <mxGeometry x="-20" y="20" width="220" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-25" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-29" target="ifSm3c1guZ6E2kyASek3-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395" y="1010" as="sourcePoint" />
+            <mxPoint x="440" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-26" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-27" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-25">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-28" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-25">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="78" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-29" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="186.5" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-30" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-1" source="ifSm3c1guZ6E2kyASek3-34" target="ifSm3c1guZ6E2kyASek3-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="940" as="sourcePoint" />
+            <mxPoint x="650" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-31" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-32" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-30">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-33" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-30">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="78" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-34" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-1">
+          <mxGeometry x="495" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-221" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="dNxyNK7c78bLwvsdeMH5-11" source="ifSm3c1guZ6E2kyASek3-222" target="ifSm3c1guZ6E2kyASek3-223">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Student page" name="Evan Valet" position="HR Director" location="Office 4" email="me@example.com" placeholders="1" link="https://www.draw.io" id="ifSm3c1guZ6E2kyASek3-222">
+          <mxCell style="label;image=https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-9-2-128.png;whiteSpace=wrap;html=1;rounded=0;glass=0;treeFolding=1;treeMoving=1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+            <mxGeometry x="1991" y="877.5" width="180" height="77.5" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-223" value="Contents" style="swimlane;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="2280" y="996" width="770" height="1104" as="geometry">
+            <mxRectangle x="1210" y="540" width="90" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-247" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=none;endArrow=blockThin;rounded=0;curved=0;endFill=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-223" source="ifSm3c1guZ6E2kyASek3-248" target="ifSm3c1guZ6E2kyASek3-250">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Student page" treeRoot="1" id="ifSm3c1guZ6E2kyASek3-248">
+          <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-223">
+            <mxGeometry x="315" y="181.5" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-249" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=blockThin;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-223" source="ifSm3c1guZ6E2kyASek3-250" target="ifSm3c1guZ6E2kyASek3-252">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="431.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-250" value="(DEFAULT) View existing student data" style="whiteSpace=wrap;html=1;align=center;verticalAlign=middle;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-223">
+          <mxGeometry x="325" y="281.5" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-251" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Contains a vertical bar on the left, with a small user icon on the top left corner and a logout option on the bottom left corner. On clicking the user icon, we are presented with the option to change password&lt;/font&gt;&lt;/b&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Displays welcome message for user. Contains no buttons, only displays data, no editing access is permitted.&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Upon clicking the buttons the view withing the admin page changes to required content. Default display content is page to view/edit existing data. (see checkpoint-1 solutions 2nd last point)&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-223">
+          <mxGeometry x="20" y="41.5" width="730" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-252" value="On click" style="swimlane;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-223">
+          <mxGeometry x="257.5" y="371.5" width="235" height="300" as="geometry">
+            <mxRectangle x="105" y="400" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-253" value="&lt;ul&gt;&lt;li&gt;Displays student data on default on table. Shows grades of student in all exams in all subjects&lt;/li&gt;&lt;li&gt;Above the table, there are readily available statistics which can be clicked on to open a pop-up on the screen to display graphs, and data analysis (software need not implement user to query specific data and show statistics on that due to further complexity. may be implemented later on if time permits)&lt;/li&gt;&lt;li&gt;All data extracted from SQL database&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fontStyle=1" vertex="1" parent="ifSm3c1guZ6E2kyASek3-252">
+          <mxGeometry x="-10" y="20" width="240" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-254" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="ifSm3c1guZ6E2kyASek3-223" source="ifSm3c1guZ6E2kyASek3-258" target="ifSm3c1guZ6E2kyASek3-252">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="385" y="1021.5" as="sourcePoint" />
+            <mxPoint x="430" y="861.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-255" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-254">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-256" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-254">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-257" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-254">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="78" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-258" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-223">
+          <mxGeometry x="345" y="951.5" width="60" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
