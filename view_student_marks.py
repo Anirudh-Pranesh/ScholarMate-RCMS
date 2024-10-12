@@ -26,6 +26,22 @@ def get_tables():
     cursor.close()
     return res
 
+def fetch_subject_names(table_name):
+    # Fetch subject names dynamically from the selected table (exam)
+    cursor = db.cursor()
+    get_subj_names = f"DESC {table_name};"
+    cursor.execute(get_subj_names)
+    subj_names_sql = cursor.fetchall()
+    
+    # Skip the first 3 columns and store the remaining ones as subject names
+    subj_names_useable = []
+    for idx, item in enumerate(subj_names_sql):
+        if idx > 2:  # Skipping first 3 fields
+            subj_names_useable.append(item[0])
+    
+    cursor.close()
+    return subj_names_useable
+
 def fetch_table_data(table_name):
     # Fetch all data from the selected table, sorted by class and name
     cursor = db.cursor()
@@ -80,6 +96,9 @@ def show_student_and_class_avg(selected_student):
     # Replace None values in class averages with 0 for proper plotting
     class_averages = [float(avg) if avg is not None else 0 for avg in class_averages]  # Ensure class averages are float
 
+    # Get subject names dynamically
+    subject_names = fetch_subject_names(selected_table)
+
     # Create a new window for the plot
     graph_window = tk.Toplevel(window)
     graph_window.title(f"{selected_student[1]} vs Class Average")
@@ -98,7 +117,7 @@ def show_student_and_class_avg(selected_student):
     ax.set_ylabel("Marks")
     ax.set_title("Student Marks vs Class Average")
     ax.set_xticks([i + bar_width / 2 for i in index])
-    ax.set_xticklabels([f'Score {i+1}' for i in index])  # Use uniform labels for subjects
+    ax.set_xticklabels(subject_names)  # Use fetched subject names
     ax.set_ylim(0, 100)  # Set Y-axis limit to 100
     ax.legend()
 
