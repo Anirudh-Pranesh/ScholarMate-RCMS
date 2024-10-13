@@ -142,7 +142,7 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     pdf.image("bar_graph.png", x=10, y=50, w=180)  # Embed the saved bar graph image
 
     # Save PDF
-    #file_path = f"C:\\Users\\aniru\\Downloads\\REPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
-    file_path = f"/Users/adminREPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
+    file_path = f"C:\\Users\\aniru\\Downloads\\REPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
+    #file_path = f"/Users/adminREPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
     pdf.output(file_path)
     os.remove('bar_graph.png')
