@@ -92,8 +92,6 @@ def execute_selection_delete_student(): # deletes student by sending a query
         item_data = student_trv.item(selected_item)  
         values = item_data['values']
         id=values[0]
-        print(item_data)
-        print(values)
         query=f"DELETE FROM student_details WHERE student_id={id};"
         cur.execute(query)
         db.commit()
