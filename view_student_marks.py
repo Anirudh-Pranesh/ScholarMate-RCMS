@@ -62,6 +62,8 @@ def fetch_table_data(table_name):
         return [], []
 
 def display_table_data(column_names, data):
+    name = ttk.Label(table_frame, text="Click On Student \nFor Result analysis ", font=('Arial', 20, 'bold'))
+    name.pack(padx=5, pady=5)
     for row in tree.get_children():
         tree.delete(row)
     tree["columns"] = column_names
@@ -300,7 +302,7 @@ def show_class_average_window():
     ax_avg.set_ylabel("Average Marks")
     ax_avg.set_title(f"Class-wise Averages for {selected_table}")
     ax_avg.set_xticks([x + bar_width * (num_classes / 2) for x in index])
-    ax_avg.set_xticklabels(subject_names, rotation=45, ha='right', fontsize=10)
+    ax_avg.set_xticklabels(subject_names, rotation=0, ha='right', fontsize=10)
     ax_avg.set_ylim(0, 100)
     ax_avg.legend()
 
