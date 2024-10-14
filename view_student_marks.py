@@ -62,10 +62,13 @@ def fetch_table_data(table_name):
         return [], []
 
 def display_table_data(column_names, data):
-    name = ttk.Label(table_frame, text="Click On Student \nFor Result analysis ", font=('Arial', 20, 'bold'))
+    global name
+    name = ttk.Label(table_frame, text="Click On Student \nFor Result analysis", font=('Arial', 20, 'bold'))
     name.pack(padx=5, pady=5)
+    
     for row in tree.get_children():
         tree.delete(row)
+        name.destroy()
     tree["columns"] = column_names
     tree["show"] = "headings"
     for col in column_names:
@@ -73,6 +76,7 @@ def display_table_data(column_names, data):
         tree.column(col, anchor="center", width=150)
     for row in data:
         tree.insert("", "end", values=row)
+    
 
 def calculate_class_average(table_name, subject_names):
     try:
@@ -85,6 +89,7 @@ def calculate_class_average(table_name, subject_names):
         return class_averages
     except mysql.connector.Error as err:
         print(f"Error calculating class average: {err}")
+     
         return ()
 
 def top_score(table_name, subject_names):
@@ -397,7 +402,7 @@ table_label = ttk.Label(table_frame, text="Select Table:", font=('Arial', 12, 'b
 table_label.pack(padx=5, pady=5)
 
 table_combo = ttk.Combobox(table_frame, values=get_tables(), state="readonly", width=30, font=('Arial', 12))
-table_combo.bind("<<ComboboxSelected>>", on_table_select)
+table_combo.bind("<<ComboboxSelected>>", on_table_select)   
 table_combo.pack(padx=5, pady=5)
 
 # BUTTON to show class-wise averages
