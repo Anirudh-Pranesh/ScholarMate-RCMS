@@ -114,7 +114,7 @@ def create_class_average_treeview(parent, subject_names):
     # Define columns: 'Class' followed by average of each subject
     columns = ["Class"] + [f"{sub} Avg" for sub in subject_names]
     
-    class_average_tree = ttk.Treeview(class_avg_frame, columns=columns, show='headings', height=10)
+    class_average_tree = ttk.Treeview(class_avg_frame, columns=columns, show='headings', height=5)
     
     for col in columns:
         class_average_tree.heading(col, text=col)
@@ -262,7 +262,7 @@ def show_class_average_window():
     # Create a new window for class-wise averages
     avg_window = tk.Toplevel(root)
     avg_window.title(f"Class-wise Averages for {selected_table}")
-    avg_window.geometry("1000x600")
+    avg_window.geometry("1000x700")
     avg_window.resizable(True, True)
 
     # Function to handle averages window close
