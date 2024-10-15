@@ -398,7 +398,7 @@ second_frame.bind("<Configure>", on_frame_configure)
 table_frame = ttk.Frame(second_frame)
 table_frame.pack(pady=10, anchor='center')  # Center the frame
 
-table_label = ttk.Label(table_frame, text="Select Table:", font=('Arial', 12, 'bold'))
+table_label = ttk.Label(table_frame, text="Select Examination:", font=('Arial', 12, 'bold'))
 table_label.pack(padx=5, pady=5)
 
 table_combo = ttk.Combobox(table_frame, values=get_tables(), state="readonly", width=30, font=('Arial', 12))

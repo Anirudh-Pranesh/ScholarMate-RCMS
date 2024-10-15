@@ -58,8 +58,8 @@ def display_table_data(column_names, data):
     for row in data:
         treeview.insert("", "end", values=row)
 
-# In-place editing on double-click
-edit_entries = {}
+# Store modified values for bulk update
+modified_values = {}
 
 def on_double_click(event):
     selected_item = treeview.focus()
@@ -79,11 +79,6 @@ def on_double_click(event):
         if bbox:
             current_value = treeview.item(selected_item, 'values')[col_index]
 
-            # If an entry already exists for this cell, focus on it
-            if (selected_item, column) in edit_entries:
-                edit_entries[(selected_item, column)].focus()
-                return
-
             # Create Entry widget and position it over the cell
             entry = tk.Entry(root)
             entry.place(x=bbox[0] + treeview.winfo_x(), y=bbox[1] + treeview.winfo_y(), width=bbox[2], height=bbox[3])
@@ -92,47 +87,45 @@ def on_double_click(event):
 
             # Bind events to save or cancel
             entry.bind("<Return>", lambda e: save_value(selected_item, col_index, entry))
-            entry.bind("<FocusOut>", lambda e: cancel_edit(selected_item, column))
-
-            edit_entries[(selected_item, column)] = entry
+            entry.bind("<FocusOut>", lambda e: entry.destroy())
 
 def save_value(selected_item, col_index, entry):
     new_value = entry.get()
     values = list(treeview.item(selected_item, 'values'))
     values[col_index] = new_value
 
-    # Use the correct foreign key
     primary_key_column = "student_id"  # Foreign key column name
     primary_key = values[0]  # Adjust this index based on the position of student_id in your treeview
     column_name = treeview["columns"][col_index]
 
-    # Confirmation dialog
-    confirm = messagebox.askyesno("Confirm Update", "Are you sure you want to update the marks?")
+    # Store or update modified values
+    if primary_key not in modified_values:
+        modified_values[primary_key] = {}
+    modified_values[primary_key][column_name] = new_value
+
+    treeview.item(selected_item, values=values)
+    entry.destroy()
+
+def confirm_changes():
+    if not modified_values:
+        messagebox.showinfo("No Changes", "There are no changes to save.")
+        return
+
+    confirm = messagebox.askyesno("Confirm Update", "Are you sure you want to save all changes?")
     if confirm:
         try:
             cursor = db.cursor()
-            query = f"UPDATE `{selected_table}` SET `{column_name}` = %s WHERE `{primary_key_column}` = %s"
-            cursor.execute(query, (new_value, primary_key))
+            for student_id, updates in modified_values.items():
+                for column, value in updates.items():
+                    query = f"UPDATE `{selected_table}` SET `{column}` = %s WHERE `student_id` = %s"
+                    cursor.execute(query, (value, student_id))
             db.commit()
             cursor.close()
-            treeview.item(selected_item, values=values)
-            entry.destroy()
+            messagebox.showinfo("Success", "Changes have been saved.")
+            modified_values.clear()  # Clear modified values after saving
         except mysql.connector.Error as err:
             db.rollback()
             messagebox.showerror("Error", f"Failed to update the database: {err}")
-            entry.destroy()
-    else:
-        entry.destroy()
-
-    key = (selected_item, treeview.identify_column(col_index + 1))
-    if key in edit_entries:
-        del edit_entries[key]
-
-def cancel_edit(selected_item, column):
-    if (selected_item, column) in edit_entries:
-        entry = edit_entries[(selected_item, column)]
-        entry.destroy()
-        del edit_entries[(selected_item, column)]
 
 def on_table_select(event):
     global selected_table
@@ -151,7 +144,7 @@ root.resizable(True, True)
 table_frame = ttk.Frame(root)
 table_frame.pack(pady=10, anchor='center')
 
-table_label = ttk.Label(table_frame, text="Select Table:", font=('Arial', 12, 'bold'))
+table_label = ttk.Label(table_frame, text="Select Examination:", font=('Arial', 12, 'bold'))
 table_label.pack(padx=5, pady=5)
 
 table_combo = ttk.Combobox(table_frame, values=get_tables(), state="readonly", width=30, font=('Arial', 12))
@@ -162,6 +155,10 @@ table_combo.pack(padx=5, pady=5)
 treeview = ttk.Treeview(root, show='headings', height=15)
 treeview.pack(pady=10, fill=tk.BOTH, expand=True)
 treeview.bind("<Double-1>", on_double_click)
+
+# Confirm changes button
+confirm_button = ttk.Button(root, text="Confirm Changes", command=confirm_changes)
+confirm_button.pack(pady=10)
 
 # Start the Tkinter event loop
 root.protocol("WM_DELETE_WINDOW", on_close)
