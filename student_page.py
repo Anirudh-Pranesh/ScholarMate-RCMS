@@ -119,7 +119,7 @@ class AdminPage(tk.Tk):
         call([sys.executable, 'DataEntrySheetForAdmin.py']) # Link py file (view marks)
 
     def generate_report_card(self):
-        call([sys.executable, 'generate_report_card.py']) #Link py file (report card)
+        call([sys.executable, 'generate_report_card_student.py']) #Link py file (report card)
 
     def changepassword(self):
         call([sys.executable, 'changepassword.py'])

@@ -44,13 +44,13 @@ def login():
             db.close()
             if res[0][4]=='S':
                 window.destroy()
-                call(['python', 'student_page_placeholder.py']) # INSERT DAVE'S GUI HERE
+                call(['python', 'student_page.py']) # INSERT DAVE'S GUI HERE
             elif res[0][4]=='A':
                 window.destroy()
                 call(['python', 'Admin_Page.py']) # INSERT DAVE'S GUI HERE
             elif res[0][4]=='T':
                 window.destroy()
-                call(['python', 'teacher_page_placeholder.py']) # INSERT DAVE'S GUI HERE      
+                call(['python', 'teacher_page.py']) # INSERT DAVE'S GUI HERE      
         elif username=='' or password=='':
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
