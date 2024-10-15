@@ -1,4 +1,5 @@
 import tkinter as tk
+import sv_ttk
 from tkinter import ttk, messagebox
 import mysql.connector
 
@@ -162,4 +163,5 @@ confirm_button.pack(pady=10)
 
 # Start the Tkinter event loop
 root.protocol("WM_DELETE_WINDOW", on_close)
+sv_ttk.set_theme("dark")
 root.mainloop()
