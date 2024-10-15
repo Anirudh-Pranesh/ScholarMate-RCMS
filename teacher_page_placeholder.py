@@ -130,13 +130,13 @@ class AdminPage(tk.Tk):
         call([sys.executable, 'login_page.py'])
 
     def create_data(self):
-        call([sys.executable, 'DataEntrySheetForAdmin.py']) #link py file (view student marks)
+        call([sys.executable, 'view_student_marks_teacher.py']) #link py file (view student marks)
 
     def generate_report_card(self):
-        call([sys.executable, 'generate_report_card.py']) #link py file (generate report card)
+        call([sys.executable, 'generate_report_card_teacher.py']) #link py file (generate report card)
 
     def edit_school_directory(self):
-        call([sys.executable, 'edit_school_directory.py']) #link py file (edit student marks)
+        call([sys.executable, 'edit_student_marks_teacher.py']) #link py file (edit student marks)
 
     def changepassword(self):
         call([sys.executable, 'changepassword.py'])
