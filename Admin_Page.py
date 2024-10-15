@@ -74,15 +74,12 @@ class AdminPage(tk.Tk):
         self.content_frame = ttk.Frame(self.main_frame, style='TFrame')
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        self.title_label = ttk.Label(self.content_frame, text="Admin Page", font=('Helvetica', 24, 'bold'))
+        self.title_label = ttk.Label(self.content_frame, text="Admin Portal", font=('Helvetica', 24, 'bold'))
         self.title_label.pack(pady=20)
 
         # Table (Placeholder for class averages)
         self.table_frame = ttk.Frame(self.content_frame, style='TFrame')
         self.table_frame.pack(pady=20)
-
-        table_label = ttk.Label(self.table_frame, text="Class Averages Table (Placeholder)", font=('Helvetica', 14))
-        table_label.pack(pady=10)
 
         # Buttons frame
         self.buttons_frame = ttk.Frame(self.content_frame, style='TFrame')
