@@ -12,7 +12,7 @@
 item_data = student_trv.item(selected_item)       #student_trv is the treeview object that we want to get the selected data from 
 values = item_data['values']                      # this will store exactly how MySQL stored it, in order. so for example if student_trv contained data from student_details, then values[0] will be student_id because the first column in student_details is student_id
 '''
-#!!!!!!!!!!!!!!!PLEASE REFERNCE https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing FOR TABLE NAMES, COLUMNS NAMES, ETC. exam-sheet-1 is just a sample table the admin will create for the exam showing how the data will be in it once such an exam table is created, 
+#!!!!!!!!!!!!!!!PLEASE REFERENCE https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing FOR TABLE NAMES, COLUMNS NAMES, ETC. exam-sheet-1 is just a sample table the admin will create for the exam showing how the data will be in it once such an exam table is created, 
 #so that teachers can enter the student marks in that table. we have not programmed the part where teachers can enter the student marks yet, but we are obtaining the table name as i said above. the table for an exam can be 
 #created by an admin.
 
@@ -35,6 +35,11 @@ window.geometry('1000x10000')
 common_options_frame=ttk.Frame(window) # main frame to ask for which exam we are generating report for
 multiple_student_frame=ttk.Frame(window) # frame if we are generating for multiple students. it asks for the classes we are geenrating for. so in the database we query for the list of students who belong to the selected class from the table for the exam containing students and their marks, and then generate their report cards using their marks
 single_student_frame=ttk.Frame(window) # frame if we are generating only for a single student. we get the id of the student based on what the student in the treeview the user has selected. using that we query for their marks from the exam table we select and then generate the report card
+
+#DB conn.
+db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
+cur=db.cursor()
 
 def show_common_opt():
     common_options_frame.pack(fill="both", expand=True)
@@ -65,16 +70,12 @@ def generate_multiple_rc_func():
     # in here, we can get the classes selected by using class9var, class10var, class11var, class12var
     try:
         if (class9var.get() == 1 or class10var.get() == 1 or class11var.get() == 1 or class12var.get() == 1) and selected_exam != None : 
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-            #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-            cur=db.cursor()
             permitted_classes_get=f"SELECT DISTINCT LEFT(class, LENGTH(class) - 1) FROM {selected_exam};"
             cur.execute(permitted_classes_get)
             res=cur.fetchall()
             get_subj_names=f"DESC {selected_exam};"
             cur.execute(get_subj_names)
             subj_names_sql=cur.fetchall()
-            db.close()
             count=0
             subj_names_useable=[]
             for i in subj_names_sql:
@@ -99,18 +100,11 @@ def generate_multiple_rc_func():
             messagebox.showwarning(title='WARNING', message='A class must be selected/confirm your exam selection')
         if selected_classes !=[]:
             for i in selected_classes:
-                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-                #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-                cur=db.cursor()
                 sqlstatement=f"SELECT * FROM {selected_exam} WHERE class LIKE '{i}%';"
                 cur.execute(sqlstatement)
                 res=cur.fetchall()
-                db.close()
                 top_score=[]
                 avg_score=[]
-                db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-                #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-                cur=db.cursor()
                 for k in subj_names_useable:
                     statement_top=f"SELECT MAX({k}) FROM {selected_exam} WHERE class LIKE '{i}%'"
                     statement_avg=f"SELECT ROUND(AVG({k}), 1) FROM {selected_exam} WHERE class LIKE '{i}%'"
@@ -118,19 +112,14 @@ def generate_multiple_rc_func():
                     top_score.append(cur.fetchall()[0][0])
                     cur.execute(statement_avg)
                     avg_score.append(cur.fetchall()[0][0])
-                db.close()
                 for j in res:
                     std_id=j[0] #pdf function params
                     std_name=j[1] #pdf function params
                     std_class=j[2] #pdf function params
                     score_list=[j[3], j[4], j[5], j[6], j[7]]
-                    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-                    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-                    cur=db.cursor()
                     get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
                     cur.execute(get_names_contacts)
                     contact_name_details=cur.fetchall()
-                    db.close()
                     contact_name_details=contact_name_details[0]
                     teacher_name, teacher_contact, parent_contact = contact_name_details # pdf function param
                     pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
@@ -152,9 +141,6 @@ def generate_single_rc_func():
         selected_student=students_trv.selection()[0]
         if selected_student and selected_exam != None:
             values = selected_student
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-            #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-            cur=db.cursor()
 
             sqlstatement=f"SELECT * FROM {selected_exam} WHERE student_id={values};"
             cur.execute(sqlstatement)
@@ -168,7 +154,6 @@ def generate_single_rc_func():
             cur.execute(get_names_contacts)
             contact_name_details=cur.fetchall()
             contact_name_details=contact_name_details[0]
-            db.close()
             subj_names_useable=[]
             count=0
             for i in subj_names_sql:
@@ -183,16 +168,12 @@ def generate_single_rc_func():
             score_list=[res[0][3], res[0][4], res[0][5], res[0][6], res[0][7]] # pdf function param
             top_score=[]
             avg_score=[]
-            db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-            #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-            cur=db.cursor()
             for i in subj_names_useable:
                 statement=f"SELECT MAX({i}), ROUND(AVG({i}), 1) FROM {selected_exam} WHERE class LIKE CONCAT(LEFT('{std_class}', LENGTH('{std_class}')-1), '%');"
                 cur.execute(statement)
                 dat=cur.fetchall()
                 top_score.append(dat[0][0])
                 avg_score.append(dat[0][1])
-            db.close()
             pdfg.generate_report_card(std_name, teacher_name, parent_contact, teacher_contact, std_class, selected_exam, score_list, top_score, avg_score, std_id, subj_names_useable)
             messagebox.showinfo(title='Info', message='PDF for report card generated. Please check in downloads folder')
         else:
@@ -200,6 +181,12 @@ def generate_single_rc_func():
     except:
         messagebox.showerror(title='ERROR', message='Unexpected error, please check whether this student has written this exam')
 
+def on_closing():
+    # Close the database connection
+    if db.is_connected():
+        db.close()
+    # Destroy the root window
+    window.destroy()
 
 selected_option=tkinter.StringVar()
 class9var = tkinter.IntVar()
@@ -213,13 +200,9 @@ main_label=ttk.Label(common_options_frame, text='Generate student report card', 
 select_exam=ttk.Label(common_options_frame, text='Select the examination you want to generate report card for : ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-cur=db.cursor()
 show_exams="SHOW TABLES;"
 cur.execute(show_exams)
 res=cur.fetchall()
-db.close()
 res=list(filter(lambda x: x not in [('credentials',), ('student_details',), ('teacher_details',)], res)) # show tables gives all tables, we dont want to show those 3 tables because its not an examination, its for the backend reference
 exams_trv=ttk.Treeview(common_options_frame, selectmode='browse', columns='Examinations', height=5, show='headings')
 exams_trv.column('Examinations', anchor='c', width=200)
@@ -266,13 +249,9 @@ generating_text_multiple.grid_forget()
 student_label=ttk.Label(single_student_frame, text='Selected student to generate report card for :  ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
-cur=db.cursor()
 show_students="SELECT * FROM student_details ORDER BY student_name"
 cur.execute(show_students)
 res=cur.fetchall()
-db.close()
 l1=[i[0] for i in cur.description]#column headers
 students_trv=ttk.Treeview(single_student_frame, selectmode='browse', columns=l1, height=5, show='headings')
 for i in l1:    
@@ -292,4 +271,5 @@ generate_single_rc.grid(row=3, column=0,sticky = 'W', pady=10)
 show_common_opt()
 sv_ttk.set_theme("dark")
 window.update_idletasks()
+window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop()
