@@ -7,7 +7,7 @@ import pickle
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import mysql.connector  # Import mysql connector
+import mysql.connector  # Ensure you have the MySQL connector installed
 
 class AdminPage(tk.Tk):
     def __init__(self):
@@ -16,25 +16,20 @@ class AdminPage(tk.Tk):
         self.title("Welcome Student")
         self.geometry("850x700")
 
-        # Initialize Sun Valley theme with the "dark" theme
         sv_ttk.set_theme("dark")
 
-        # Access User details
         try:
             with open('client_details.dat', 'rb') as file:
                 details = pickle.load(file)
             details = list(details[0])
-            self.student_name = details[2]  # Store user name for fetching marks
         except (FileNotFoundError, EOFError, IndexError) as e:
             messagebox.showerror("Error", "Failed to load user details.")
             self.destroy()
             return
 
-        # Main content frame
         self.main_frame = ttk.Frame(self, padding=(10, 10, 10, 10))
         self.main_frame.pack(fill="both", expand=True)
 
-        # Sidebar with a blue background
         self.sidebar = ttk.Frame(self.main_frame, width=200)
         self.sidebar.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
 
@@ -43,7 +38,7 @@ class AdminPage(tk.Tk):
 
         self.user_details = ttk.Label(
             self.sidebar_color,
-            text="Welcome\n" + self.student_name,
+            text="Welcome\n" + details[2],
             font=('Helvetica', 14, 'bold'),
             background="#3B82F6",
             foreground="white"
@@ -72,29 +67,26 @@ class AdminPage(tk.Tk):
         )
         self.logout_button.pack(side=tk.BOTTOM, pady=20, padx=10)
 
-        # Main content
         self.content_frame = ttk.Frame(self.main_frame, style='TFrame')
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         self.title_label = ttk.Label(self.content_frame, text="Student Portal", font=('Helvetica', 24, 'bold'))
         self.title_label.pack(pady=20)
 
-        # Buttons frame
         self.buttons_frame = ttk.Frame(self.content_frame, style='TFrame')
         self.buttons_frame.pack(pady=20)
 
-        # View Student Marks Button
-        self.view_student_marks_button = ttk.Button(
+        self.create_data_button = ttk.Button(
             self.buttons_frame,
             text="View your marks",
-            command=self.open_marks_window,
+            command=self.view_student_marks,
             style='TButton'
         )
-        self.view_student_marks_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
-        self.view_student_marks_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_student_marks_button, "#2563EB"))
-        self.view_student_marks_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_student_marks_button))
+        
+        self.create_data_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
+        self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
+        self.create_data_button.bind("<Leave>", lambda event: self.on_leave(event, self.create_data_button))
 
-        # Generate Report Card Button
         self.generate_report_button = ttk.Button(
             self.buttons_frame,
             text="Generate Your Report Card",
@@ -115,107 +107,73 @@ class AdminPage(tk.Tk):
         self.destroy()
         call([sys.executable, 'login_page.py'])
 
-    def open_marks_window(self):
-        self.marks_window = tk.Toplevel(self)
-        self.marks_window.title("View Student Marks")
-        self.marks_window.geometry("600x400")
+    def view_student_marks(self):
+        # Create a new window for viewing student marks
+        marks_window = tk.Toplevel(self)
+        marks_window.title("View Student Marks")
+        marks_window.geometry("600x400")
 
-        # Dropdown for selecting table
-        self.table_var = tk.StringVar()
-        self.table_dropdown = ttk.Combobox(self.marks_window, textvariable=self.table_var)
-        self.table_dropdown.pack(pady=20)
+        # Dropdown for selecting tables
+        self.selected_table = tk.StringVar()
+        table_label = ttk.Label(marks_window, text="Select Table:")
+        table_label.pack(pady=10)
 
-        # Fetch table names from the database
-        self.fetch_table_names()
+        # Example list of tables; replace this with actual table names from your database
+        table_names = ['semester1', 'semester2', 'semester3']
+        table_dropdown = ttk.Combobox(marks_window, textvariable=self.selected_table, values=table_names)
+        table_dropdown.pack(pady=10)
+        table_dropdown.bind("<<ComboboxSelected>>", self.load_student_marks)
+
+        self.marks_text = tk.Text(marks_window, width=70, height=10)
+        self.marks_text.pack(pady=10)
 
         # Button to load marks
-        self.load_marks_button = ttk.Button(self.marks_window, text="Load Marks", command=self.load_marks)
-        self.load_marks_button.pack(pady=20)
+        load_button = ttk.Button(marks_window, text="Load Marks", command=self.load_student_marks)
+        load_button.pack(pady=10)
 
-        # Treeview for displaying marks
-        self.tree = ttk.Treeview(self.marks_window, columns=("Subject", "Marks"), show='headings')
-        self.tree.heading("Subject", text="Subject")
-        self.tree.heading("Marks", text="Marks")
-        self.tree.pack(fill=tk.BOTH, expand=True)
+        self.graph_canvas = FigureCanvasTkAgg(plt.figure(), marks_window)
+        self.graph_canvas.get_tk_widget().pack(pady=20)
 
-        # Canvas for plotting graph
-        self.canvas = FigureCanvasTkAgg(plt.figure(), master=self.marks_window)
-        self.canvas.get_tk_widget().pack()
+    def load_student_marks(self, event=None):
+        selected_table = self.selected_table.get()
+        student_id = '1'  # Replace with the actual student ID to filter marks
 
-    def fetch_table_names(self):
         try:
-            connection = mysql.connector.connect(
-                host="mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com",
-                port=13426,
-                user="avnadmin",
-                password="AVNS_1UgkIMxSzsCWt0D-3cB",
-                database="scholarmate_db"
-            )
-            cursor = connection.cursor()
-            cursor.execute("SHOW TABLES")
-            tables = cursor.fetchall()
-            table_names = [table[0] for table in tables]
-            self.table_dropdown['values'] = table_names
-            if table_names:
-                self.table_dropdown.current(0)  # Select the first table by default
-            cursor.close()
-            connection.close()
-        except mysql.connector.Error as e:
-            messagebox.showerror("Database Error", f"Failed to fetch tables: {e}")
-
-    def load_marks(self):
-        selected_table = self.table_var.get()
-        try:
-            connection = mysql.connector.connect(
-                host="mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com",
-                port=13426,
-                user="avnadmin",
-                password="AVNS_1UgkIMxSzsCWt0D-3cB",
-                database="scholarmate_db"
-            )
+            connection = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db')
             cursor = connection.cursor()
 
-            # Query to fetch only the selected student's marks
-            query = f"SELECT * FROM {selected_table} WHERE student_name = %s"
-            cursor.execute(query, (self.student_name,))
-            rows = cursor.fetchall()
+            # Query to fetch marks and average
+            cursor.execute(f"SELECT * FROM {selected_table} WHERE student_id = %s", (student_id,))
+            student_marks = cursor.fetchone()
 
-            # Clear previous data in the Treeview
-            self.tree.delete(*self.tree.get_children())
+            cursor.execute(f"SELECT AVG(mark) FROM {selected_table}")
+            class_average = cursor.fetchone()[0]
 
-            if not rows:
-                messagebox.showinfo("No Data", "No marks found for this student.")
-                return
+            # Display marks in text widget
+            self.marks_text.delete(1.0, tk.END)
+            if student_marks:
+                self.marks_text.insert(tk.END, f"Marks: {student_marks}\nClass Average: {class_average}\n")
+            else:
+                self.marks_text.insert(tk.END, "No marks found for this student.")
 
-            # Get subject names from the table's column names
-            column_names = [desc[0] for desc in cursor.description]
-            subjects = [col for col in column_names if col not in ['student_id', 'student_name', 'class']]  # Exclude ID, Name, Class
+            # Create graph
+            subjects = ['Subject 1', 'Subject 2', 'Subject 3']  # Replace with actual subjects
+            marks = student_marks[1:]  # Skip the first column (student_id) if necessary
+            plt.clf()  # Clear previous figures
+            plt.bar(subjects, marks, label='Your Marks')
+            plt.axhline(y=class_average, color='r', linestyle='--', label='Class Average')
+            plt.title(f"Marks vs Class Average")
+            plt.xlabel('Subjects')
+            plt.ylabel('Marks')
+            plt.legend()
+            plt.xticks(rotation=45)
+            self.graph_canvas.draw()
 
-            marks = rows[0]  # Get the first row of marks since there should only be one student
-
-            for subject, mark in zip(subjects, marks):
-                self.tree.insert("", tk.END, values=(subject, mark if mark is not None else 'Absent'))
-
-            # Generate and display the graph
-            self.plot_graph(marks, subjects)
-
+        except mysql.connector.Error as e:
+            messagebox.showerror("Database Error", f"Error: {str(e)}")
+        finally:
             cursor.close()
             connection.close()
-        except mysql.connector.Error as e:
-            messagebox.showerror("Database Error", f"Failed to fetch marks: {e}")
-
-    def plot_graph(self, marks, subjects):
-        marks_values = [mark if mark is not None else 0 for mark in marks]  # Replace None with 0
-
-        plt.clf()  # Clear the current figure
-        plt.bar(subjects, marks_values, color='blue')
-        plt.xlabel('Subjects')
-        plt.ylabel('Marks')
-        plt.title('Student Marks')
-        plt.ylim(0, 100)  # Assuming marks are out of 100
-        plt.grid(axis='y')
-
-        self.canvas.draw()  # Refresh the canvas with the new graph
 
     def generate_report_card(self):
         call([sys.executable, 'generate_report_card_student.py'])

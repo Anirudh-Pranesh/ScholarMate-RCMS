@@ -21,10 +21,11 @@ from tkinter import messagebox
 import pickle
 from subprocess import call
 import webbrowser
+import sys
 
 #MySQL connection
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
+#db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 
 #User defined functions
@@ -43,14 +44,17 @@ def login():
             file.close()
             db.close()
             if res[0][4]=='S':
+                window.quit()
                 window.destroy()
-                call(['python', 'student_page.py']) # INSERT DAVE'S GUI HERE
+                call([sys.executable, 'student_page.py']) # INSERT DAVE'S GUI HERE
             elif res[0][4]=='A':
+                window.quit()
                 window.destroy()
-                call(['python', 'Admin_Page.py']) # INSERT DAVE'S GUI HERE
+                call([sys.executable, 'Admin_Page.py']) # INSERT DAVE'S GUI HERE
             elif res[0][4]=='T':
+                window.quit()
                 window.destroy()
-                call(['python', 'teacher_page.py']) # INSERT DAVE'S GUI HERE      
+                call([sys.executable, 'teacher_page.py']) # INSERT DAVE'S GUI HERE      
         elif username=='' or password=='':
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
