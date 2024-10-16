@@ -210,7 +210,7 @@ def show_student_and_class_avg(selected_student):
     # Display total marks, percentage, and subject performance
     total_label = ttk.Label(info_frame, text=f"Total Marks: {total_marks}", font=('Arial', 12, 'bold'))
     total_label.pack(anchor='w', pady=(10, 0))
-    percentage_label = ttk.Label(info_frame, text=f"Percentage: {percentage:.2f}%", font=('Arial', 12, 'bold'))
+    percentage_label = ttk.Label(info_frame, text=f"Overall Aggregate: {percentage:.2f}%", font=('Arial', 12, 'bold'))
     percentage_label.pack(anchor='w')
     low_label = ttk.Label(info_frame, text=f"Worst Performing Subject: {low_subject} ({low:.2f})", font=('Arial', 12, 'bold'))
     low_label.pack(anchor='w')

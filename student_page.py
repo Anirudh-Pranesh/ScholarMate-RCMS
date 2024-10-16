@@ -2,22 +2,23 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import sv_ttk
 from subprocess import call
-import sys
+import sys  # Imported sys module
 import pickle
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import mysql.connector  # Ensure you have the MySQL connector installed
 
 class AdminPage(tk.Tk):
     def __init__(self):
         super().__init__()
 
         self.title("Welcome Student")
-        self.geometry("850x700")
+        self.geometry("850x700")  # Increased height for the graph
 
+        # Initialize Sun Valley theme with the "dark" theme
         sv_ttk.set_theme("dark")
 
+        # Access User details
         try:
             with open('client_details.dat', 'rb') as file:
                 details = pickle.load(file)
@@ -27,9 +28,11 @@ class AdminPage(tk.Tk):
             self.destroy()
             return
 
+        # Main content frame
         self.main_frame = ttk.Frame(self, padding=(10, 10, 10, 10))
         self.main_frame.pack(fill="both", expand=True)
 
+        # Sidebar with a blue background
         self.sidebar = ttk.Frame(self.main_frame, width=200)
         self.sidebar.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
 
@@ -37,10 +40,10 @@ class AdminPage(tk.Tk):
         self.sidebar_color.pack(fill=tk.Y, side=tk.LEFT, expand=True)
 
         self.user_details = ttk.Label(
-            self.sidebar_color,
-            text="Welcome\n" + details[2],
-            font=('Helvetica', 14, 'bold'),
-            background="#3B82F6",
+            self.sidebar_color, 
+            text="Welcome\n" + details[2], 
+            font=('Helvetica', 14, 'bold'), 
+            background="#3B82F6", 
             foreground="white"
         )
         self.user_details.pack(pady=20, padx=10)
@@ -50,9 +53,9 @@ class AdminPage(tk.Tk):
             image = image.resize((150, 90), Image.Resampling.LANCZOS)
             self.new_img = ImageTk.PhotoImage(image)
             self.button = tk.Button(
-                self.sidebar_color,
-                image=self.new_img,
-                command=self.changepassword,
+                self.sidebar_color, 
+                image=self.new_img, 
+                command=self.changepassword, 
                 borderwidth=0
             )
             self.button.pack()
@@ -60,26 +63,29 @@ class AdminPage(tk.Tk):
             messagebox.showerror("Error", "Failed to load user icon.")
 
         self.logout_button = ttk.Button(
-            self.sidebar_color,
-            text="Log out",
-            command=self.logout,
+            self.sidebar_color, 
+            text="Log out", 
+            command=self.logout, 
             style='Sidebar.TButton'
         )
         self.logout_button.pack(side=tk.BOTTOM, pady=20, padx=10)
 
+        # Main content
         self.content_frame = ttk.Frame(self.main_frame, style='TFrame')
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         self.title_label = ttk.Label(self.content_frame, text="Student Portal", font=('Helvetica', 24, 'bold'))
         self.title_label.pack(pady=20)
 
+        # Buttons frame
         self.buttons_frame = ttk.Frame(self.content_frame, style='TFrame')
         self.buttons_frame.pack(pady=20)
 
+        # Create Entry Sheet Button
         self.create_data_button = ttk.Button(
-            self.buttons_frame,
-            text="View your marks",
-            command=self.view_student_marks,
+            self.buttons_frame, 
+            text="View your marks", 
+            command=self.create_data, 
             style='TButton'
         )
         
@@ -87,13 +93,14 @@ class AdminPage(tk.Tk):
         self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
         self.create_data_button.bind("<Leave>", lambda event: self.on_leave(event, self.create_data_button))
 
+        # Generate Report Card Button
         self.generate_report_button = ttk.Button(
-            self.buttons_frame,
-            text="Generate Your Report Card",
-            command=self.generate_report_card,
+            self.buttons_frame, 
+            text="Generate Your Report Card", 
+            command=self.generate_report_card, 
             style='TButton'
         )
-        self.generate_report_button.grid(row=0, column=1, padx=20, pady=10, sticky="ew")
+        self.generate_report_button.grid(row=0, column=2, padx=20, pady=10, sticky="ew")
         self.generate_report_button.bind("<Enter>", lambda event: self.on_enter(event, self.generate_report_button, "#2563EB"))
         self.generate_report_button.bind("<Leave>", lambda event: self.on_leave(event, self.generate_report_button))
 
@@ -105,78 +112,14 @@ class AdminPage(tk.Tk):
 
     def logout(self):
         self.destroy()
+        # Use sys.executable to ensure the same Python interpreter is used
         call([sys.executable, 'login_page.py'])
 
-    def view_student_marks(self):
-        # Create a new window for viewing student marks
-        marks_window = tk.Toplevel(self)
-        marks_window.title("View Student Marks")
-        marks_window.geometry("600x400")
-
-        # Dropdown for selecting tables
-        self.selected_table = tk.StringVar()
-        table_label = ttk.Label(marks_window, text="Select Table:")
-        table_label.pack(pady=10)
-
-        # Example list of tables; replace this with actual table names from your database
-        table_names = ['semester1', 'semester2', 'semester3']
-        table_dropdown = ttk.Combobox(marks_window, textvariable=self.selected_table, values=table_names)
-        table_dropdown.pack(pady=10)
-        table_dropdown.bind("<<ComboboxSelected>>", self.load_student_marks)
-
-        self.marks_text = tk.Text(marks_window, width=70, height=10)
-        self.marks_text.pack(pady=10)
-
-        # Button to load marks
-        load_button = ttk.Button(marks_window, text="Load Marks", command=self.load_student_marks)
-        load_button.pack(pady=10)
-
-        self.graph_canvas = FigureCanvasTkAgg(plt.figure(), marks_window)
-        self.graph_canvas.get_tk_widget().pack(pady=20)
-
-    def load_student_marks(self, event=None):
-        selected_table = self.selected_table.get()
-        student_id = '1'  # Replace with the actual student ID to filter marks
-
-        try:
-            connection = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db')
-            cursor = connection.cursor()
-
-            # Query to fetch marks and average
-            cursor.execute(f"SELECT * FROM {selected_table} WHERE student_id = %s", (student_id,))
-            student_marks = cursor.fetchone()
-
-            cursor.execute(f"SELECT AVG(mark) FROM {selected_table}")
-            class_average = cursor.fetchone()[0]
-
-            # Display marks in text widget
-            self.marks_text.delete(1.0, tk.END)
-            if student_marks:
-                self.marks_text.insert(tk.END, f"Marks: {student_marks}\nClass Average: {class_average}\n")
-            else:
-                self.marks_text.insert(tk.END, "No marks found for this student.")
-
-            # Create graph
-            subjects = ['Subject 1', 'Subject 2', 'Subject 3']  # Replace with actual subjects
-            marks = student_marks[1:]  # Skip the first column (student_id) if necessary
-            plt.clf()  # Clear previous figures
-            plt.bar(subjects, marks, label='Your Marks')
-            plt.axhline(y=class_average, color='r', linestyle='--', label='Class Average')
-            plt.title(f"Marks vs Class Average")
-            plt.xlabel('Subjects')
-            plt.ylabel('Marks')
-            plt.legend()
-            plt.xticks(rotation=45)
-            self.graph_canvas.draw()
-
-        except mysql.connector.Error as e:
-            messagebox.showerror("Database Error", f"Error: {str(e)}")
-        finally:
-            cursor.close()
-            connection.close()
+    def create_data(self):
+        call([sys.executable, 'view_Student_mark_student.py']) # Link py file (view marks)
 
     def generate_report_card(self):
-        call([sys.executable, 'generate_report_card_student.py'])
+        call([sys.executable, 'generate_report_card_student.py']) #Link py file (report card)
 
     def changepassword(self):
         call([sys.executable, 'changepassword.py'])
@@ -184,3 +127,4 @@ class AdminPage(tk.Tk):
 if __name__ == "__main__":
     app = AdminPage()
     app.mainloop()
+    
