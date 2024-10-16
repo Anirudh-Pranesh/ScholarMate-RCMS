@@ -5,8 +5,18 @@ from subprocess import call
 import sys  # Imported sys module
 import pickle
 from PIL import ImageTk, Image
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import os  # Import os for path manipulation
+
+# Resource path function
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for development and PyInstaller """
+    try:
+        # PyInstaller creates a temporary folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class AdminPage(tk.Tk):
     def __init__(self):
@@ -48,8 +58,9 @@ class AdminPage(tk.Tk):
         )
         self.user_details.pack(pady=20, padx=10)
 
+        # Load user icon
         try:
-            image = Image.open("usericon.png")
+            image = Image.open(resource_path("usericon.png"))  # Use resource_path here
             image = image.resize((150, 90), Image.Resampling.LANCZOS)
             self.new_img = ImageTk.PhotoImage(image)
             self.button = tk.Button(
@@ -149,27 +160,26 @@ class AdminPage(tk.Tk):
     def logout(self):
         self.destroy()
         # Use sys.executable to ensure the same Python interpreter is used
-        call([sys.executable, 'login_page.py'])
+        call([sys.executable, resource_path('login_page.py')])
 
     def create_data(self):
-        call([sys.executable, 'DataEntrySheetForAdmin.py'])
+        call([sys.executable, resource_path('DataEntrySheetForAdmin.py')])
 
     def view_marks(self):
-        call([sys.executable, 'view_student_marks.py'])  # Link Python files here
+        call([sys.executable, resource_path('view_student_marks.py')])  # Link Python files here
 
     def edit_marks(self):
-        call([sys.executable, 'edit_student_marks.py'])  # Link Python files here
+        call([sys.executable, resource_path('edit_student_marks.py')])  # Link Python files here
 
     def generate_report_card(self):
-        call([sys.executable, 'generate_report_card.py'])
+        call([sys.executable, resource_path('generate_report_card.py')])
 
     def edit_school_directory(self):
-        call([sys.executable, 'edit_school_directory.py'])
+        call([sys.executable, resource_path('edit_school_directory.py')])
 
     def changepassword(self):
-        call([sys.executable, 'changepassword.py'])
+        call([sys.executable, resource_path('changepassword.py')])
 
 if __name__ == "__main__":
     app = AdminPage()
     app.mainloop()
-    

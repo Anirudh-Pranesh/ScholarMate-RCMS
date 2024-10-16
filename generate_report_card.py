@@ -260,7 +260,7 @@ for i in l1:
 for row in res:
     students_trv.insert("", 'end', iid=row[0], text=row[0], values=list(row))
 
-generate_single_rc=ttk.Button(single_student_frame, text='Confirm selection and genrate', command=generate_single_rc_func)
+generate_single_rc=ttk.Button(single_student_frame, text='Confirm selection and generate', command=generate_single_rc_func)
 
 
 student_label.grid(row=0, column=0,sticky = 'W')

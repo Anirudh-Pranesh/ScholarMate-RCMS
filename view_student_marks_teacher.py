@@ -12,6 +12,8 @@ db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122',
 #db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_1UgkIMxSzsCWt0D-3cB',database='scholarmate_db')
 cur=db.cursor()
 
+selected_table=None
+
 file=open('client_details.dat', 'rb')
 dat=pickle.load(file)
 
@@ -60,7 +62,6 @@ def fetch_table_data(table_name):
         query = f"SELECT * FROM `{table_name}` WHERE class = '{assgn_class}' ORDER BY `class`, `student_name`"
         cursor.execute(query)
         data = cursor.fetchall()
-        print(data)
         if data == []:
             messagebox.showinfo(title='Info', message=f"{assgn_class} has not written this exam")
         else:
@@ -258,8 +259,8 @@ def show_student_and_class_avg(selected_student):
 
 def show_class_average_window():
     global selected_table
-    if not selected_table:
-        print("No table selected.")
+    if selected_table == None:
+        messagebox.showerror(title="Error", message="Select examination")
         return
 
     subject_names = fetch_subject_names(selected_table)
@@ -361,11 +362,14 @@ def calculate_class_wise_average(table_name, subject_names):
 def on_table_select(event):
     global selected_table
     selected_table = table_combo.get()
-    if selected_table:
-        column_names, data = fetch_table_data(selected_table)
-        display_table_data(column_names, data)
-        tree.selection_remove(tree.selection())
-        clear_student_info()
+    if selected_table != None:
+        try:
+            column_names, data = fetch_table_data(selected_table)
+            display_table_data(column_names, data)
+            tree.selection_remove(tree.selection())
+            clear_student_info()
+        except:
+            pass
 
 # Clear student info when a new table is selected
 def clear_student_info():

@@ -4,10 +4,13 @@ import sv_ttk
 import mysql.connector
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from tkinter import messagebox
 
 # DATABASE CONNECTION
 db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
 #db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_1UgkIMxSzsCWt0D-3cB',database='scholarmate_db')
+
+selected_table=None
 
 # Handle window close event to release Matplotlib resources
 def on_close():
@@ -242,8 +245,8 @@ def show_student_and_class_avg(selected_student):
 
 def show_class_average_window():
     global selected_table
-    if not selected_table:
-        print("No table selected.")
+    if selected_table == None:
+        messagebox.showerror(title="Error", message="Select examination")
         return
 
     subject_names = fetch_subject_names(selected_table)

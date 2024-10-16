@@ -23,6 +23,8 @@ try:
 except mysql.connector.Error as err:
     print(f"Database connection failed: {err}")
     exit(1)
+    
+selected_table = None
 
 # Handle window close event to release Matplotlib resources
 def on_close():
@@ -58,10 +60,8 @@ def fetch_subject_names(table_name):
         cursor.close()
         return tuple(subj_names_useable)
     except mysql.connector.Error as err:
-        print(f"Error fetching subject names: {err}")
+        messagebox.showerror(title="Error", message='Select examination')
         return ()
-
-selected_table = None
 
 def on_table_select(event):
     global selected_table

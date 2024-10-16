@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sv_ttk
@@ -5,8 +6,17 @@ from subprocess import call
 import sys  # Imported sys module
 import pickle
 from PIL import ImageTk, Image
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+def resource_path(relative_path):
+    """ Get the absolute path to the resource, works for both
+    development and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class AdminPage(tk.Tk):
     def __init__(self):
@@ -20,7 +30,7 @@ class AdminPage(tk.Tk):
 
         # Access User details
         try:
-            with open('client_details.dat', 'rb') as file:
+            with open(resource_path('client_details.dat'), 'rb') as file:
                 details = pickle.load(file)
             details = list(details[0])
         except (FileNotFoundError, EOFError, IndexError) as e:
@@ -49,7 +59,7 @@ class AdminPage(tk.Tk):
         self.user_details.pack(pady=20, padx=10)
 
         try:
-            image = Image.open("usericon.png")
+            image = Image.open(resource_path("usericon.png"))
             image = image.resize((150, 90), Image.Resampling.LANCZOS)
             self.new_img = ImageTk.PhotoImage(image)
             self.button = tk.Button(
@@ -113,18 +123,17 @@ class AdminPage(tk.Tk):
     def logout(self):
         self.destroy()
         # Use sys.executable to ensure the same Python interpreter is used
-        call([sys.executable, 'login_page.py'])
+        call([sys.executable, resource_path('login_page.py')])
 
     def create_data(self):
-        call([sys.executable, 'view_Student_mark_student.py']) # Link py file (view marks)
+        call([sys.executable, resource_path('view_Student_mark_student.py')]) # Link py file (view marks)
 
     def generate_report_card(self):
-        call([sys.executable, 'generate_report_card_student.py']) #Link py file (report card)
+        call([sys.executable, resource_path('generate_report_card_student.py')]) # Link py file (report card)
 
     def changepassword(self):
-        call([sys.executable, 'changepassword.py'])
+        call([sys.executable, resource_path('changepassword.py')])
 
 if __name__ == "__main__":
     app = AdminPage()
     app.mainloop()
-    
