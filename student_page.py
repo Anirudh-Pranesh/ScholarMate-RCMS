@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sv_ttk
@@ -5,13 +6,12 @@ from subprocess import call
 import sys  # Imported sys module
 import pickle
 from PIL import ImageTk, Image
-import os  # Import os for path manipulation
 
-# Resource path function
 def resource_path(relative_path):
-    """ Get absolute path to resource, works for development and PyInstaller """
+    """ Get the absolute path to the resource, works for both
+    development and for PyInstaller """
     try:
-        # PyInstaller creates a temporary folder and stores path in _MEIPASS
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
         base_path = sys._MEIPASS
     except Exception:
         base_path = os.path.abspath(".")
@@ -22,7 +22,7 @@ class AdminPage(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Welcome Admin")
+        self.title("Welcome Student")
         self.geometry("850x700")  # Increased height for the graph
 
         # Initialize Sun Valley theme with the "dark" theme
@@ -30,7 +30,7 @@ class AdminPage(tk.Tk):
 
         # Access User details
         try:
-            with open('client_details.dat', 'rb') as file:
+            with open(resource_path('client_details.dat'), 'rb') as file:
                 details = pickle.load(file)
             details = list(details[0])
         except (FileNotFoundError, EOFError, IndexError) as e:
@@ -58,9 +58,8 @@ class AdminPage(tk.Tk):
         )
         self.user_details.pack(pady=20, padx=10)
 
-        # Load user icon
         try:
-            image = Image.open(resource_path("usericon.png"))  # Use resource_path here
+            image = Image.open(resource_path("usericon.png"))
             image = image.resize((150, 90), Image.Resampling.LANCZOS)
             self.new_img = ImageTk.PhotoImage(image)
             self.button = tk.Button(
@@ -85,12 +84,8 @@ class AdminPage(tk.Tk):
         self.content_frame = ttk.Frame(self.main_frame, style='TFrame')
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        self.title_label = ttk.Label(self.content_frame, text="Admin Portal", font=('Helvetica', 24, 'bold'))
+        self.title_label = ttk.Label(self.content_frame, text="Student Portal", font=('Helvetica', 24, 'bold'))
         self.title_label.pack(pady=20)
-
-        # Table (Placeholder for class averages)
-        self.table_frame = ttk.Frame(self.content_frame, style='TFrame')
-        self.table_frame.pack(pady=20)
 
         # Buttons frame
         self.buttons_frame = ttk.Frame(self.content_frame, style='TFrame')
@@ -99,57 +94,25 @@ class AdminPage(tk.Tk):
         # Create Entry Sheet Button
         self.create_data_button = ttk.Button(
             self.buttons_frame, 
-            text="Create Entry Sheet For New Exam", 
+            text="View your marks", 
             command=self.create_data, 
             style='TButton'
         )
+        
         self.create_data_button.grid(row=0, column=0, padx=20, pady=10, sticky="ew")
         self.create_data_button.bind("<Enter>", lambda event: self.on_enter(event, self.create_data_button, "#2563EB"))
         self.create_data_button.bind("<Leave>", lambda event: self.on_leave(event, self.create_data_button))
 
-        # Edit School Directory Button
-        self.edit_school_directory_button = ttk.Button(
-            self.buttons_frame, 
-            text="Edit School Directory", 
-            command=self.edit_school_directory, 
-            style='TButton'
-        )
-        self.edit_school_directory_button.grid(row=0, column=1, padx=20, pady=10, sticky="ew")
-        self.edit_school_directory_button.bind("<Enter>", lambda event: self.on_enter(event, self.edit_school_directory_button, "#2563EB"))
-        self.edit_school_directory_button.bind("<Leave>", lambda event: self.on_leave(event, self.edit_school_directory_button))
-
         # Generate Report Card Button
         self.generate_report_button = ttk.Button(
             self.buttons_frame, 
-            text="Generate Report Card", 
+            text="Generate Your Report Card", 
             command=self.generate_report_card, 
             style='TButton'
         )
         self.generate_report_button.grid(row=0, column=2, padx=20, pady=10, sticky="ew")
         self.generate_report_button.bind("<Enter>", lambda event: self.on_enter(event, self.generate_report_button, "#2563EB"))
         self.generate_report_button.bind("<Leave>", lambda event: self.on_leave(event, self.generate_report_button))
-
-        # View Student Marks Button
-        self.view_marks_button = ttk.Button(
-            self.buttons_frame, 
-            text="View Student Marks", 
-            command=self.view_marks, 
-            style='TButton'
-        )
-        self.view_marks_button.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
-        self.view_marks_button.bind("<Enter>", lambda event: self.on_enter(event, self.view_marks_button, "#2563EB"))
-        self.view_marks_button.bind("<Leave>", lambda event: self.on_leave(event, self.view_marks_button))
-
-        # Edit Student Marks Button
-        self.edit_marks_button = ttk.Button(
-            self.buttons_frame, 
-            text="Edit Student Marks", 
-            command=self.edit_marks, 
-            style='TButton'
-        )
-        self.edit_marks_button.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
-        self.edit_marks_button.bind("<Enter>", lambda event: self.on_enter(event, self.edit_marks_button, "#2563EB"))
-        self.edit_marks_button.bind("<Leave>", lambda event: self.on_leave(event, self.edit_marks_button))
 
     def on_enter(self, event, widget, color):
         widget.configure(style="Hover.TButton")
@@ -163,19 +126,10 @@ class AdminPage(tk.Tk):
         call([sys.executable, resource_path('login_page.py')])
 
     def create_data(self):
-        call([sys.executable, resource_path('DataEntrySheetForAdmin.py')])
-
-    def view_marks(self):
-        call([sys.executable, resource_path('view_student_marks.py')])  # Link Python files here
-
-    def edit_marks(self):
-        call([sys.executable, resource_path('edit_student_marks.py')])  # Link Python files here
+        call([sys.executable, resource_path('view_Student_mark_student.py')]) # Link py file (view marks)
 
     def generate_report_card(self):
-        call([sys.executable, resource_path('generate_report_card.py')])
-
-    def edit_school_directory(self):
-        call([sys.executable, resource_path('edit_school_directory.py')])
+        call([sys.executable, resource_path('generate_report_card_student.py')]) # Link py file (report card)
 
     def changepassword(self):
         call([sys.executable, resource_path('changepassword.py')])
