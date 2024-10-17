@@ -69,7 +69,7 @@ def login():
             window.destroy()
 
             # Call the next page using the absolute path
-            call([sys.executable, next_page])   
+            call([sys.executable, next_page]) 
         elif username == '' or password == '':
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
