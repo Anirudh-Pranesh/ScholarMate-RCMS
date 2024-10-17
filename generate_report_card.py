@@ -246,7 +246,7 @@ generating_text_multiple.grid_forget()
 
 
 #SINGLE STUDENT FRAME, and widget set-up
-student_label=ttk.Label(single_student_frame, text='Selected student to generate report card for :  ', font=('Arial', '15'), justify="left", anchor="w")
+student_label=ttk.Label(single_student_frame, text='Select student to generate report card for :  ', font=('Arial', '15'), justify="left", anchor="w")
 
 #treeview
 show_students="SELECT * FROM student_details ORDER BY student_name"

@@ -64,24 +64,24 @@ def tablecreation():
 
 # Initialize the Tkinter window
 root = tk.Tk()
-root.geometry('800x650')
+root.geometry('900x650')
 root.title('Data Entry Sheet For Admin')
 
 # Create and place widgets
-title_label = ttk.Label(root, text='Data Entry Sheet for Admin', font=('Arial', 30, 'bold'))
-exam_label = ttk.Label(root, text='1. Enter exam name here:', font=('calibre', 18, 'bold'))
+title_label = ttk.Label(root, text='Create Entry Sheet For New Exam', font=('Arial', 30, 'bold'))
+exam_label = ttk.Label(root, text='1. Enter exam name :', font=('calibre', 18, 'bold'))
 exam_entry = ttk.Entry(root)
-subject1_label = ttk.Label(root, text='a. Enter subject 1 here:', font=('calibre', 18, 'bold'))
+subject1_label = ttk.Label(root, text='a. Enter subject 1 :', font=('calibre', 18, 'bold'))
 subject1_entry = ttk.Entry(root)
-subject2_label = ttk.Label(root, text='b. Enter subject 2 here:', font=('calibre', 18, 'bold'))
+subject2_label = ttk.Label(root, text='b. Enter subject 2 :', font=('calibre', 18, 'bold'))
 subject2_entry = ttk.Entry(root)
-subject3_label = ttk.Label(root, text='c. Enter subject 3 here:', font=('calibre', 18, 'bold'))
+subject3_label = ttk.Label(root, text='c. Enter subject 3 :', font=('calibre', 18, 'bold'))
 subject3_entry = ttk.Entry(root)
-subject4_label = ttk.Label(root, text='d. Enter subject 4 here:', font=('calibre', 18, 'bold'))
+subject4_label = ttk.Label(root, text='d. Enter subject 4 :', font=('calibre', 18, 'bold'))
 subject4_entry = ttk.Entry(root)
-subject5_label = ttk.Label(root, text='e. Enter subject 5 here:', font=('calibre', 18, 'bold'))
+subject5_label = ttk.Label(root, text='e. Enter subject 5 :', font=('calibre', 18, 'bold'))
 subject5_entry = ttk.Entry(root)
-class_label=ttk.Label(root,text='''           2.Click on the classes for which the exam was held: ''',font=('calibre',18,'bold'))
+class_label=ttk.Label(root,text='''           2.Select the classes for which the exam was held: ''',font=('calibre',18,'bold'))
 
 # Checkbox variables
 class9var = tk.IntVar()

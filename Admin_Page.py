@@ -99,7 +99,7 @@ class AdminPage(tk.Tk):
         # Create Entry Sheet Button
         self.create_data_button = ttk.Button(
             self.buttons_frame, 
-            text="Create entry sheet for new exam", 
+            text="Create Entry Sheet For New Exam", 
             command=self.create_data, 
             style='TButton'
         )
@@ -132,7 +132,7 @@ class AdminPage(tk.Tk):
         # View Student Marks Button
         self.view_marks_button = ttk.Button(
             self.buttons_frame, 
-            text="View student Marks", 
+            text="View Student Marks", 
             command=self.view_marks, 
             style='TButton'
         )
@@ -143,7 +143,7 @@ class AdminPage(tk.Tk):
         # Edit Student Marks Button
         self.edit_marks_button = ttk.Button(
             self.buttons_frame, 
-            text="Edit student Marks", 
+            text="Edit Student Marks", 
             command=self.edit_marks, 
             style='TButton'
         )
