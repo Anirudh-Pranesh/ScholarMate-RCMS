@@ -20,7 +20,7 @@ import sv_ttk
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import pickle
-from subprocess import call
+import subprocess
 import webbrowser
 import sys
 import os  # Import os for path manipulation
@@ -64,12 +64,16 @@ def login():
             elif res[0][4] == 'T':
                 next_page = resource_path('teacher_page.py')
             
+            #exe test
+            #subprocess.Popen([sys.executable, next_page], env={**os.environ, "PYINSTALLER_RESET_ENVIRONMENT": "1"})
+            #sys.exit(0)
+            
             # Close the login window
             window.quit()
             window.destroy()
 
             # Call the next page using the absolute path
-            call([sys.executable, next_page]) 
+            subprocess.call([sys.executable, next_page]) 
         elif username == '' or password == '':
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
