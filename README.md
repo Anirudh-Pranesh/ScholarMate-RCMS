@@ -42,24 +42,24 @@ Here are some usernames and passwords that you may use for testing purposes :
 
 Username : _admin Password: _admin
 
-**Username and Password of a few students : **
+**Username and Password of a few students :**
 
-Aarti Bansal_94          Aarti Bansal_94<br />
-Reyansh Jain_7           Reyansh Jain_7<br />
-Vivaan Sharma_2        Vivaan Sharma_2<br />
-Ayaan Mehta_6           Ayaan Mehta_6<br />
-Kartik Agarwal_8         Kartik Agarwal_8<br />
+Aarti Bansal_94<br />
+Reyansh Jain_7<br />
+Vivaan Sharma_2<br />
+Ayaan Mehta_6<br />
+Kartik Agarwal_8<br />
 
 **Username and Password of all teachers :** 
 
-Mr. Arjun Gupta_5         Mr. Arjun Gupta_5<br />
-Mr. Rajesh Kumar_7      Mr. Rajesh Kumar_7<br />
-Mr. Ramesh Patel_1      Mr. Ramesh Patel_1<br />
-Mr. Vikram Sharma_3   Mr. Vikram Sharma_3<br />
-Mrs. Sanya Desai_8     Mrs. Sanya Desai_8<br />
-Ms. Ananya Singh_2    Ms. Ananya Singh_2<br />
-Ms. Neha Verma_6      Ms. Neha Verma_6<br />
-Ms. Priya Rao_4          Ms. Priya Rao_4<br />
+Mr. Arjun Gupta_5<br />
+Mr. Rajesh Kumar_7<br />
+Mr. Ramesh Patel_1<br />
+Mr. Vikram Sharma_3<br />
+Mrs. Sanya Desai_8<br />
+Ms. Ananya Singh_2<br />
+Ms. Neha Verma_6<br />
+Ms. Priya Rao_4<br />
 
 For more student usernames, you may access the MySQL database. The host, username, and password are given in the source code. You may access either through your terminal or through MySQL workbench. To get more usernames and passwords, run this SQL statement to the server: 
 
