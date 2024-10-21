@@ -130,9 +130,9 @@ def confirm_changes():
             cursor.close()
             messagebox.showinfo("Success", "Changes have been saved.")
             modified_values.clear()  # Clear modified values after saving
-        except mysql.connector.Error as err:
+        except mysql.connector.Error:
             db.rollback()
-            messagebox.showerror("Error", f"Failed to update the database: {err}")
+            messagebox.showerror("ERROR", f"Please entter a valid entry")
 
 def on_table_select(event):
     global selected_table
