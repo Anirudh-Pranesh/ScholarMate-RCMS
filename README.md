@@ -36,6 +36,37 @@ As a teacher, you are assigned to be the class teacher of a given class. You are
 
 As a student, you can only view your marks and generate your own report card
 
+Here are some usernames and passwords that you may use for testing purposes : 
+
+**Username and Password of admin :** 
+
+Username : _admin Password: _admin
+
+**Username and Password of a few students : **
+
+Aarti Bansal_94          Aarti Bansal_94
+Reyansh Jain_7           Reyansh Jain_7
+Vivaan Sharma_2        Vivaan Sharma_2
+Ayaan Mehta_6           Ayaan Mehta_6
+Kartik Agarwal_8         Kartik Agarwal_8
+
+**Username and Password of all teachers :** 
+
+Mr. Arjun Gupta_5         Mr. Arjun Gupta_5
+Mr. Rajesh Kumar_7      Mr. Rajesh Kumar_7
+Mr. Ramesh Patel_1      Mr. Ramesh Patel_1
+Mr. Vikram Sharma_3   Mr. Vikram Sharma_3
+Mrs. Sanya Desai_8     Mrs. Sanya Desai_8
+Ms. Ananya Singh_2    Ms. Ananya Singh_2
+Ms. Neha Verma_6      Ms. Neha Verma_6
+Ms. Priya Rao_4          Ms. Priya Rao_4
+
+For more student usernames, you may access the MySQL database. The host, username, and password are given in the source code. You may access either through your terminal or through MySQL workbench. To get more usernames and passwords, run this SQL statement to the server : 
+
+```SQL
+SELECT * FROM credentials;
+```
+
 # DISCLAIMER 
 
 As of now, the **"Edit school directory"** feature is currently **UNAVAILABLE** due to server issues. This feature is only available for localhost release where the database server issues have been resolved. We apologise for any inconvenience caused.
