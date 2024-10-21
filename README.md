@@ -1,10 +1,22 @@
-# ScholarMate-RCMS
+# ScholarMate 🏫
 [![GPL License](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://opensource.org/licenses/GPL-3.0/)
-[![python](https://img.shields.io/badge/Python-3.11.4-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=flat&logo=mysql&logoColor=white)](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)
+[![python](https://img.shields.io/badge/Python-3.11.4-3776AB.svg?style=flat&logo=python&logoColor=yellow)](https://www.python.org)
+[![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=flat&logo=mysql&logoColor=black)](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)
 
+```
 
-ScholarMate is an RCMS, being made for CS class 12 project by Anirudh, Dave & Vignesh
+           $$$$$$\            $$\                 $$\                           $$\      $$\            $$\               
+          $$  __$$\           $$ |                $$ |                          $$$\    $$$ |           $$ |              
+          $$ /  \__| $$$$$$$\ $$$$$$$\   $$$$$$\  $$ | $$$$$$\   $$$$$$\        $$$$\  $$$$ | $$$$$$\ $$$$$$\    $$$$$$\  
+          \$$$$$$\  $$  _____|$$  __$$\ $$  __$$\ $$ | \____$$\ $$  __$$\       $$\$$\$$ $$ | \____$$\\_$$  _|  $$  __$$\ 
+           \____$$\ $$ /      $$ |  $$ |$$ /  $$ |$$ | $$$$$$$ |$$ |  \__|      $$ \$$$  $$ | $$$$$$$ | $$ |    $$$$$$$$ |
+          $$\   $$ |$$ |      $$ |  $$ |$$ |  $$ |$$ |$$  __$$ |$$ |            $$ |\$  /$$ |$$  __$$ | $$ |$$\ $$   ____|
+          \$$$$$$  |\$$$$$$$\ $$ |  $$ |\$$$$$$  |$$ |\$$$$$$$ |$$ |            $$ | \_/ $$ |\$$$$$$$ | \$$$$  |\$$$$$$$\ 
+           \______/  \_______|\__|  \__| \______/ \__| \_______|\__|            \__|     \__| \_______|  \____/  \_______|
+                                                                                                                
+```                                                                                                                
+                                                                                                                
+ScholarMate is an RCMS (Report Card Managament System), under development for CS class 12 project by Anirudh, Dave & Vignesh
 
 ScholarMate can be used by schools for handling their students' marks and keeping a secure and safe record of them. The sofwatre provides visual analytics of marks for each and every student who has written an exam, and also provides a comparison for the class averages. The program may be used to generate report cards for every student that has written an exam within seconds, and also includes many other features, described in the **How to use ScholarMate** section.
 
@@ -32,7 +44,7 @@ https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=shari
 
 [REPORTCARD_Semester1_Aarti Sharma_50.pdf](https://github.com/user-attachments/files/17462897/REPORTCARD_Semester1_Aarti.Sharma_50.pdf)
 
-# Installation 
+# Installation 🖥️
 
 First, install python, after which run the following commands on your terminal
 
@@ -46,7 +58,7 @@ Use the first command on windows, and the second if you're on mac
 
 Download the zip file of this project and run ```login_page.py```
 
-# How to use ScholarMate ? 
+# How to use ScholarMate ? 👤
 
 Open login_page.py and enter your username and password. 
 
@@ -91,6 +103,6 @@ SELECT * FROM credentials;
 
 As of now, the **"Edit school directory"** feature is currently **UNAVAILABLE** due to server issues. This feature is only available for localhost release where the database server issues have been resolved. We apologise for any inconvenience caused.
 
-# Documentation
+# Documentation 📃
 
 Coming soon ...
