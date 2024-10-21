@@ -1,4 +1,8 @@
 # ScholarMate-RCMS
+[![GPL License](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://opensource.org/licenses/GPL-3.0/)
+[![python](https://img.shields.io/badge/Python-3.11.4-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=flat&logo=mysql&logoColor=white)](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)
+
 
 ScholarMate is an RCMS, being made for CS class 12 project by Anirudh, Dave & Vignesh
 
@@ -8,25 +12,39 @@ The file attatched below describes the design of the software, describing all th
 
 https://drive.google.com/file/d/1XUFr5fEAIPeqqcX7lUnfNcna0rNyRoBH/view?usp=sharing
 
-![alt text](image.png)
-
 The file attatched bellow describes the MySQL database structure
 
 https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing
 
+
+
+# Screenshots : 
+
+![alt text](image.png)
+
 ![alt text](image-1.png)
 
-The software is open source and here is the list of all the required imports and downloads for the source code : 
+![image](https://github.com/user-attachments/assets/011f5dc0-c9dd-4524-a1c0-be1dc299254d)
 
-# REQUIRED INSTALLS : 
+![image](https://github.com/user-attachments/assets/4aa0783d-2d18-4b91-8886-53a07eb0263a)
+
+**Sample report card :**
+
+[REPORTCARD_Semester1_Aarti Sharma_50.pdf](https://github.com/user-attachments/files/17462897/REPORTCARD_Semester1_Aarti.Sharma_50.pdf)
+
+# Installation 
+
+First, install python, after which run the following commands on your terminal
 
 Use the first command on windows, and the second if you're on mac
 
--> pip install pillow or pip3 install pillow (for inserting image)<br />
--> pip install sv_ttk or pip3 install sv_ttk (for the theme)<br />
--> pip install fpdf or pip3 install fpdf (pdf generation)<br />
--> pip install mysql.connector or pip3 install mysql.connector (for MySQL connection)<br />
--> pip install matplotlib or pip3 install matplotlib (Graph generation)
+➡️ pip install pillow or pip3 install pillow (for inserting image)<br />
+➡️ pip install sv_ttk or pip3 install sv_ttk (for the theme)<br />
+➡️ pip install fpdf or pip3 install fpdf (pdf generation)<br />
+➡️ pip install mysql.connector or pip3 install mysql.connector (for MySQL connection)<br />
+➡️ pip install matplotlib or pip3 install matplotlib (Graph generation)
+
+Download the zip file of this project and run ```login_page.py```
 
 # How to use ScholarMate ? 
 
@@ -42,26 +60,26 @@ Here are some usernames and passwords that you may use for testing purposes :
 
 **Username and Password of admin :** 
 
-Username : _admin Password: _admin
+➡️Username : _admin Password: _admin
 
 **Username and Password of a few students :**
 
-Aarti Bansal_94<br />
-Reyansh Jain_7<br />
-Vivaan Sharma_2<br />
-Ayaan Mehta_6<br />
-Kartik Agarwal_8<br />
+➡️Aarti Bansal_94<br />
+➡️Reyansh Jain_7<br />
+➡️Vivaan Sharma_2<br />
+➡️Ayaan Mehta_6<br />
+➡️Kartik Agarwal_8<br />
 
 **Username and Password of all teachers :** 
 
-Mr. Arjun Gupta_5<br />
-Mr. Rajesh Kumar_7<br />
-Mr. Ramesh Patel_1<br />
-Mr. Vikram Sharma_3<br />
-Mrs. Sanya Desai_8<br />
-Ms. Ananya Singh_2<br />
-Ms. Neha Verma_6<br />
-Ms. Priya Rao_4<br />
+➡️Mr. Arjun Gupta_5<br />
+➡️Mr. Rajesh Kumar_7<br />
+➡️Mr. Ramesh Patel_1<br />
+➡️Mr. Vikram Sharma_3<br />
+➡️Mrs. Sanya Desai_8<br />
+➡️Ms. Ananya Singh_2<br />
+➡️Ms. Neha Verma_6<br />
+➡️Ms. Priya Rao_4<br />
 
 For more student usernames, you may access the MySQL database. The host, username, and password are given in the source code. You may access either through your terminal or through MySQL workbench. To get more usernames and passwords, run this SQL statement to the server: 
 
@@ -69,6 +87,10 @@ For more student usernames, you may access the MySQL database. The host, usernam
 SELECT * FROM credentials;
 ```
 
-# DISCLAIMER 
+# DISCLAIMER ⚠️
 
 As of now, the **"Edit school directory"** feature is currently **UNAVAILABLE** due to server issues. This feature is only available for localhost release where the database server issues have been resolved. We apologise for any inconvenience caused.
+
+# Documentation
+
+Coming soon ...
