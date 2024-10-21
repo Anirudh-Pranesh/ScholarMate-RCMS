@@ -91,8 +91,10 @@ def on_double_click(event):
 def save_value(selected_item, col_index, entry):
     new_value = entry.get()
 
-    if new_value.lower() != "" and not new_value.isdigit():
-        messagebox.showerror("Invalid Input", "Please enter a valid number.")
+    if new_value.lower() == 'null':
+        new_value = None  # Allow NULL values
+    elif new_value.lower() != "" and not new_value.isdigit():
+        messagebox.showerror("Invalid Input", "Please enter a valid number or 'NULL'.")
         entry.focus()
         return
     
@@ -126,9 +128,9 @@ def confirm_changes():
             cursor.close()
             messagebox.showinfo("Success", "Changes have been saved.")
             modified_values.clear()
-        except mysql.connector.Error:
+        except mysql.connector.Error as err:
             db.rollback()
-            messagebox.showerror("ERROR", f"Please entter a valid entry")
+            messagebox.showerror("Error", f"Please input a valid entry")
 
 # Fetch table data based on selected table in the dropdown
 def on_table_select(event):
