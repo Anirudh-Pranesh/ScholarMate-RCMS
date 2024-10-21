@@ -34,3 +34,7 @@ As an admin you are allowed multiple access rights to the database server. You a
 As a teacher, you are assigned to be the class teacher of a given class. You are allowed a restricted access to the database server. First and foremost, you are only allowed to view/edit your own class' marks. You cannot see or edit any other class' marks. You can generate report cards, but only for the students in your class.
 
 As a student, you can only view your marks and generate your own report card
+
+# DISCLAIMER 
+
+As of now, the **"Edit school directory"** feature is currently **UNAVAILABLE** due to server issues. This feature is only available for localhost release where the database server issues have been resolved. We apologise for any inconvenience caused.
