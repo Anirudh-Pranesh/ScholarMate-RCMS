@@ -178,7 +178,7 @@ def show_student_and_class_avg(selected_student):
     marks_tree.column("Subject", anchor="w", width=300)
     marks_tree.column("Mark", anchor="w", width=300)
     for subject, mark in zip(subject_names, student_marks):
-        marks_tree.insert("", "end", values=(subject, mark if mark != 0 else "Absent"))
+        marks_tree.insert("", "end", values=(subject, mark))
     marks_tree.pack(fill='x', expand=True)
 
     # Calculate total and percentage
