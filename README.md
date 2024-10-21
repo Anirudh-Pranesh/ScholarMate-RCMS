@@ -20,11 +20,13 @@ The software is open source and here is the list of all the required imports and
 
 # REQUIRED INSTALLS : 
 
--> pip install pillow (for inserting image)<br />
--> pip install sv_ttk (for the theme)<br />
--> pip install fpdf (pdf generation)<br />
--> pip install mysql.connector<br />
--> pip install matplotlib (Graph generation)
+Use the first command on windows, and the second if you're on mac
+
+-> pip install pillow or pip3 install pillow (for inserting image)<br />
+-> pip install sv_ttk or pip3 install sv_ttk (for the theme)<br />
+-> pip install fpdf or pip3 install fpdf (pdf generation)<br />
+-> pip install mysql.connector or pip3 install mysql.connector (for MySQL connection)<br />
+-> pip install matplotlib or pip3 install matplotlib (Graph generation)
 
 # How to use ScholarMate ? 
 
