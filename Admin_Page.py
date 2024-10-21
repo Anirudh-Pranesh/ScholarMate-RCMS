@@ -175,7 +175,8 @@ class AdminPage(tk.Tk):
         call([sys.executable, resource_path('generate_report_card.py')])
 
     def edit_school_directory(self):
-        call([sys.executable, resource_path('edit_school_directory.py')])
+        messagebox.showerror(title="Error !", message="This feature is currently unavailable due to database server issues")
+        #call([sys.executable, resource_path('edit_school_directory.py')])
 
     def changepassword(self):
         call([sys.executable, resource_path('changepassword.py')])
