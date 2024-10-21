@@ -1,0 +1,24 @@
+            <mxPoint x="385" y="1021.5" as="sourcePoint" />
+            <mxPoint x="430" y="861.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-255" value="DIrect query to SQL via python" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-254">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-256" value="SQL database" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-254">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-257" value=".exe interface" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;fontStyle=1" connectable="0" vertex="1" parent="ifSm3c1guZ6E2kyASek3-254">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="78" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ifSm3c1guZ6E2kyASek3-258" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="ifSm3c1guZ6E2kyASek3-223">
+          <mxGeometry x="345" y="951.5" width="60" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
