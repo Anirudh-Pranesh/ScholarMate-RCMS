@@ -57,6 +57,7 @@ def fetch_subject_names(table_name):
         return ()
 
 def fetch_table_data(table_name):
+    global selected_table
     try:
         cursor = db.cursor()
         query = f"SELECT * FROM `{table_name}` WHERE class = '{assgn_class}' ORDER BY `class`, `student_name`"
@@ -64,6 +65,8 @@ def fetch_table_data(table_name):
         data = cursor.fetchall()
         if data == []:
             messagebox.showinfo(title='Info', message=f"{assgn_class} has not written this exam")
+            table_combo.set("")
+            selected_table=None
         else:
             column_names = [i[0] for i in cursor.description]
             cursor.close()

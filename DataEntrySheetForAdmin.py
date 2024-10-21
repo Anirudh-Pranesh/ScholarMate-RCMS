@@ -21,23 +21,23 @@ def tablecreation():
         
         # Create SQL statement with proper spacing and quotes
         str = (
-        f"CREATE TABLE IF NOT EXISTS {examname} ("
-        "student_id INT, "
-        "student_name VARCHAR(30) NOT NULL, "
-        "class VARCHAR(3) NOT NULL, "
-        f"{sub1} DECIMAL(4,1), "
-        f"{sub2} DECIMAL(4,1), "
-        f"{sub3} DECIMAL(4,1), "
-        f"{sub4} DECIMAL(4,1), "
-        f"{sub5} DECIMAL(4,1), "
-        f"CHECK({sub1} <= 100.0 AND {sub1} >= 0), "
-        f"CHECK({sub2} <= 100.0 AND {sub2} >= 0), "
-        f"CHECK({sub3} <= 100.0 AND {sub3} >= 0), "
-        f"CHECK({sub4} <= 100.0 AND {sub4} >= 0), "
-        f"CHECK({sub5} <= 100.0 AND {sub5} >= 0), "
-        "FOREIGN KEY(student_id) REFERENCES student_details(student_id)"
-        ");"
-        )
+    f"CREATE TABLE IF NOT EXISTS {examname} ("
+    "student_id INT, "
+    "student_name VARCHAR(30) NOT NULL, "
+    "class VARCHAR(3) NOT NULL, "
+    f"{sub1} DECIMAL(4,1) DEFAULT 0, "
+    f"{sub2} DECIMAL(4,1) DEFAULT 0, "
+    f"{sub3} DECIMAL(4,1) DEFAULT 0, "
+    f"{sub4} DECIMAL(4,1) DEFAULT 0, "
+    f"{sub5} DECIMAL(4,1) DEFAULT 0, "
+    f"CHECK({sub1} <= 100.0 AND {sub1} >= 0), "
+    f"CHECK({sub2} <= 100.0 AND {sub2} >= 0), "
+    f"CHECK({sub3} <= 100.0 AND {sub3} >= 0), "
+    f"CHECK({sub4} <= 100.0 AND {sub4} >= 0), "
+    f"CHECK({sub5} <= 100.0 AND {sub5} >= 0), "
+    "FOREIGN KEY(student_id) REFERENCES student_details(student_id)"
+    ");"
+)
 
         cursor1.execute(str)
         vighneshdb.commit()
