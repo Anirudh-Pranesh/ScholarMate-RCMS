@@ -61,7 +61,7 @@ Ms. Ananya Singh_2    Ms. Ananya Singh_2
 Ms. Neha Verma_6      Ms. Neha Verma_6
 Ms. Priya Rao_4          Ms. Priya Rao_4
 
-For more student usernames, you may access the MySQL database. The host, username, and password are given in the source code. You may access either through your terminal or through MySQL workbench. To get more usernames and passwords, run this SQL statement to the server : 
+For more student usernames, you may access the MySQL database. The host, username, and password are given in the source code. You may access either through your terminal or through MySQL workbench. To get more usernames and passwords, run this SQL statement to the server: 
 
 ```SQL
 SELECT * FROM credentials;
