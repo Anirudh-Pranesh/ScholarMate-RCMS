@@ -1,0 +1,52 @@
+# -*- mode: python ; coding: utf-8 -*-
+
+
+a = Analysis(
+    ['login_page.py'],
+    pathex=[],
+    binaries=[],
+    datas=[('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\logo.png', '.'), ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\usericon.png', '.'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\sv.tcl', 'sv_ttk'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\theme\\light.tcl', 'sv_ttk/theme'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\theme\\dark.tcl', 'sv_ttk/theme'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\theme\\sprites_dark.tcl', 'sv_ttk/theme'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\theme\\sprites_light.tcl', 'sv_ttk/theme'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\theme\\spritesheet_dark.png', 'sv_ttk/theme'), ('C:\\Users\\aniru\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sv_ttk\\theme\\spritesheet_light.png', 'sv_ttk/theme'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\Admin_Page.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\teacher_page.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\student_page.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\DataEntrySheetForAdmin.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\view_student_marks.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\edit_student_marks.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\generate_report_card.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\edit_school_directory.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\changepassword.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\view_Student_mark_student.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\generate_report_card_student.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\view_student_marks_teacher.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\generate_report_card_teacher.py', '.'),
+    ('C:\\Users\\aniru\\OneDrive\\Documents\\GitHub\\ScholarMate-RCMS\\edit_student_marks_teacher.py', '.')],
+    hiddenimports=[],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    noarchive=False,
+    optimize=0,
+)
+pyz = PYZ(a.pure)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    a.binaries,
+    a.datas,
+    [],
+    name='ScholarMate',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
+    console=True,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)

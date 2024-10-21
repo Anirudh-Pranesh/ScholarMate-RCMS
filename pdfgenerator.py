@@ -2,6 +2,13 @@ import os
 from fpdf import FPDF
 import matplotlib.pyplot as plt
 from tkinter import messagebox
+import os
+from pathlib import Path
+
+#get downloads folder
+home = str(Path.home())
+downloads_folder = os.path.join(home, "Downloads")
+
 
 class PDF(FPDF):
     def header(self):
@@ -55,7 +62,7 @@ def create_bar_graph(subjects, student_scores, top_scores, average_scores):
 
     plt.bar(r1, student_scores, color='blue', width=bar_width, label='Student Score')
     plt.bar(r2, top_scores, color='red', width=bar_width, label='Top Score')
-    plt.bar(r3, average_scores, color='green', width=bar_width, label='Avg Score')
+    plt.bar(r3, average_scores, color='green', width=bar_width, label='Grade Avg Score')
 
     for i in range(len(subjects)):
         plt.text(r1[i], float(student_scores[i]) + 0.5, str(student_scores[i]), ha='center')
@@ -64,7 +71,7 @@ def create_bar_graph(subjects, student_scores, top_scores, average_scores):
 
     plt.xlabel('Subjects')
     plt.ylabel('Scores')
-    plt.title('Student vs Top vs Avg Scores')
+    plt.title('Student vs Top vs Grade Avg Scores')
     plt.xticks([r + bar_width for r in range(len(subjects))], subjects)
     
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -83,7 +90,7 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     pdf.chapter_title(f"Report for {exam_name}")
     pdf.set_font("Arial", "", 12)
     pdf.cell(0, 10, f"Student Name: {student_name}", 0, 1)
-    pdf.cell(0, 10, f"Teacher Name: {teacher_name}", 0, 1)
+    pdf.cell(0, 10, f"Class Teacher : {teacher_name}", 0, 1)
     pdf.cell(0, 10, f"Parent Contact: {parent_contact}", 0, 1)
     pdf.cell(0, 10, f"Teacher Contact: {teacher_contact}", 0, 1)
     pdf.cell(0, 10, f"Class: {class_name}", 0, 1)
@@ -100,8 +107,8 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     pdf.cell(50, 10, "Subject", 1)
     pdf.cell(40, 10, "Student Score", 1)
     pdf.cell(40, 10, "Top Score", 1)
-    pdf.cell(40, 10, "Class Avg Score", 1)
-    pdf.cell(40, 10, "Grade", 1)
+    pdf.cell(40, 10, "Grade Avg Score", 1)
+    pdf.cell(20, 10, "Grade", 1)
     pdf.ln()
 
     # Table Rows
@@ -117,7 +124,7 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
         pdf.cell(40, 10, str(student_score), 1)
         pdf.cell(40, 10, str(top_scores[i]), 1)
         pdf.cell(40, 10, str(average_scores[i]), 1)
-        pdf.cell(40, 10, grade, 1)
+        pdf.cell(20, 10, grade, 1)
         pdf.ln()
 
     # Total and Average
@@ -126,14 +133,14 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     pdf.cell(40, 10, str(total_score), 1, 0)
     pdf.cell(40, 10, "", 1)
     pdf.cell(40, 10, "", 1)
-    pdf.cell(40, 10, "", 1)
+    pdf.cell(20, 10, "", 1)
     pdf.ln()
 
     pdf.cell(50, 10, "Your total Average Score", 1)
     pdf.cell(40, 10, str(average_student_score), 1, 0)
     pdf.cell(40, 10, "", 1)
     pdf.cell(40, 10, "", 1)
-    pdf.cell(40, 10, "", 1)
+    pdf.cell(20, 10, "", 1)
 
     # Embed Bar Graph
     create_bar_graph(subjects, scores, top_scores, average_scores)
@@ -142,6 +149,8 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     pdf.image("bar_graph.png", x=10, y=50, w=180)  # Embed the saved bar graph image
 
     # Save PDF
-    file_path = f"C:\\Users\\aniru\\Downloads\\REPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
-    pdf.output(file_path)
+    file_path = f"REPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
+    pdf_path = os.path.join(downloads_folder, file_path)
+    #file_path = f"/Users/adminREPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
+    pdf.output(pdf_path)
     os.remove('bar_graph.png')

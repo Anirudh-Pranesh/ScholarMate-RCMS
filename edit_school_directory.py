@@ -63,7 +63,9 @@ def hide_frames():
     student_add_frame.pack_forget()
 
 def execute_selection_delete_teacher(): #deletes teacher by sending a query
-    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+    #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur=db.cursor()
     selected_item = trv.selection()  
     if selected_item:
@@ -81,15 +83,15 @@ def execute_selection_delete_teacher(): #deletes teacher by sending a query
         messagebox.showwarning(title='WARNING', message='Select a teacher')
 
 def execute_selection_delete_student(): # deletes student by sending a query
-    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+    #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur=db.cursor()
     selected_item = student_trv.selection()  
     if selected_item:
         item_data = student_trv.item(selected_item)  
         values = item_data['values']
         id=values[0]
-        print(item_data)
-        print(values)
         query=f"DELETE FROM student_details WHERE student_id={id};"
         cur.execute(query)
         db.commit()
@@ -101,7 +103,9 @@ def execute_selection_delete_student(): # deletes student by sending a query
         messagebox.showwarning(title='WARNING', message='Select a student')
 
 def execute_add_teacher(): #adds teacher by sending a query
-    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+    #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur=db.cursor()
     name=teacher_name_entry.get()
     contact=teacher_contact_entry.get()
@@ -114,7 +118,9 @@ def execute_add_teacher(): #adds teacher by sending a query
             cur.execute(query)
             db.commit()
             db.close()
-            newdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+            newdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            #newdb=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
             newcur=newdb.cursor()
             usnamepwd=f"SELECT username, passkey FROM credentials where teacher_id = (SELECT teacher_id FROM teacher_details where teacher_name='{name}' AND teacher_contact='{contact}' AND assigned_class='{asgnclass}');'"
             newcur.execute(usnamepwd)
@@ -130,7 +136,9 @@ def execute_add_teacher(): #adds teacher by sending a query
 
 
 def execute_add_student(): # adds studsnt by sending a query
-    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+    #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur=db.cursor()
     name=student_name_entry.get()
     contact=parent_contact_entry.get()
@@ -143,7 +151,9 @@ def execute_add_student(): # adds studsnt by sending a query
             cur.execute(query)
             db.commit()
             db.close()
-            newdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+            #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+            newdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            #newdb=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
             newcur=newdb.cursor()
             usnamepwd=f"SELECT username, passkey FROM credentials where student_id = (SELECT student_id FROM student_details where student_name='{name}' AND parent_contact='{contact}' AND class='{asgnclass}');'"
             newcur.execute(usnamepwd)
@@ -158,9 +168,11 @@ def execute_add_student(): # adds studsnt by sending a query
             messagebox.showerror(title='UNEXPECTED ERROR', message='Unexpected error encountered. Please check details inputted')
 
 def refresh_teacher_list(): # bug : after adding a teacher, the table showed in teacher delete is not refreshing, this function achieves it
-    db = mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+    #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur = db.cursor()
-    remove_t_q = "SELECT * FROM teacher_details"
+    remove_t_q = "SELECT * FROM teacher_details ORDER BY teacher_name"
     cur.execute(remove_t_q)
     res = cur.fetchall()
     cur.close()
@@ -174,9 +186,11 @@ def refresh_teacher_list(): # bug : after adding a teacher, the table showed in 
         trv.insert("", 'end', iid=row[0], text=row[0], values=list(row))
 
 def refresh_student_list(): # same bug here, except for student delete frame
-    db = mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+    #RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
     cur = db.cursor()
-    remove_s_q = "SELECT * FROM student_details"
+    remove_s_q = "SELECT * FROM student_details ORDER BY student_name"
     cur.execute(remove_s_q)
     res = cur.fetchall()
     cur.close()
@@ -236,7 +250,9 @@ remove_radiobutton.place(relx=0.5, rely=0.27, anchor='center')
 # REMOVE TEACHER CONTENT
 '''##### REMOVE TEACHER CONTENT #####'''
 
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+#RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 remove_t_q="SELECT * FROM teacher_details ORDER BY teacher_name"
 cur.execute(remove_t_q)
@@ -268,7 +284,9 @@ for row in res:
 
 '''##### REMOVE STUDENT CONTENT #####'''
 
-db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db')
+#RESTRICT FOR AIVEN CONN. ------> TRIGGERS NOT SETUP
+db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+#db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 remove_s_q="SELECT * FROM student_details ORDER BY student_name"
 cur.execute(remove_s_q)
