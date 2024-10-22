@@ -5,7 +5,7 @@ import mysql.connector
 
 # DATABASE CONNECTION SETUP
 #db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_1UgkIMxSzsCWt0D-3cB',database='scholarmate_db')
+db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_QI3ZZve-eNqFc8_bsLQ',database='scholarmate_db')
 
 # Gracefully close the application and the database connection
 def on_close():

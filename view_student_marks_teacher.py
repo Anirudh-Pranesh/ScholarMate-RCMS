@@ -9,7 +9,7 @@ from tkinter import messagebox
 
 # DATABASE CONNECTION
 #db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_1UgkIMxSzsCWt0D-3cB',database='scholarmate_db')
+db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_QI3ZZve-eNqFc8_bsLQ',database='scholarmate_db')
 cur=db.cursor()
 
 selected_table=None

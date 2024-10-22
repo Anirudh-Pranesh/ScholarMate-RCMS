@@ -13,7 +13,6 @@ Once the whole program is closed, the main login page pops up again, and the bin
 
 # IMPORT STATEMENTS
 import mysql.connector
-from mysql.connector import Error
 import tkinter
 from tkinter import ttk
 import sv_ttk
@@ -38,7 +37,7 @@ def resource_path(relative_path):
 
 # MySQL connection
 #db = mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') # local host conn.
-db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
+db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
 cur = db.cursor()
 
 # User defined functions
@@ -79,8 +78,8 @@ def login():
             messagebox.showwarning(title='Invalid input', message='Please enter a username and password')
         else:
             messagebox.showerror(title='Invalid credentials', message='Please enter correct username/password')
-    except Error as e:
-        messagebox.showerror(title='RUNTIME ERROR', message=f'Unexpected error: {e}')
+    except:
+        messagebox.showerror(title='ERROR', message=f'Unexpected error')
 
 # Window Setup
 window = tkinter.Tk()

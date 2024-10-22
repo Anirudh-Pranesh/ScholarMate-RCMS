@@ -8,7 +8,7 @@ from mysql.connector import Error
 from tkinter import messagebox
 
 #db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_1UgkIMxSzsCWt0D-3cB', database='scholarmate_db') #aiven conn.
+db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
 cur=db.cursor()
 
 def save():
@@ -22,22 +22,25 @@ def save():
         new_username=username_entry.get()
         new_pwd=password_entry.get()
         confirm_pwd=passwordconfirm_entry.get()
-        if new_pwd == confirm_pwd:
-            sql = (
-    "UPDATE credentials SET username=%s, passkey=%s "
-    "WHERE username=%s AND passkey=%s;"
-)
-            cur.execute(sql, (new_username, new_pwd, old_username, old_pwd))
-            db.commit()
-            db.close()
-            details[2]=new_username
-            details[3]=new_pwd
-            file=open('client_details.dat','wb')
-            pickle.dump(details, file)
-            file.close()
-            messagebox.showinfo('Password and username changed', 'Sucessfully changed username and password')
+        if new_pwd != '' and new_username != '' and confirm_pwd != '':
+            if new_pwd == confirm_pwd:
+                sql = (
+        "UPDATE credentials SET username=%s, passkey=%s "
+        "WHERE username=%s AND passkey=%s;"
+    )
+                cur.execute(sql, (new_username, new_pwd, old_username, old_pwd))
+                db.commit()
+                db.close()
+                details[2]=new_username
+                details[3]=new_pwd
+                file=open('client_details.dat','wb')
+                pickle.dump(details, file)
+                file.close()
+                messagebox.showinfo('Password and username changed', 'Sucessfully changed username and password')
+            else:
+                messagebox.showwarning('Incorrect password', 'Password entered is incorrect')
         else:
-            messagebox.showwarning('Incorrect password', 'Password entered is incorrect')
+            messagebox.showerror('Error', 'Enter a valid password')
     except Error as e:
         messagebox.showerror('ERROR', f'Unexpected error : {e}')
     
