@@ -4,8 +4,11 @@ from tkinter import ttk, messagebox
 import mysql.connector
 
 # DATABASE CONNECTION SETUP
-#db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-db = mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com',port=13426,user='avnadmin',password='AVNS_QI3ZZve-eNqFc8_bsLQ',database='scholarmate_db')
+try:
+    db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
+    #db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+except:
+    messagebox.showerror(title="Error", message="No internet connection. Please connect to internet")
 
 # Gracefully close the application and the database connection
 def on_close():

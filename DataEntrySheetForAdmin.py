@@ -7,8 +7,11 @@ from mysql.connector import Error
 def tablecreation():
     try:
         # Connect to the database
-        #vighneshdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-        vighneshdb=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
+        try:
+            #vighneshdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            vighneshdb=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
+        except:
+            messagebox.showerror(title="Error", message="No internet connection. Please connect to  internet")
         cursor1 = vighneshdb.cursor()
         
         # Retrieve values from entries and checkbuttons
@@ -18,47 +21,52 @@ def tablecreation():
         sub3 = subject3_entry.get()
         sub4 = subject4_entry.get()
         sub5 = subject5_entry.get()
-        
-        # Create SQL statement with proper spacing and quotes
-        str = (
-    f"CREATE TABLE IF NOT EXISTS {examname} ("
-    "student_id INT, "
-    "student_name VARCHAR(30) NOT NULL, "
-    "class VARCHAR(3) NOT NULL, "
-    f"{sub1} DECIMAL(4,1) DEFAULT 0, "
-    f"{sub2} DECIMAL(4,1) DEFAULT 0, "
-    f"{sub3} DECIMAL(4,1) DEFAULT 0, "
-    f"{sub4} DECIMAL(4,1) DEFAULT 0, "
-    f"{sub5} DECIMAL(4,1) DEFAULT 0, "
-    f"CHECK({sub1} <= 100.0 AND {sub1} >= 0), "
-    f"CHECK({sub2} <= 100.0 AND {sub2} >= 0), "
-    f"CHECK({sub3} <= 100.0 AND {sub3} >= 0), "
-    f"CHECK({sub4} <= 100.0 AND {sub4} >= 0), "
-    f"CHECK({sub5} <= 100.0 AND {sub5} >= 0), "
-    "FOREIGN KEY(student_id) REFERENCES student_details(student_id)"
-    ");"
-)
+        if '' not in [sub1,sub2,sub3,sub4,sub5]:
+            # Create SQL statement with proper spacing and quotes
+            str = (
+        f"CREATE TABLE IF NOT EXISTS {examname} ("
+        "student_id INT, "
+        "student_name VARCHAR(30) NOT NULL, "
+        "class VARCHAR(3) NOT NULL, "
+        f"{sub1} DECIMAL(4,1) DEFAULT 0, "
+        f"{sub2} DECIMAL(4,1) DEFAULT 0, "
+        f"{sub3} DECIMAL(4,1) DEFAULT 0, "
+        f"{sub4} DECIMAL(4,1) DEFAULT 0, "
+        f"{sub5} DECIMAL(4,1) DEFAULT 0, "
+        f"CHECK({sub1} <= 100.0 AND {sub1} >= 0), "
+        f"CHECK({sub2} <= 100.0 AND {sub2} >= 0), "
+        f"CHECK({sub3} <= 100.0 AND {sub3} >= 0), "
+        f"CHECK({sub4} <= 100.0 AND {sub4} >= 0), "
+        f"CHECK({sub5} <= 100.0 AND {sub5} >= 0), "
+        "FOREIGN KEY(student_id) REFERENCES student_details(student_id)"
+        ");"
+    )
 
-        cursor1.execute(str)
-        vighneshdb.commit()
-
-        available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
-        selected_classes=[]
-        for i in available_classes:
-            if available_classes[i] == 1:
-                selected_classes.append(i)
-        for i in selected_classes:
-            str=(
-            f"INSERT INTO {examname}(student_id, student_name, class) "
-            "SELECT student_id, student_name, class "
-            "FROM student_details "
-            f"WHERE class LIKE '{i}%';"
-            )
             cursor1.execute(str)
-        vighneshdb.commit()
-        # Close the connection
-        vighneshdb.close()
-        messagebox.showinfo("Info", f"Table '{examname}' created successfully.")
+            vighneshdb.commit()
+
+            available_classes={'9':class9var.get(),'10':class10var.get(), '11':class11var.get(), '12':class12var.get()}
+            selected_classes=[]
+            for i in available_classes:
+                if available_classes[i] == 1:
+                    selected_classes.append(i)
+            if selected_classes==[]:
+                messagebox.showerror(title="Error", message="Please select a class")
+            else:
+                for i in selected_classes:
+                    str=(
+                    f"INSERT INTO {examname}(student_id, student_name, class) "
+                    "SELECT student_id, student_name, class "
+                    "FROM student_details "
+                    f"WHERE class LIKE '{i}%';"
+                    )
+                    cursor1.execute(str)
+                vighneshdb.commit()
+                # Close the connection
+                vighneshdb.close()
+                messagebox.showinfo("Info", f"Table '{examname}' created successfully.")
+        else:
+            messagebox.showerror(title="Error", message="Please input a valid entry")
     except Error as e:
         messagebox.showerror("ERROR", f"Error: {e}")
 
