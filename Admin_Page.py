@@ -23,7 +23,7 @@ class AdminPage(tk.Tk):
         super().__init__()
 
         self.title("Welcome Admin")
-        self.geometry("850x700")  # Increased height for the graph
+        self.geometry("900x700")  # Increased height for the graph
 
         # Initialize Sun Valley theme with the "dark" theme
         sv_ttk.set_theme("dark")
