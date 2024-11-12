@@ -28,9 +28,9 @@ The file attatched bellow describes the MySQL database structure
 
 https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing
 
-NOTE : <br/>
+**Note : <br/>**
 
-The database structure or the design of the software may or may not have been subject to changes during the course of development. These draw.io files were purely for our own reference during the inital stages of development. Kindly ignore any features that do not align with the initial design as they have been added/removed for a reason.
+**The database structure or the design of the software may or may not have been subject to changes during the course of development. These draw.io files were purely for our own reference during the inital stages of development. Kindly ignore any features that do not align with the initial design as they have been added/removed for a reason.**
 
 # Screenshots : 
 
