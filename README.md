@@ -48,6 +48,7 @@ https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=shari
 
 # Installation 🖥️
 
+Ensure that you have VSCode installed on your system.<br/>
 First, install python, after which run the following commands on your terminal
 
 Use the first command on windows, and the second if you're on mac
@@ -59,6 +60,9 @@ Use the first command on windows, and the second if you're on mac
 ➡️ pip install matplotlib or pip3 install matplotlib (Graph generation)
 
 Download the zip file of this project and run ```login_page.py```
+
+<h5>IMPORTANT : </h5>
+<h4>Use only VSCode for testing and using the software and not python's IDLE. The aunthetication method in python's IDLE will not support connection to the database</h4>
 
 # How to use ScholarMate ? 👤
 
