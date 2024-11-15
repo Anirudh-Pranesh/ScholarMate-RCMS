@@ -51,13 +51,11 @@ https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=shari
 Ensure that you have VSCode installed on your system.<br/>
 First, install python, after which run the following commands on your terminal
 
-Use the first command on windows, and the second if you're on mac
-
-➡️ pip install pillow or pip3 install pillow (for inserting image)<br />
-➡️ pip install sv_ttk or pip3 install sv_ttk (for the theme)<br />
-➡️ pip install fpdf or pip3 install fpdf (pdf generation)<br />
-➡️ pip install mysql-connector-python or pip3 install mysql-connector-python (for MySQL connection)<br />
-➡️ pip install matplotlib or pip3 install matplotlib (Graph generation)
+➡️ pip install pillow (for inserting image)<br />
+➡️ pip install sv_ttk (for the theme)<br />
+➡️ pip install fpdf (pdf generation)<br />
+➡️ pip install mysql-connector-python (for MySQL connection)<br />
+➡️ pip install matplotlib (Graph generation)
 
 Download the zip file of this project and run ```login_page.py```
 
