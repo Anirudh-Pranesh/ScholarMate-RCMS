@@ -18,6 +18,7 @@ try:
     file = open('client_details.dat', 'rb')
     dat = pickle.load(file)
     std_id = dat[0][1]
+    #std_id=5
     get_assgn_class = f"SELECT class, student_name FROM student_details WHERE student_id = {std_id}"
     cur.execute(get_assgn_class)
     classandname=cur.fetchall()
@@ -149,8 +150,237 @@ def show_student_and_class_avg():
     cur.execute(statement2)
     res2 = cur.fetchall()
     # Extract student marks starting from the 4th column
-    if res == [] or res2 == []:
-        messagebox.showinfo(title="Error", message="You have not written this/prev exam")
+    if res == [] and res2 == []:
+        messagebox.showinfo(title="Error", message="You have neither written this exam nor the previous exam")
+    elif res!=[] and res2==[]:
+        student_marks_current = res[0][3:8]
+        student_marks = student_marks_current
+        class_averages = calculate_class_average(selected_table, subject_names)
+        class_averages = [float(avg) if avg is not None else 0 for avg in class_averages]
+        statement = f"SELECT * FROM `{selected_table}` WHERE student_id = {std_id}"
+        cur.execute(statement)
+        res = cur.fetchall()
+        graph_window = tk.Toplevel(root)
+        graph_window.title(f"Marks for {std_name}")
+        graph_window.geometry("1400x1200")  # Increased size for better layout
+        graph_window.resizable(True, True)  # Prevent resizing
+
+        # Function to handle graph window close
+        def on_graph_close():
+            plt.close(fig)
+            graph_window.destroy()
+
+        graph_window.protocol("WM_DELETE_WINDOW", on_graph_close)
+
+        # Create frames within the graph window
+        info_frame = ttk.Frame(graph_window)
+        info_frame.pack(pady=10, padx=10,anchor='w')
+        marks_frame_graph = ttk.Frame(graph_window)
+        marks_frame_graph.pack(pady=10, padx=10,anchor='w')
+        
+        # Student Information Labels
+        student_name_label = ttk.Label(info_frame, text=f"Name: {std_name}", font=('Arial', 14, 'bold'))
+        student_name_label.pack(anchor='w')
+        student_class_label = ttk.Label(info_frame, text=f"Class: {std_class}", font=('Arial', 14, 'bold'))
+        student_class_label.pack(anchor='w')
+        extralabel=ttk.Label(info_frame,text='Current Exam Results: ',font=('Arial',14,'bold'))
+        extralabel.pack(anchor='w')
+
+        # Marks Treeview
+        marks_tree = ttk.Treeview(marks_frame_graph, columns=("Subject", "Mark"), show='headings', height=len(subject_names))
+        marks_tree.heading("Subject", text="Subject (Current Exam)")
+        marks_tree.heading("Mark", text="Mark (Current Exam)")
+        marks_tree.column("Subject", anchor="w", width=300)
+        marks_tree.column("Mark", anchor="w", width=300)
+        for subject, mark in zip(subject_names, student_marks):
+            marks_tree.insert("", "end", values=(subject, mark if mark != 0 else "Absent"))
+        marks_tree.pack(anchor='w',pady=10)
+
+        # Calculate total and percentage
+        total_marks = sum(student_marks_current)
+        num_subjects = len(subject_names)
+        percentage = (total_marks / (num_subjects * 100)) * 100 if num_subjects > 0 else 0
+        low_subject, low = min(zip(subject_names, student_marks), key=lambda x: x[1])
+        best_subject, best = max(zip(subject_names, student_marks), key=lambda x: x[1])
+
+        # Display total marks, percentage, and subject performance
+        total_label = ttk.Label(info_frame, text=f"Total Marks: {total_marks}", font=('Arial', 12, 'bold'))
+        total_label.pack(anchor='w')
+        percentage_label = ttk.Label(info_frame, text=f"Overall Aggregate: {percentage:.2f}%", font=('Arial', 12, 'bold'))
+        percentage_label.pack(anchor='w')
+        low_label = ttk.Label(info_frame, text=f"Worst Performing Subject: {low_subject} ({low:.2f})", font=('Arial', 12, 'bold'))
+        low_label.pack(anchor='w')
+        best_label = ttk.Label(info_frame, text=f"Best Performing Subject: {best_subject} ({best:.2f})", font=('Arial', 12, 'bold'))
+        best_label.pack(anchor='w')
+
+        # Plotting student marks, class averages, and top scores
+        fig, ax = plt.subplots(figsize=(12.1, 12))  # Adjusted size for better fit
+        bar_width = 0.2
+        index = range(len(subject_names)*2)
+
+        # Positions for each set of bars
+        student_pos = [i - bar_width for i in index]
+        average_pos = index
+        top_pos = [i + bar_width for i in index]
+        
+        # Plotting the bars
+        bars1 = ax.bar(student_pos, student_marks, bar_width, label=std_name, color='skyblue')
+        bars2 = ax.bar(average_pos, class_averages, bar_width, label="Class Average", color='lightgreen')
+        bars3 = ax.bar(top_pos, top_score(selected_table,subject_names), bar_width, label="Top Score", color='salmon')
+
+        # Labels and Title
+        ax.set_xlabel("Subjects")
+        ax.set_ylabel("Marks")
+        ax.set_xticks(index)
+        subject_names  = subject_names
+        ax.set_xticklabels(subject_names, rotation=0, ha='right', fontsize=10)
+        ax.set_ylim(0, max(max(student_marks), max(class_averages), max(top_score(selected_table,subject_names)), 100) + 10)
+        ax.legend()
+        
+        # Adding bar value labels
+        def add_labels(bars):
+            for bar in bars:
+                height = bar.get_height()
+                if height > 0:
+                    ax.annotate(f'{height:.1f}',
+                                xy=(bar.get_x() + bar.get_width() /2, height),
+                                xytext=(0, 3),  # 3 points vertical offset
+                                textcoords="offset points",
+                                ha='center', va='bottom')
+
+        add_labels(bars1)
+        add_labels(bars2)
+        add_labels(bars3)
+
+        
+
+        plt.tight_layout()
+
+        # Add graph to window
+        canvas = FigureCanvasTkAgg(fig, master=marks_frame_graph)
+        canvas.draw()
+        canvas.get_tk_widget().pack(anchor='w') 
+        ax.axvline(4.5, color='black', linestyle='-')  
+        text_x = 1.5
+        text_y = 105
+        text_str = "Current Exam"
+        fontdict = {'family': 'serif', 'size': 14, 'weight': 'bold'}
+        ax.text(text_x, text_y, text_str,fontdict=fontdict)
+
+    elif res==[] and res2!=[]:
+        student_marks_prev = res2[0][3:8]
+        student_marks = student_marks_prev
+        class_averages = calculate_class_average(prev_table, subject_names)
+        class_averages = [float(avg) if avg is not None else 0 for avg in class_averages2]
+        statement = f"SELECT * FROM `{prev_table}` WHERE student_id = {std_id}"
+        cur.execute(statement)
+        res = cur.fetchall()
+        graph_window = tk.Toplevel(root)
+        graph_window.title(f"Marks for {std_name}")
+        graph_window.geometry("1400x1200")  # Increased size for better layout
+        graph_window.resizable(True, True)  # Prevent resizing
+
+        # Function to handle graph window close
+        def on_graph_close():
+            plt.close(fig)
+            graph_window.destroy()
+
+        graph_window.protocol("WM_DELETE_WINDOW", on_graph_close)
+
+        # Create frames within the graph window
+        info_frame = ttk.Frame(graph_window)
+        info_frame.pack(pady=10, padx=10,anchor='w')
+        marks_frame_graph = ttk.Frame(graph_window)
+        marks_frame_graph.pack(pady=10, padx=10,anchor='w')
+        
+        # Student Information Labels
+        student_name_label = ttk.Label(info_frame, text=f"Name: {std_name}", font=('Arial', 14, 'bold'))
+        student_name_label.pack(anchor='w')
+        student_class_label = ttk.Label(info_frame, text=f"Class: {std_class}", font=('Arial', 14, 'bold'))
+        student_class_label.pack(anchor='w')
+        extralabel=ttk.Label(info_frame,text='Current Exam Results: ',font=('Arial',14,'bold'))
+        extralabel.pack(anchor='w')
+
+        # Marks Treeview
+        marks_tree = ttk.Treeview(marks_frame_graph, columns=("Subject", "Mark"), show='headings', height=len(subject_names))
+        marks_tree.heading("Subject", text="Subject (Current Exam)")
+        marks_tree.heading("Mark", text="Mark (Current Exam)")
+        marks_tree.column("Subject", anchor="w", width=300)
+        marks_tree.column("Mark", anchor="w", width=300)
+        for subject, mark in zip(subject_names, student_marks):
+            marks_tree.insert("", "end", values=(subject, mark if mark != 0 else "Absent"))
+        marks_tree.pack(anchor='w',pady=10)
+
+        # Calculate total and percentage
+        total_marks = sum(student_marks_current)
+        num_subjects = len(subject_names)
+        percentage = (total_marks / (num_subjects * 100)) * 100 if num_subjects > 0 else 0
+        low_subject, low = min(zip(subject_names, student_marks), key=lambda x: x[1])
+        best_subject, best = max(zip(subject_names, student_marks), key=lambda x: x[1])
+
+        # Display total marks, percentage, and subject performance
+        total_label = ttk.Label(info_frame, text=f"Total Marks: {total_marks}", font=('Arial', 12, 'bold'))
+        total_label.pack(anchor='w')
+        percentage_label = ttk.Label(info_frame, text=f"Overall Aggregate: {percentage:.2f}%", font=('Arial', 12, 'bold'))
+        percentage_label.pack(anchor='w')
+        low_label = ttk.Label(info_frame, text=f"Worst Performing Subject: {low_subject} ({low:.2f})", font=('Arial', 12, 'bold'))
+        low_label.pack(anchor='w')
+        best_label = ttk.Label(info_frame, text=f"Best Performing Subject: {best_subject} ({best:.2f})", font=('Arial', 12, 'bold'))
+        best_label.pack(anchor='w')
+
+        # Plotting student marks, class averages, and top scores
+        fig, ax = plt.subplots(figsize=(12.1, 12))  # Adjusted size for better fit
+        bar_width = 0.2
+        index = range(len(subject_names)*2)
+
+        # Positions for each set of bars
+        student_pos = [i - bar_width for i in index]
+        average_pos = index
+        top_pos = [i + bar_width for i in index]
+        
+        # Plotting the bars
+        bars1 = ax.bar(student_pos, student_marks, bar_width, label=std_name, color='skyblue')
+        bars2 = ax.bar(average_pos, class_averages, bar_width, label="Class Average", color='lightgreen')
+        bars3 = ax.bar(top_pos, top_score(prev_table,subject_names), bar_width, label="Top Score", color='salmon')
+
+        # Labels and Title
+        ax.set_xlabel("Subjects")
+        ax.set_ylabel("Marks")
+        ax.set_xticks(index)
+        subject_names  = subject_names
+        ax.set_xticklabels(subject_names, rotation=0, ha='right', fontsize=10)
+        ax.set_ylim(0, max(max(student_marks), max(class_averages), max(top_score(prev_table,subject_names)), 100) + 10)
+        ax.legend()
+        
+        # Adding bar value labels
+        def add_labels(bars):
+            for bar in bars:
+                height = bar.get_height()
+                if height > 0:
+                    ax.annotate(f'{height:.1f}',
+                                xy=(bar.get_x() + bar.get_width() /2, height),
+                                xytext=(0, 3),  # 3 points vertical offset
+                                textcoords="offset points",
+                                ha='center', va='bottom')
+
+        add_labels(bars1)
+        add_labels(bars2)
+        add_labels(bars3)
+
+        
+
+        plt.tight_layout()
+
+        # Add graph to window
+        canvas = FigureCanvasTkAgg(fig, master=marks_frame_graph)
+        canvas.draw()
+        canvas.get_tk_widget().pack(anchor='w') 
+        ax.axvline(4.5, color='black', linestyle='-')  
+        text_x = 1.5
+        text_y = 105
+        text_str = "Current Exam"
+        fontdict = {'family': 'serif', 'size': 14, 'weight': 'bold'}
+        ax.text(text_x, text_y, text_str,fontdict=fontdict)
     else:
         student_marks_current = res[0][3:8]
         student_marks_prev = res2[0][3:8]
@@ -325,5 +555,7 @@ avg_button = ttk.Button(table_frame, text="View marks", command=show_student_and
 avg_button.grid(row=1, column=0, columnspan=2, pady=10)
 sv_ttk.set_theme("dark")
 root.mainloop()
+
+
 
 
