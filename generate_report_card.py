@@ -38,8 +38,8 @@ single_student_frame=ttk.Frame(window) # frame if we are generating only for a s
 
 #DB conn.
 try:
-    db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
-    #db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
 except:
     messagebox.showerror(title="Error", message="No internet connection. Please connect to internet")
 cur=db.cursor()
@@ -98,6 +98,7 @@ def generate_multiple_rc_func():
             if error_list != [] and selected_classes != []:
                 messagebox.showinfo(title='Info', message='This examination was not conducted for classes '+str(error_list)+'. Report card now being generated for '+str(selected_classes))
             elif error_list!=[] and selected_classes == []:
+                generating_text_multiple.grid_forget()
                 messagebox.showwarning(title='Select appropriate class', message='This examination was not conducted for classes '+str(error_list))
         else:
             messagebox.showwarning(title='WARNING', message='A class must be selected/confirm your exam selection')

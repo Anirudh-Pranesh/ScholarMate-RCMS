@@ -151,6 +151,5 @@ def generate_report_card(student_name, teacher_name, parent_contact, teacher_con
     # Save PDF
     file_path = f"REPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
     pdf_path = os.path.join(downloads_folder, file_path)
-    #file_path = f"/Users/adminREPORTCARD_{exam_name}_{student_name}_{student_id}.pdf"
     pdf.output(pdf_path)
     os.remove('bar_graph.png')

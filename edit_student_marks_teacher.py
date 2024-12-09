@@ -6,8 +6,8 @@ import pickle
 
 # DATABASE CONNECTION
 try:
-    db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
-    #db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+    #db=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
+    db=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
 except:
     messagebox.showerror(title="Error", message="No internet connection. Please connect to internet")
 cur=db.cursor()
@@ -135,7 +135,7 @@ def confirm_changes():
             modified_values.clear()  # Clear modified values after saving
         except mysql.connector.Error:
             db.rollback()
-            messagebox.showerror("ERROR", f"Please entter a valid entry")
+            messagebox.showerror("ERROR", f"Please enter valid marks for the student")
 
 def on_table_select(event):
     global selected_table
