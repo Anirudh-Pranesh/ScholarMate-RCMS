@@ -8,8 +8,8 @@ def tablecreation():
     try:
         # Connect to the database
         try:
-            #vighneshdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
-            vighneshdb=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
+            vighneshdb=mysql.connector.connect(host='localhost', user='root', password='Admin@1122', database='scholarmate_db') #local host conn.
+            #vighneshdb=mysql.connector.connect(host='mysql-336e5914-anirudhpranesh-be68.f.aivencloud.com', port=13426, user='avnadmin', password='AVNS_QI3ZZve-eNqFc8_bsLQ', database='scholarmate_db') #aiven conn.
         except:
             messagebox.showerror(title="Error", message="No internet connection. Please connect to  internet")
         cursor1 = vighneshdb.cursor()
