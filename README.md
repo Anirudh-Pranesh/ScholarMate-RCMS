@@ -18,7 +18,7 @@
                                                                                                                 
 ScholarMate is an RCMS (Report Card Managament System), under development for CS class 12 project by Anirudh, Dave & Vignesh
 
-ScholarMate can be used by schools for handling their students' marks and keeping a secure and safe record of them. The sofwatre provides visual analytics of marks for each and every student who has written an exam, and also provides a comparison for the class averages. The program may be used to generate report cards for every student that has written an exam within seconds, and also includes many other features, described in the **How to use ScholarMate** section.
+ScholarMate can be used by schools for handling their students' marks and keeping a secure and safe record of them. The sofware provides visual analytics of marks for each and every student who has written an exam, and also provides a comparison for the class averages. The program may be used to generate report cards for every student that has written an exam within seconds, and also includes many other features, described in the **How to use ScholarMate** section.
 
 The file attatched below describes the design of the software, describing all the features and functionalities included in the software.
 
