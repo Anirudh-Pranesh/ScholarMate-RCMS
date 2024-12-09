@@ -18,6 +18,7 @@ try:
     file = open('client_details.dat', 'rb')
     dat = pickle.load(file)
     std_id = dat[0][1]
+    #std_id=5
     get_assgn_class = f"SELECT class, student_name FROM student_details WHERE student_id = {std_id}"
     cur.execute(get_assgn_class)
     classandname=cur.fetchall()
