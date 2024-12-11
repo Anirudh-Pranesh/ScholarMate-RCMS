@@ -182,9 +182,10 @@ class AdminPage(tk.Tk):
     def changepassword(self):
         call([sys.executable, resource_path('changepassword.py')])
         
-    def on_close():
+    def on_close(self):
         with open('client_details.dat', 'wb') as file:
             pass
+        self.destroy()
 
 if __name__ == "__main__":
     app = AdminPage()
