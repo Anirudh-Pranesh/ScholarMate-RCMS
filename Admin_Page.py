@@ -160,6 +160,8 @@ class AdminPage(tk.Tk):
     def logout(self):
         self.destroy()
         # Use sys.executable to ensure the same Python interpreter is used
+        with open('client_details.dat', 'wb') as file:
+            pass
         call([sys.executable, resource_path('login_page.py')])
 
     def create_data(self):
@@ -179,7 +181,12 @@ class AdminPage(tk.Tk):
 
     def changepassword(self):
         call([sys.executable, resource_path('changepassword.py')])
+        
+    def on_close():
+        with open('client_details.dat', 'wb') as file:
+            pass
 
 if __name__ == "__main__":
     app = AdminPage()
+    app.protocol("WM_DELETE_WINDOW", app.on_close)
     app.mainloop()
