@@ -138,7 +138,7 @@ def on_table_select(event):
 
 # Set up the main Tkinter window
 root = tk.Tk()
-root.title("Student Marks Viewer")
+root.title("Edit student marks")
 root.geometry("1600x1400")
 root.resizable(True, True)
 

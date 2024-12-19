@@ -146,7 +146,7 @@ def on_table_select(event):
 
 # GUI SETUP
 root = tk.Tk()
-root.title("Student Marks Viewer")
+root.title("Edit student marks")
 root.geometry("1600x1400")
 root.resizable(True, True)
 
