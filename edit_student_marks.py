@@ -89,7 +89,7 @@ def on_double_click(event):
 def save_value(selected_item, col_index, entry):
     new_value = entry.get()
 
-    if new_value.lower() != "" and new_value.isdigit():
+    if new_value.lower() != "" and (isinstance(new_value, float) or isinstance(new_value,int)):
         messagebox.showerror("Invalid Input", "Please enter valid marks for the student.")
         entry.focus()
         return

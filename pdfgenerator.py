@@ -33,21 +33,22 @@ class PDF(FPDF):
 
 def get_grade(score):
     """Returns the grade based on the score."""
-    if 91 <= score <= 100:
+    score=float(score)
+    if 91.0 <= score <= 100.0:
         return 'A1'
-    elif 81 <= score <= 90:
+    elif 81.0 <= score <= 90.5:
         return 'A2'
-    elif 71 <= score <= 80:
+    elif 71.0 <= score <= 80.5:
         return 'B1'
-    elif 61 <= score <= 70:
+    elif 61.0 <= score <= 70.5:
         return 'B2'
-    elif 51 <= score <= 60:
+    elif 51.0 <= score <= 60.5:
         return 'C1'
-    elif 41 <= score <= 50:
+    elif 41.0 <= score <= 50.5:
         return 'C2'
-    elif 33 <= score <= 40:
+    elif 33.0 <= score <= 40.5:
         return 'D'
-    elif score <= 32:
+    elif score <= 32.5:
         return 'F'
 
 def create_bar_graph(subjects, student_scores, top_scores, average_scores):
