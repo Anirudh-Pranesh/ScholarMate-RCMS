@@ -41,6 +41,10 @@ https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=shari
 
 [REPORTCARD_Semester1_Aarti Sharma_50.pdf](https://github.com/user-attachments/files/17462897/REPORTCARD_Semester1_Aarti.Sharma_50.pdf)
 
+**Full project demo :**
+
+[![Watch the video](https://img.youtube.com/vi/AceAN6TRZGY/0.jpg)](https://youtu.be/AceAN6TRZGY)
+
 # Installation 🖥️
 
 Ensure that you have VSCode installed on your system.<br/>
