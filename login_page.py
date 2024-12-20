@@ -6,11 +6,9 @@ Python extracts data inputted in entry field and communicates this data with MyS
 Depending on what is returned by MySQL, python verifies and checks if the login can be authorized.
 SQL injections can't take place.
 
-Once logged in, the details are stored in a binary file, named client_details. 
-Python will check the authorization of the client and send them to the required window.
+Once logged in, the details are stored in a binary file, named client_details. Python will check the authorization of the client and send them to the required window.
 The program for that window reads the binary file, and displays required information based on that.
-Once the whole program is closed, the main login page pops up again, and the binary file is overwritten with data of the 
-person who has logged in next and the process repeats.
+Once the whole program is closed, the main login page pops up again, and the binary file is overwritten with data of the person who has logged in next and the process repeats.
 '''
 
 # IMPORT STATEMENTS
