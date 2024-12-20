@@ -109,7 +109,8 @@ def generate_multiple_rc_func():
                     std_name=j[1] #pdf function params
                     std_class=j[2] #pdf function params
                     score_list=[j[3], j[4], j[5], j[6], j[7]]
-                    get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
+                    get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON 
+                    {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
                     cur.execute(get_names_contacts)
                     contact_name_details=cur.fetchall()
                     contact_name_details=contact_name_details[0]
@@ -147,7 +148,8 @@ def generate_single_rc_func():
             cur.execute(get_subj_names)
             subj_names_sql=cur.fetchall()
 
-            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {res[0][0]};"
+            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details 
+            ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {res[0][0]};"
             cur.execute(get_names_contacts)
             contact_name_details=cur.fetchall()
             contact_name_details=contact_name_details[0]

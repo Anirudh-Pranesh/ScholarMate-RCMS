@@ -7,12 +7,15 @@
 # graph showing their performance vs class average performance. the class aeverage performace can again be queried from the table.
 #if we are generating only for a single student, then the user will select a student, we gather their student id, refer to the examination table, gather their marks, top marks, grade, and average perofmrance 
 #of class again and generate the report card again.
-#Don't worry about the UI or anything else in this script, its only setting up the UI, we only need to write the functions, SQL statements and actually generate a pdf. all you NEED TO KNOW is to extract selected row from treeview do this : 
+#Don't worry about the UI or anything else in this script, its only setting up the UI, we only need to write the functions,
+# SQL statements and actually generate a pdf. all you NEED TO KNOW is to extract selected row from treeview do this : 
 '''
 item_data = student_trv.item(selected_item)       #student_trv is the treeview object that we want to get the selected data from 
-values = item_data['values']                      # this will store exactly how MySQL stored it, in order. so for example if student_trv contained data from student_details, then values[0] will be student_id because the first column in student_details is student_id
+values = item_data['values']                      # this will store exactly how MySQL stored it, in order. so for example if student_trv contained data from student_details, then values[0] 
+will be student_id because the first column in student_details is student_id
 '''
-#!!!!!!!!!!!!!!!PLEASE REFERENCE https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing FOR TABLE NAMES, COLUMNS NAMES, ETC. exam-sheet-1 is just a sample table the admin will create for the exam showing how the data will be in it once such an exam table is created, 
+#!!!!!!!!!!!!!!!PLEASE REFERENCE https://drive.google.com/file/d/1QQCceEJRKtQzwJt2dB5-S4vGCiToQtWy/view?usp=sharing FOR TABLE NAMES, COLUMNS NAMES, ETC. exam-sheet-1 is just a sample table the admin will create for the
+#exam showing how the data will be in it once such an exam table is created, 
 #so that teachers can enter the student marks in that table. we have not programmed the part where teachers can enter the student marks yet, but we are obtaining the table name as i said above. the table for an exam can be 
 #created by an admin.
 
@@ -121,7 +124,8 @@ def generate_multiple_rc_func():
                     std_name=j[1] #pdf function params
                     std_class=j[2] #pdf function params
                     score_list=[j[3], j[4], j[5], j[6], j[7]]
-                    get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
+                    get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON 
+                    {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {std_id};"
                     cur.execute(get_names_contacts)
                     contact_name_details=cur.fetchall()
                     contact_name_details=contact_name_details[0]
@@ -154,7 +158,8 @@ def generate_single_rc_func():
             cur.execute(get_subj_names)
             subj_names_sql=cur.fetchall()
 
-            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {res[0][0]};"
+            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON 
+            {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {res[0][0]};"
             cur.execute(get_names_contacts)
             contact_name_details=cur.fetchall()
             contact_name_details=contact_name_details[0]

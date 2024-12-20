@@ -70,7 +70,8 @@ def generate_single_rc_func():
             cur.execute(get_subj_names)
             subj_names_sql=cur.fetchall()
 
-            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {student_id};"
+            get_names_contacts=f"SELECT teacher_name, teacher_contact, parent_contact FROM {selected_exam} JOIN teacher_details ON {selected_exam}.class = teacher_details.assigned_class 
+            JOIN student_details ON {selected_exam}.student_id = student_details.student_id WHERE {selected_exam}.student_id = {student_id};"
             cur.execute(get_names_contacts)
             contact_name_details=cur.fetchall()
             contact_name_details=contact_name_details[0]
