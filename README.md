@@ -104,7 +104,7 @@ SELECT * FROM credentials;
 
 # DISCLAIMER ⚠️
 
-As of now, the **"Edit school directory"** feature is currently **UNAVAILABLE** due to server issues. This feature is only available for localhost release where the database server issues have been resolved. We apologise for any inconvenience caused.
+As of now, the **"Edit school directory"** feature (online host releease) is currently **UNAVAILABLE** due to server issues. This feature is only available for localhost release where the database server issues have been resolved. We apologise for any inconvenience caused.
 
 # Documentation 📃
 
