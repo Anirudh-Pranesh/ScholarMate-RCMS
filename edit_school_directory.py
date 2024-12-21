@@ -11,6 +11,7 @@ from tkinter import messagebox
 
 # Window and frame setup
 window=tkinter.Tk()
+
 window.title('Edit School Directory')
 window.geometry('1000x900')
 #These four are the frames where i am displaying the option to perform action
