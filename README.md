@@ -108,4 +108,4 @@ As of now, the **"Edit school directory"** feature (online host releease) is cur
 
 # Documentation 📃
 
-Coming soon ...
+[Click here](https://jmp.sh/N8VHLjPo)
